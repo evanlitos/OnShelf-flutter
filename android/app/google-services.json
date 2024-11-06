@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "958923618388",
+    "project_id": "on-shelf-kx3bv5",
+    "storage_bucket": "on-shelf-kx3bv5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958923618388:android:406d5b7070d32491b715c1",
+        "android_client_info": {
+          "package_name": "com.de3.onshelf"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPmcW7YxLuR5crrC_yNCjwgBPQxOGG7rc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
