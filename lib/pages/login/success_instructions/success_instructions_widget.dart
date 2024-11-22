@@ -129,7 +129,7 @@ class _SuccessInstructionsWidgetState extends State<SuccessInstructionsWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Inter',
+                                                  fontFamily: 'Hanken Grotesk',
                                                   color: const Color(0xFF676767),
                                                   letterSpacing: 0.0,
                                                 ),

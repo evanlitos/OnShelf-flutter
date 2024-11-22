@@ -66,93 +66,117 @@ class _SignInWidgetState extends State<SignInWidget> {
                               fit: BoxFit.cover,
                             ),
                           ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
+                          Stack(
                             children: [
-                              Row(
+                              Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: Image.asset(
-                                      'assets/images/Mask_group-l.png',
-                                      width: 200.0,
-                                      height: 115.0,
-                                      fit: BoxFit.contain,
-                                      alignment: const Alignment(-1.0, 0.0),
+                                  Expanded(
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/Mask_group-l.png',
+                                            width: 200.0,
+                                            height: 115.0,
+                                            fit: BoxFit.contain,
+                                            alignment: const Alignment(-1.0, 0.0),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Align(
+                                          alignment:
+                                              const AlignmentDirectional(1.0, 0.0),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/Mask_group-right.png',
+                                              width: 200.0,
+                                              height: 115.0,
+                                              fit: BoxFit.contain,
+                                              alignment: const Alignment(1.0, 0.0),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ],
                               ),
-                              Expanded(
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Column(
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: Row(
                                       mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
-                                        Text(
-                                          'Welcome to',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Hanken Grotesk',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                fontSize: 21.0,
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 30.0, 0.0, 30.0),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            child: SvgPicture.asset(
-                                              'assets/images/logo_onshel.svg',
-                                              width: 200.0,
-                                              height: 80.0,
-                                              fit: BoxFit.contain,
+                                        Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'Welcome to',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Hanken Grotesk',
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryBackground,
+                                                        fontSize: 21.0,
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
-                                          ),
-                                        ),
-                                        Text(
-                                          'Revolutionizing Retail Excellence.',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Hanken Grotesk',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                fontSize: 17.0,
-                                                letterSpacing: 0.0,
+                                            Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 30.0, 0.0, 30.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: SvgPicture.asset(
+                                                  'assets/images/logo_onshel.svg',
+                                                  width: 200.0,
+                                                  height: 80.0,
+                                                  fit: BoxFit.contain,
+                                                ),
                                               ),
+                                            ),
+                                            Text(
+                                              'Revolutionizing Retail Excellence.',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Hanken Grotesk',
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryBackground,
+                                                        fontSize: 17.0,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                            ),
+                                          ],
                                         ),
                                       ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Align(
-                                    alignment: const AlignmentDirectional(1.0, 0.0),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      child: Image.asset(
-                                        'assets/images/Mask_group-right.png',
-                                        width: 200.0,
-                                        height: 115.0,
-                                        fit: BoxFit.contain,
-                                        alignment: const Alignment(1.0, 0.0),
-                                      ),
                                     ),
                                   ),
                                 ],
@@ -245,7 +269,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .labelMedium
                                                   .override(
-                                                    fontFamily: 'Inter',
+                                                    fontFamily:
+                                                        'Hanken Grotesk',
                                                     letterSpacing: 0.0,
                                                   ),
                                           hintText: 'Enter email',
@@ -253,7 +278,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .labelMedium
                                                   .override(
-                                                    fontFamily: 'Inter',
+                                                    fontFamily:
+                                                        'Hanken Grotesk',
                                                     letterSpacing: 0.0,
                                                   ),
                                           enabledBorder: OutlineInputBorder(
@@ -301,7 +327,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Inter',
+                                              fontFamily: 'Hanken Grotesk',
                                               letterSpacing: 0.0,
                                             ),
                                         keyboardType:
@@ -353,7 +379,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .labelMedium
                                                   .override(
-                                                    fontFamily: 'Inter',
+                                                    fontFamily:
+                                                        'Hanken Grotesk',
                                                     letterSpacing: 0.0,
                                                   ),
                                           hintText: 'Enter password',
@@ -361,7 +388,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .labelMedium
                                                   .override(
-                                                    fontFamily: 'Inter',
+                                                    fontFamily:
+                                                        'Hanken Grotesk',
                                                     letterSpacing: 0.0,
                                                   ),
                                           enabledBorder: OutlineInputBorder(
@@ -424,7 +452,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Inter',
+                                              fontFamily: 'Hanken Grotesk',
                                               letterSpacing: 0.0,
                                             ),
                                         cursorColor:
@@ -451,6 +479,10 @@ class _SignInWidgetState extends State<SignInWidget> {
                                             50.0, 0.0, 50.0, 0.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
+                                            if (Navigator.of(context)
+                                                .canPop()) {
+                                              context.pop();
+                                            }
                                             context.pushNamed('Checkin');
                                           },
                                           text: 'Sign in',

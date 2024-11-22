@@ -49,27 +49,33 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.asset(
-                            'assets/images/Capa_1.png',
-                            height: 32.0,
-                            fit: BoxFit.contain,
+          child: Visibility(
+            visible: responsiveVisibility(
+              context: context,
+              tablet: false,
+              tabletLandscape: false,
+              desktop: false,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.asset(
+                              'assets/images/logo_2.png',
+                              height: 32.0,
+                              fit: BoxFit.contain,
+                            ),
                           ),
-                        ),
-                        Expanded(
-                          child: Padding(
+                          Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 20.0, 0.0, 0.0),
                             child: Material(
@@ -120,7 +126,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Inter',
+                                                  fontFamily: 'Hanken Grotesk',
                                                   letterSpacing: 0.0,
                                                 ),
                                           ),
@@ -160,7 +166,8 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                                                               context)
                                                           .labelMedium
                                                           .override(
-                                                            fontFamily: 'Inter',
+                                                            fontFamily:
+                                                                'Hanken Grotesk',
                                                             letterSpacing: 0.0,
                                                           ),
                                                   hintText: 'Enter your email',
@@ -169,7 +176,8 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                                                               context)
                                                           .labelMedium
                                                           .override(
-                                                            fontFamily: 'Inter',
+                                                            fontFamily:
+                                                                'Hanken Grotesk',
                                                             letterSpacing: 0.0,
                                                           ),
                                                   enabledBorder:
@@ -228,7 +236,8 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily:
+                                                              'Hanken Grotesk',
                                                           letterSpacing: 0.0,
                                                         ),
                                                 cursorColor:
@@ -301,13 +310,13 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

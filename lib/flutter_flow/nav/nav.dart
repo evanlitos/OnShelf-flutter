@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '/backend/schema/structs/index.dart';
+
 import '/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
@@ -29,12 +31,32 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => const HomePageWidget(),
+      errorBuilder: (context, state) => appStateNotifier.showSplashImage
+          ? Builder(
+              builder: (context) => Container(
+                color: const Color(0x00FFFFFF),
+                child: Image.asset(
+                  'assets/images/iconApp.png',
+                  fit: BoxFit.contain,
+                ),
+              ),
+            )
+          : const HomePageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => const HomePageWidget(),
+          builder: (context, _) => appStateNotifier.showSplashImage
+              ? Builder(
+                  builder: (context) => Container(
+                    color: const Color(0x00FFFFFF),
+                    child: Image.asset(
+                      'assets/images/iconApp.png',
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                )
+              : const HomePageWidget(),
         ),
         FFRoute(
           name: 'HomePage',
@@ -60,6 +82,66 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Checkin',
           path: '/checkin',
           builder: (context, params) => const CheckinWidget(),
+        ),
+        FFRoute(
+          name: 'menu',
+          path: '/menu',
+          builder: (context, params) => const MenuWidget(),
+        ),
+        FFRoute(
+          name: 'takepicture',
+          path: '/takepicture',
+          builder: (context, params) => const TakepictureWidget(),
+        ),
+        FFRoute(
+          name: 'BLOCK_CATEGORIES2',
+          path: '/blockCategories2',
+          builder: (context, params) => const BlockCategories2Widget(),
+        ),
+        FFRoute(
+          name: 'BlockCategoriesInstructions',
+          path: '/blockCategoriesInstructions',
+          builder: (context, params) => const BlockCategoriesInstructionsWidget(),
+        ),
+        FFRoute(
+          name: 'Resume_TakePhoto_3',
+          path: '/resumeTakePhoto3',
+          builder: (context, params) => ResumeTakePhoto3Widget(
+            foto: params.getParam(
+              'foto',
+              ParamType.FFUploadedFile,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'Before_photo_diagram_4',
+          path: '/beforePhotoDiagram4',
+          builder: (context, params) => const BeforePhotoDiagram4Widget(),
+        ),
+        FFRoute(
+          name: 'ScanProducts_5',
+          path: '/scanProducts5',
+          builder: (context, params) => const ScanProducts5Widget(),
+        ),
+        FFRoute(
+          name: 'BLOCK_ALIENPRODUCTS',
+          path: '/blockAlienproducts',
+          builder: (context, params) => const BlockAlienproductsWidget(),
+        ),
+        FFRoute(
+          name: 'InstructionsAlienProduct',
+          path: '/instructionsAlienProduct',
+          builder: (context, params) => const InstructionsAlienProductWidget(),
+        ),
+        FFRoute(
+          name: 'InstructionsAlienProductPhoto',
+          path: '/instructionsAlienProductPhoto',
+          builder: (context, params) => InstructionsAlienProductPhotoWidget(
+            photo: params.getParam(
+              'photo',
+              ParamType.FFUploadedFile,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -131,6 +213,7 @@ class FFParameters {
     String paramName,
     ParamType type, {
     bool isList = false,
+    StructBuilder<T>? structBuilder,
   }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -148,6 +231,7 @@ class FFParameters {
       param,
       type,
       isList,
+      structBuilder: structBuilder,
     );
   }
 }
