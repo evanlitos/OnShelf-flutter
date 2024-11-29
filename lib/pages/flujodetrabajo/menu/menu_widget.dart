@@ -593,7 +593,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Text(
-                                            'Mon \n11',
+                                            functions.daysFromWeek()[0],
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium

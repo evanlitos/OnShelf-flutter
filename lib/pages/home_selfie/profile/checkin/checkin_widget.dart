@@ -1,3 +1,5 @@
+import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -5,6 +7,8 @@ import '/flutter_flow/upload_data.dart';
 import '/pages/alerts/no_picture_selfie/no_picture_selfie_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'checkin_model.dart';
 export 'checkin_model.dart';
 
@@ -24,6 +28,41 @@ class _CheckinWidgetState extends State<CheckinWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CheckinModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.apiResultgrz =
+          await ApiShelfGroup.getRouteForMerchandiserCall.call(
+        userId: FFAppState().user.user.id,
+        token: FFAppState().user.token,
+      );
+
+      if ((_model.apiResultgrz?.succeeded ?? true)) {
+        FFAppState().routeLOC = ((_model.apiResultgrz?.jsonBody ?? '')
+                .toList()
+                .map<RouteMerchandiseResponseStruct?>(
+                    RouteMerchandiseResponseStruct.maybeFromMap)
+                .toList() as Iterable<RouteMerchandiseResponseStruct?>)
+            .withoutNulls
+            .toList()
+            .cast<RouteMerchandiseResponseStruct>();
+        FFAppState().routeUnic = ((_model.apiResultgrz?.jsonBody ?? '')
+                .toList()
+                .map<RouteMerchandiseResponseStruct?>(
+                    RouteMerchandiseResponseStruct.maybeFromMap)
+                .toList() as Iterable<RouteMerchandiseResponseStruct?>)
+            .withoutNulls
+            .last;
+        FFAppState().routeJson = getJsonField(
+          (_model.apiResultgrz?.jsonBody ?? ''),
+          r'''$''',
+        );
+        safeSetState(() {});
+        return;
+      } else {
+        return;
+      }
+    });
   }
 
   @override
@@ -35,6 +74,8 @@ class _CheckinWidgetState extends State<CheckinWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -241,8 +282,11 @@ class _CheckinWidgetState extends State<CheckinWidget> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                if (_model.isDataUploading ==
-                                                    false)
+                                                if (valueOrDefault<bool>(
+                                                  _model.isDataUploading ==
+                                                      false,
+                                                  false,
+                                                ))
                                                   ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(

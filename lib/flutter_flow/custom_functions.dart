@@ -43,3 +43,12 @@ String getFormattedTime() {
   String formattedTime = DateFormat('hh:mm a').format(now);
   return formattedTime;
 }
+
+String? printResult(dynamic data) {
+  print(data);
+  return data;
+}
+
+String imagePathFromUrl(String url) {
+  return "https://api.onshelf.app/" + url;
+}
