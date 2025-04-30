@@ -8,6 +8,9 @@ export 'takepicture_model.dart';
 class TakepictureWidget extends StatefulWidget {
   const TakepictureWidget({super.key});
 
+  static String routeName = 'takepicture';
+  static String routePath = '/takepicture';
+
   @override
   State<TakepictureWidget> createState() => _TakepictureWidgetState();
 }
@@ -33,7 +36,10 @@ class _TakepictureWidgetState extends State<TakepictureWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -43,11 +49,11 @@ class _TakepictureWidgetState extends State<TakepictureWidget> {
             Container(
               width: MediaQuery.sizeOf(context).width * 1.0,
               height: MediaQuery.sizeOf(context).height * 1.0,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.black,
               ),
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(16.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,11 +61,11 @@ class _TakepictureWidgetState extends State<TakepictureWidget> {
                     Container(
                       width: MediaQuery.sizeOf(context).width * 1.0,
                       height: 80.0,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         color: Colors.black,
                       ),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             16.0, 24.0, 16.0, 24.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
@@ -68,8 +74,8 @@ class _TakepictureWidgetState extends State<TakepictureWidget> {
                             FlutterFlowIconButton(
                               borderRadius: 20.0,
                               buttonSize: 40.0,
-                              fillColor: const Color(0x33FFFFFF),
-                              icon: const Icon(
+                              fillColor: Color(0x33FFFFFF),
+                              icon: Icon(
                                 Icons.flash_off,
                                 color: Colors.white,
                                 size: 24.0,
@@ -81,8 +87,8 @@ class _TakepictureWidgetState extends State<TakepictureWidget> {
                             FlutterFlowIconButton(
                               borderRadius: 20.0,
                               buttonSize: 40.0,
-                              fillColor: const Color(0x33FFFFFF),
-                              icon: const Icon(
+                              fillColor: Color(0x33FFFFFF),
+                              icon: Icon(
                                 Icons.flip_camera_ios,
                                 color: Colors.white,
                                 size: 24.0,
@@ -98,11 +104,11 @@ class _TakepictureWidgetState extends State<TakepictureWidget> {
                     Container(
                       width: MediaQuery.sizeOf(context).width * 1.0,
                       height: 100.0,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         color: Colors.black,
                       ),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             16.0, 24.0, 16.0, 24.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
@@ -112,10 +118,10 @@ class _TakepictureWidgetState extends State<TakepictureWidget> {
                               width: 70.0,
                               height: 70.0,
                               decoration: BoxDecoration(
-                                color: const Color(0x33FFFFFF),
+                                color: Color(0x33FFFFFF),
                                 borderRadius: BorderRadius.circular(35.0),
                               ),
-                              child: const Icon(
+                              child: Icon(
                                 Icons.photo_library,
                                 color: Colors.white,
                                 size: 30.0,
@@ -128,7 +134,7 @@ class _TakepictureWidgetState extends State<TakepictureWidget> {
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(35.0),
                               ),
-                              child: const Icon(
+                              child: Icon(
                                 Icons.camera,
                                 color: Colors.black,
                                 size: 30.0,
@@ -138,10 +144,10 @@ class _TakepictureWidgetState extends State<TakepictureWidget> {
                               width: 70.0,
                               height: 70.0,
                               decoration: BoxDecoration(
-                                color: const Color(0x33FFFFFF),
+                                color: Color(0x33FFFFFF),
                                 borderRadius: BorderRadius.circular(35.0),
                               ),
-                              child: const Icon(
+                              child: Icon(
                                 Icons.video_camera_back,
                                 color: Colors.white,
                                 size: 30.0,

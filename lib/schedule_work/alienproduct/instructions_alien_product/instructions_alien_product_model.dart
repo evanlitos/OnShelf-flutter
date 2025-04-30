@@ -1,5 +1,6 @@
 import '/components/menulateral_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'instructions_alien_product_widget.dart'
     show InstructionsAlienProductWidget;
 import 'package:flutter/material.dart';

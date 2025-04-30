@@ -1,0 +1,39 @@
+import '/components/menulateral_widget.dart';
+import '/components/progress_shelfs_widget.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
+import 's1_block_categories2_widget.dart' show S1BlockCategories2Widget;
+import 'package:flutter/material.dart';
+
+class S1BlockCategories2Model
+    extends FlutterFlowModel<S1BlockCategories2Widget> {
+  ///  Local state fields for this page.
+
+  dynamic routeToday;
+
+  ///  State fields for stateful widgets in this page.
+
+  // Model for menulateral component.
+  late MenulateralModel menulateralModel;
+  // Model for progressShelfs component.
+  late ProgressShelfsModel progressShelfsModel;
+  // State field(s) for sinput_sku widget.
+  FocusNode? sinputSkuFocusNode;
+  TextEditingController? sinputSkuTextController;
+  String? Function(BuildContext, String?)? sinputSkuTextControllerValidator;
+  var barcodeMode = '';
+
+  @override
+  void initState(BuildContext context) {
+    menulateralModel = createModel(context, () => MenulateralModel());
+    progressShelfsModel = createModel(context, () => ProgressShelfsModel());
+  }
+
+  @override
+  void dispose() {
+    menulateralModel.dispose();
+    progressShelfsModel.dispose();
+    sinputSkuFocusNode?.dispose();
+    sinputSkuTextController?.dispose();
+  }
+}

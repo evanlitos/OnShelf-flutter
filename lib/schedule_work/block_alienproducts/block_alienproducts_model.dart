@@ -1,5 +1,6 @@
 import '/components/menulateral_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'block_alienproducts_widget.dart' show BlockAlienproductsWidget;
 import 'package:flutter/material.dart';
 

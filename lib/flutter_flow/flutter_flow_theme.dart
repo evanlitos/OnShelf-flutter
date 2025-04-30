@@ -160,106 +160,91 @@ class ThemeTypography extends Typography {
   final FlutterFlowTheme theme;
 
   String get displayLargeFamily => 'Hanken Grotesk';
-  TextStyle get displayLarge => GoogleFonts.getFont(
-        'Hanken Grotesk',
+  TextStyle get displayLarge => GoogleFonts.hankenGrotesk(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 64.0,
       );
   String get displayMediumFamily => 'Hanken Grotesk';
-  TextStyle get displayMedium => GoogleFonts.getFont(
-        'Hanken Grotesk',
+  TextStyle get displayMedium => GoogleFonts.hankenGrotesk(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 44.0,
       );
   String get displaySmallFamily => 'Hanken Grotesk';
-  TextStyle get displaySmall => GoogleFonts.getFont(
-        'Hanken Grotesk',
+  TextStyle get displaySmall => GoogleFonts.hankenGrotesk(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 36.0,
       );
   String get headlineLargeFamily => 'Hanken Grotesk';
-  TextStyle get headlineLarge => GoogleFonts.getFont(
-        'Hanken Grotesk',
+  TextStyle get headlineLarge => GoogleFonts.hankenGrotesk(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 32.0,
       );
   String get headlineMediumFamily => 'Hanken Grotesk';
-  TextStyle get headlineMedium => GoogleFonts.getFont(
-        'Hanken Grotesk',
+  TextStyle get headlineMedium => GoogleFonts.hankenGrotesk(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 28.0,
       );
   String get headlineSmallFamily => 'Hanken Grotesk';
-  TextStyle get headlineSmall => GoogleFonts.getFont(
-        'Hanken Grotesk',
+  TextStyle get headlineSmall => GoogleFonts.hankenGrotesk(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 24.0,
       );
   String get titleLargeFamily => 'Hanken Grotesk';
-  TextStyle get titleLarge => GoogleFonts.getFont(
-        'Hanken Grotesk',
+  TextStyle get titleLarge => GoogleFonts.hankenGrotesk(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 20.0,
       );
   String get titleMediumFamily => 'Hanken Grotesk';
-  TextStyle get titleMedium => GoogleFonts.getFont(
-        'Hanken Grotesk',
+  TextStyle get titleMedium => GoogleFonts.hankenGrotesk(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 18.0,
       );
   String get titleSmallFamily => 'Hanken Grotesk';
-  TextStyle get titleSmall => GoogleFonts.getFont(
-        'Hanken Grotesk',
+  TextStyle get titleSmall => GoogleFonts.hankenGrotesk(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 16.0,
       );
   String get labelLargeFamily => 'Hanken Grotesk';
-  TextStyle get labelLarge => GoogleFonts.getFont(
-        'Hanken Grotesk',
+  TextStyle get labelLarge => GoogleFonts.hankenGrotesk(
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
   String get labelMediumFamily => 'Hanken Grotesk';
-  TextStyle get labelMedium => GoogleFonts.getFont(
-        'Hanken Grotesk',
+  TextStyle get labelMedium => GoogleFonts.hankenGrotesk(
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
   String get labelSmallFamily => 'Hanken Grotesk';
-  TextStyle get labelSmall => GoogleFonts.getFont(
-        'Hanken Grotesk',
+  TextStyle get labelSmall => GoogleFonts.hankenGrotesk(
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
       );
   String get bodyLargeFamily => 'Hanken Grotesk';
-  TextStyle get bodyLarge => GoogleFonts.getFont(
-        'Hanken Grotesk',
+  TextStyle get bodyLarge => GoogleFonts.hankenGrotesk(
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
   String get bodyMediumFamily => 'Hanken Grotesk';
-  TextStyle get bodyMedium => GoogleFonts.getFont(
-        'Hanken Grotesk',
+  TextStyle get bodyMedium => GoogleFonts.hankenGrotesk(
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
   String get bodySmallFamily => 'Hanken Grotesk';
-  TextStyle get bodySmall => GoogleFonts.getFont(
-        'Hanken Grotesk',
+  TextStyle get bodySmall => GoogleFonts.hankenGrotesk(
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
@@ -268,38 +253,45 @@ class ThemeTypography extends Typography {
 
 extension TextStyleHelper on TextStyle {
   TextStyle override({
+    TextStyle? font,
     String? fontFamily,
     Color? color,
     double? fontSize,
     FontWeight? fontWeight,
     double? letterSpacing,
     FontStyle? fontStyle,
-    bool useGoogleFonts = true,
+    bool useGoogleFonts = false,
     TextDecoration? decoration,
     double? lineHeight,
     List<Shadow>? shadows,
-  }) =>
-      useGoogleFonts
-          ? GoogleFonts.getFont(
-              fontFamily!,
-              color: color ?? this.color,
-              fontSize: fontSize ?? this.fontSize,
-              letterSpacing: letterSpacing ?? this.letterSpacing,
-              fontWeight: fontWeight ?? this.fontWeight,
-              fontStyle: fontStyle ?? this.fontStyle,
-              decoration: decoration,
-              height: lineHeight,
-              shadows: shadows,
-            )
-          : copyWith(
-              fontFamily: fontFamily,
-              color: color,
-              fontSize: fontSize,
-              letterSpacing: letterSpacing,
-              fontWeight: fontWeight,
-              fontStyle: fontStyle,
-              decoration: decoration,
-              height: lineHeight,
-              shadows: shadows,
-            );
+  }) {
+    if (useGoogleFonts && fontFamily != null) {
+      font = GoogleFonts.getFont(fontFamily,
+          fontWeight: fontWeight ?? this.fontWeight,
+          fontStyle: fontStyle ?? this.fontStyle);
+    }
+
+    return font != null
+        ? font.copyWith(
+            color: color ?? this.color,
+            fontSize: fontSize ?? this.fontSize,
+            letterSpacing: letterSpacing ?? this.letterSpacing,
+            fontWeight: fontWeight ?? this.fontWeight,
+            fontStyle: fontStyle ?? this.fontStyle,
+            decoration: decoration,
+            height: lineHeight,
+            shadows: shadows,
+          )
+        : copyWith(
+            fontFamily: fontFamily,
+            color: color,
+            fontSize: fontSize,
+            letterSpacing: letterSpacing,
+            fontWeight: fontWeight,
+            fontStyle: fontStyle,
+            decoration: decoration,
+            height: lineHeight,
+            shadows: shadows,
+          );
+  }
 }

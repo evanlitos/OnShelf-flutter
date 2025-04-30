@@ -2,16 +2,23 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 
-import '/index.dart';
+import '/auth/base_auth_user_provider.dart';
+
+import '/backend/push_notifications/push_notifications_handler.dart'
+    show PushNotificationsHandler;
 import '/flutter_flow/flutter_flow_util.dart';
+
+import '/index.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
 
 const kTransitionInfoKey = '__transition_info__';
+
+GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
 
 class AppStateNotifier extends ChangeNotifier {
   AppStateNotifier._();
@@ -19,7 +26,46 @@ class AppStateNotifier extends ChangeNotifier {
   static AppStateNotifier? _instance;
   static AppStateNotifier get instance => _instance ??= AppStateNotifier._();
 
+  BaseAuthUser? initialUser;
+  BaseAuthUser? user;
   bool showSplashImage = true;
+  String? _redirectLocation;
+
+  /// Determines whether the app will refresh and build again when a sign
+  /// in or sign out happens. This is useful when the app is launched or
+  /// on an unexpected logout. However, this must be turned off when we
+  /// intend to sign in/out and then navigate or perform any actions after.
+  /// Otherwise, this will trigger a refresh and interrupt the action(s).
+  bool notifyOnAuthChange = true;
+
+  bool get loading => user == null || showSplashImage;
+  bool get loggedIn => user?.loggedIn ?? false;
+  bool get initiallyLoggedIn => initialUser?.loggedIn ?? false;
+  bool get shouldRedirect => loggedIn && _redirectLocation != null;
+
+  String getRedirectLocation() => _redirectLocation!;
+  bool hasRedirect() => _redirectLocation != null;
+  void setRedirectLocationIfUnset(String loc) => _redirectLocation ??= loc;
+  void clearRedirectLocation() => _redirectLocation = null;
+
+  /// Mark as not needing to notify on a sign in / out when we intend
+  /// to perform subsequent actions (such as navigation) afterwards.
+  void updateNotifyOnAuthChange(bool notify) => notifyOnAuthChange = notify;
+
+  void update(BaseAuthUser newUser) {
+    final shouldUpdate =
+        user?.uid == null || newUser.uid == null || user?.uid != newUser.uid;
+    initialUser ??= newUser;
+    user = newUser;
+    // Refresh the app on auth change unless explicitly marked otherwise.
+    // No need to update unless the user has changed.
+    if (notifyOnAuthChange && shouldUpdate) {
+      notifyListeners();
+    }
+    // Once again mark the notifier as needing to update on auth change
+    // (in order to catch sign in / out events).
+    updateNotifyOnAuthChange(true);
+  }
 
   void stopShowingSplashImage() {
     showSplashImage = false;
@@ -31,82 +77,65 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => appStateNotifier.showSplashImage
-          ? Builder(
-              builder: (context) => Container(
-                color: const Color(0x00FFFFFF),
-                child: Image.asset(
-                  'assets/images/iconApp.png',
-                  fit: BoxFit.contain,
-                ),
-              ),
-            )
-          : const HomePageWidget(),
+      navigatorKey: appNavigatorKey,
+      errorBuilder: (context, state) =>
+          appStateNotifier.loggedIn ? MenuWidget() : SignInWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.showSplashImage
-              ? Builder(
-                  builder: (context) => Container(
-                    color: const Color(0x00FFFFFF),
-                    child: Image.asset(
-                      'assets/images/iconApp.png',
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                )
-              : const HomePageWidget(),
+          builder: (context, _) =>
+              appStateNotifier.loggedIn ? MenuWidget() : SignInWidget(),
         ),
         FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
-          builder: (context, params) => const HomePageWidget(),
+          name: SplashScreenWidget.routeName,
+          path: SplashScreenWidget.routePath,
+          builder: (context, params) => SplashScreenWidget(),
         ),
         FFRoute(
-          name: 'Sign_in',
-          path: '/signIn',
-          builder: (context, params) => const SignInWidget(),
+          name: SignInWidget.routeName,
+          path: SignInWidget.routePath,
+          builder: (context, params) => SignInWidget(),
         ),
         FFRoute(
-          name: 'ForgotPassword',
-          path: '/forgotPassword',
-          builder: (context, params) => const ForgotPasswordWidget(),
+          name: ForgotPasswordWidget.routeName,
+          path: ForgotPasswordWidget.routePath,
+          builder: (context, params) => ForgotPasswordWidget(),
         ),
         FFRoute(
-          name: 'SuccessInstructions',
-          path: '/successInstructions',
-          builder: (context, params) => const SuccessInstructionsWidget(),
+          name: SuccessInstructionsWidget.routeName,
+          path: SuccessInstructionsWidget.routePath,
+          builder: (context, params) => SuccessInstructionsWidget(),
         ),
         FFRoute(
-          name: 'Checkin',
-          path: '/checkin',
-          builder: (context, params) => const CheckinWidget(),
+          name: CheckinWidget.routeName,
+          path: CheckinWidget.routePath,
+          builder: (context, params) => CheckinWidget(),
         ),
         FFRoute(
-          name: 'menu',
-          path: '/menu',
-          builder: (context, params) => const MenuWidget(),
+          name: MenuWidget.routeName,
+          path: MenuWidget.routePath,
+          builder: (context, params) => MenuWidget(),
         ),
         FFRoute(
-          name: 'takepicture',
-          path: '/takepicture',
-          builder: (context, params) => const TakepictureWidget(),
+          name: TakepictureWidget.routeName,
+          path: TakepictureWidget.routePath,
+          builder: (context, params) => TakepictureWidget(),
         ),
         FFRoute(
-          name: 'BLOCK_CATEGORIES2',
-          path: '/blockCategories2',
-          builder: (context, params) => const BlockCategories2Widget(),
+          name: S1BlockCategories2Widget.routeName,
+          path: S1BlockCategories2Widget.routePath,
+          builder: (context, params) => S1BlockCategories2Widget(),
         ),
         FFRoute(
-          name: 'BlockCategoriesInstructions',
-          path: '/blockCategoriesInstructions',
-          builder: (context, params) => const BlockCategoriesInstructionsWidget(),
+          name: S2BlockCategoriesInstructionsWidget.routeName,
+          path: S2BlockCategoriesInstructionsWidget.routePath,
+          builder: (context, params) => S2BlockCategoriesInstructionsWidget(),
         ),
         FFRoute(
-          name: 'Resume_TakePhoto_3',
-          path: '/resumeTakePhoto3',
-          builder: (context, params) => ResumeTakePhoto3Widget(
+          name: S22ResumeTakePhoto3Widget.routeName,
+          path: S22ResumeTakePhoto3Widget.routePath,
+          builder: (context, params) => S22ResumeTakePhoto3Widget(
             foto: params.getParam(
               'foto',
               ParamType.FFUploadedFile,
@@ -114,34 +143,255 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'Before_photo_diagram_4',
-          path: '/beforePhotoDiagram4',
-          builder: (context, params) => const BeforePhotoDiagram4Widget(),
+          name: S3BeforePhotoDiagram4Widget.routeName,
+          path: S3BeforePhotoDiagram4Widget.routePath,
+          builder: (context, params) => S3BeforePhotoDiagram4Widget(
+            bFoto: params.getParam(
+              'bFoto',
+              ParamType.FFUploadedFile,
+            ),
+          ),
         ),
         FFRoute(
-          name: 'ScanProducts_5',
-          path: '/scanProducts5',
-          builder: (context, params) => const ScanProducts5Widget(),
+          name: S6ScanProducts5Widget.routeName,
+          path: S6ScanProducts5Widget.routePath,
+          builder: (context, params) => S6ScanProducts5Widget(
+            aFoto: params.getParam(
+              'aFoto',
+              ParamType.FFUploadedFile,
+            ),
+            bFoto: params.getParam(
+              'bFoto',
+              ParamType.FFUploadedFile,
+            ),
+          ),
         ),
         FFRoute(
-          name: 'BLOCK_ALIENPRODUCTS',
-          path: '/blockAlienproducts',
-          builder: (context, params) => const BlockAlienproductsWidget(),
+          name: BlockAlienproductsWidget.routeName,
+          path: BlockAlienproductsWidget.routePath,
+          builder: (context, params) => BlockAlienproductsWidget(),
         ),
         FFRoute(
-          name: 'InstructionsAlienProduct',
-          path: '/instructionsAlienProduct',
-          builder: (context, params) => const InstructionsAlienProductWidget(),
+          name: InstructionsAlienProductWidget.routeName,
+          path: InstructionsAlienProductWidget.routePath,
+          builder: (context, params) => InstructionsAlienProductWidget(),
         ),
         FFRoute(
-          name: 'InstructionsAlienProductPhoto',
-          path: '/instructionsAlienProductPhoto',
+          name: InstructionsAlienProductPhotoWidget.routeName,
+          path: InstructionsAlienProductPhotoWidget.routePath,
           builder: (context, params) => InstructionsAlienProductPhotoWidget(
             photo: params.getParam(
               'photo',
               ParamType.FFUploadedFile,
             ),
           ),
+        ),
+        FFRoute(
+          name: S5AferResumeTakePhoto3CopyWidget.routeName,
+          path: S5AferResumeTakePhoto3CopyWidget.routePath,
+          builder: (context, params) => S5AferResumeTakePhoto3CopyWidget(
+            bFoto: params.getParam(
+              'bFoto',
+              ParamType.FFUploadedFile,
+            ),
+            aFoto: params.getParam(
+              'aFoto',
+              ParamType.FFUploadedFile,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: S4AfterBlockCategoriesInstructionsCopyWidget.routeName,
+          path: S4AfterBlockCategoriesInstructionsCopyWidget.routePath,
+          builder: (context, params) =>
+              S4AfterBlockCategoriesInstructionsCopyWidget(
+            bFoto: params.getParam(
+              'bFoto',
+              ParamType.FFUploadedFile,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: S7FillProductWidget.routeName,
+          path: S7FillProductWidget.routePath,
+          builder: (context, params) => S7FillProductWidget(
+            product: params.getParam(
+              'product',
+              ParamType.DataStruct,
+              isList: false,
+              structBuilder: ProductsStruct.fromSerializableMap,
+            ),
+            itemIndex: params.getParam(
+              'itemIndex',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: Rep1ScanblockidWidget.routeName,
+          path: Rep1ScanblockidWidget.routePath,
+          builder: (context, params) => Rep1ScanblockidWidget(),
+        ),
+        FFRoute(
+          name: REP2InstructionsBeforeFotoWidget.routeName,
+          path: REP2InstructionsBeforeFotoWidget.routePath,
+          builder: (context, params) => REP2InstructionsBeforeFotoWidget(),
+        ),
+        FFRoute(
+          name: REP3ResumeBeforeFotoWidget.routeName,
+          path: REP3ResumeBeforeFotoWidget.routePath,
+          builder: (context, params) => REP3ResumeBeforeFotoWidget(
+            foto: params.getParam(
+              'foto',
+              ParamType.FFUploadedFile,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: REP4InstructionsAfterFotoWidget.routeName,
+          path: REP4InstructionsAfterFotoWidget.routePath,
+          builder: (context, params) => REP4InstructionsAfterFotoWidget(
+            bFoto: params.getParam(
+              'bFoto',
+              ParamType.FFUploadedFile,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: REP5ResumeAfterFotoWidget.routeName,
+          path: REP5ResumeAfterFotoWidget.routePath,
+          builder: (context, params) => REP5ResumeAfterFotoWidget(
+            bFoto: params.getParam(
+              'bFoto',
+              ParamType.FFUploadedFile,
+            ),
+            aFoto: params.getParam(
+              'aFoto',
+              ParamType.FFUploadedFile,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: REP6ScanProducts5CopyWidget.routeName,
+          path: REP6ScanProducts5CopyWidget.routePath,
+          builder: (context, params) => REP6ScanProducts5CopyWidget(
+            aFoto: params.getParam(
+              'aFoto',
+              ParamType.FFUploadedFile,
+            ),
+            bFoto: params.getParam(
+              'bFoto',
+              ParamType.FFUploadedFile,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: REP7FillProductWidget.routeName,
+          path: REP7FillProductWidget.routePath,
+          builder: (context, params) => REP7FillProductWidget(
+            product: params.getParam(
+              'product',
+              ParamType.DataStruct,
+              isList: false,
+              structBuilder: ProductsStruct.fromSerializableMap,
+            ),
+            itemIndex: params.getParam(
+              'itemIndex',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: FRESH1BLOCKCATEGORIES2CopyWidget.routeName,
+          path: FRESH1BLOCKCATEGORIES2CopyWidget.routePath,
+          builder: (context, params) => FRESH1BLOCKCATEGORIES2CopyWidget(),
+        ),
+        FFRoute(
+          name: FRESH2ProductsWidget.routeName,
+          path: FRESH2ProductsWidget.routePath,
+          builder: (context, params) => FRESH2ProductsWidget(),
+        ),
+        FFRoute(
+          name: F1Fresh1Widget.routeName,
+          path: F1Fresh1Widget.routePath,
+          builder: (context, params) => F1Fresh1Widget(),
+        ),
+        FFRoute(
+          name: PF1FinderWidget.routeName,
+          path: PF1FinderWidget.routePath,
+          builder: (context, params) => PF1FinderWidget(),
+        ),
+        FFRoute(
+          name: PF2PlanogramWidget.routeName,
+          path: PF2PlanogramWidget.routePath,
+          builder: (context, params) => PF2PlanogramWidget(
+            shelf: params.getParam(
+              'shelf',
+              ParamType.DataStruct,
+              isList: false,
+              structBuilder: ShelfsStruct.fromSerializableMap,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: RTB1FindCodeWidget.routeName,
+          path: RTB1FindCodeWidget.routePath,
+          builder: (context, params) => RTB1FindCodeWidget(),
+        ),
+        FFRoute(
+          name: RTB2FillProductCopyWidget.routeName,
+          path: RTB2FillProductCopyWidget.routePath,
+          builder: (context, params) => RTB2FillProductCopyWidget(
+            sku: params.getParam(
+              'sku',
+              ParamType.String,
+            ),
+            product: params.getParam(
+              'product',
+              ParamType.DataStruct,
+              isList: false,
+              structBuilder: ProductsStruct.fromSerializableMap,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: AbsenseWidget.routeName,
+          path: AbsenseWidget.routePath,
+          builder: (context, params) => AbsenseWidget(),
+        ),
+        FFRoute(
+          name: NotificationsWidget.routeName,
+          path: NotificationsWidget.routePath,
+          builder: (context, params) => NotificationsWidget(),
+        ),
+        FFRoute(
+          name: ChooseRouteWidget.routeName,
+          path: ChooseRouteWidget.routePath,
+          builder: (context, params) => ChooseRouteWidget(),
+        ),
+        FFRoute(
+          name: S6ScanProducts5CopyWidget.routeName,
+          path: S6ScanProducts5CopyWidget.routePath,
+          builder: (context, params) => S6ScanProducts5CopyWidget(
+            aFoto: params.getParam(
+              'aFoto',
+              ParamType.FFUploadedFile,
+            ),
+            bFoto: params.getParam(
+              'bFoto',
+              ParamType.FFUploadedFile,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: ChooseRouteFreshnessWidget.routeName,
+          path: ChooseRouteFreshnessWidget.routePath,
+          builder: (context, params) => ChooseRouteFreshnessWidget(),
+        ),
+        FFRoute(
+          name: BackDoorDeliveryWidget.routeName,
+          path: BackDoorDeliveryWidget.routePath,
+          builder: (context, params) => BackDoorDeliveryWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -155,6 +405,40 @@ extension NavParamExtensions on Map<String, String?> {
 }
 
 extension NavigationExtensions on BuildContext {
+  void goNamedAuth(
+    String name,
+    bool mounted, {
+    Map<String, String> pathParameters = const <String, String>{},
+    Map<String, String> queryParameters = const <String, String>{},
+    Object? extra,
+    bool ignoreRedirect = false,
+  }) =>
+      !mounted || GoRouter.of(this).shouldRedirect(ignoreRedirect)
+          ? null
+          : goNamed(
+              name,
+              pathParameters: pathParameters,
+              queryParameters: queryParameters,
+              extra: extra,
+            );
+
+  void pushNamedAuth(
+    String name,
+    bool mounted, {
+    Map<String, String> pathParameters = const <String, String>{},
+    Map<String, String> queryParameters = const <String, String>{},
+    Object? extra,
+    bool ignoreRedirect = false,
+  }) =>
+      !mounted || GoRouter.of(this).shouldRedirect(ignoreRedirect)
+          ? null
+          : pushNamed(
+              name,
+              pathParameters: pathParameters,
+              queryParameters: queryParameters,
+              extra: extra,
+            );
+
   void safePop() {
     // If there is only one route on the stack, navigate to the initial
     // page instead of popping.
@@ -164,6 +448,19 @@ extension NavigationExtensions on BuildContext {
       go('/');
     }
   }
+}
+
+extension GoRouterExtensions on GoRouter {
+  AppStateNotifier get appState => AppStateNotifier.instance;
+  void prepareAuthEvent([bool ignoreRedirect = false]) =>
+      appState.hasRedirect() && !ignoreRedirect
+          ? null
+          : appState.updateNotifyOnAuthChange(false);
+  bool shouldRedirect(bool ignoreRedirect) =>
+      !ignoreRedirect && appState.hasRedirect();
+  void clearRedirectLocation() => appState.clearRedirectLocation();
+  void setRedirectLocationIfUnset(String location) =>
+      appState.updateNotifyOnAuthChange(false);
 }
 
 extension _GoRouterStateExtensions on GoRouterState {
@@ -213,6 +510,7 @@ class FFParameters {
     String paramName,
     ParamType type, {
     bool isList = false,
+    List<String>? collectionNamePath,
     StructBuilder<T>? structBuilder,
   }) {
     if (futureParamValues.containsKey(paramName)) {
@@ -231,6 +529,7 @@ class FFParameters {
       param,
       type,
       isList,
+      collectionNamePath: collectionNamePath,
       structBuilder: structBuilder,
     );
   }
@@ -256,6 +555,19 @@ class FFRoute {
   GoRoute toRoute(AppStateNotifier appStateNotifier) => GoRoute(
         name: name,
         path: path,
+        redirect: (context, state) {
+          if (appStateNotifier.shouldRedirect) {
+            final redirectLocation = appStateNotifier.getRedirectLocation();
+            appStateNotifier.clearRedirectLocation();
+            return redirectLocation;
+          }
+
+          if (requireAuth && !appStateNotifier.loggedIn) {
+            appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
+            return '/signIn';
+          }
+          return null;
+        },
         pageBuilder: (context, state) {
           fixStatusBarOniOS16AndBelow(context);
           final ffParams = FFParameters(state, asyncParams);
@@ -265,7 +577,15 @@ class FFRoute {
                   builder: (context, _) => builder(context, ffParams),
                 )
               : builder(context, ffParams);
-          final child = page;
+          final child = appStateNotifier.loading
+              ? Container(
+                  color: Color(0x00FFFFFF),
+                  child: Image.asset(
+                    'assets/images/iconApp.png',
+                    fit: BoxFit.contain,
+                  ),
+                )
+              : PushNotificationsHandler(child: page);
 
           final transitionInfo = state.transitionInfo;
           return transitionInfo.hasTransition
@@ -307,7 +627,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {
