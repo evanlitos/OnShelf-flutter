@@ -10,8 +10,8 @@ class InstructionsAlienProductPhotoModel
 
   // Model for menulateral component.
   late MenulateralModel menulateralModel;
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
+  bool isDataUploading_uploadData6cx = false;
+  FFUploadedFile uploadedLocalFile_uploadData6cx =
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
   @override

@@ -21,13 +21,16 @@ class PF1FinderModel extends FlutterFlowModel<PF1FinderWidget> {
 
   // Model for menulateral component.
   late MenulateralModel menulateralModel;
-  // State field(s) for sinput_sku widget.
-  FocusNode? sinputSkuFocusNode;
-  TextEditingController? sinputSkuTextController;
-  String? Function(BuildContext, String?)? sinputSkuTextControllerValidator;
+  // State field(s) for sinput_sku2 widget.
+  FocusNode? sinputSku2FocusNode;
+  TextEditingController? sinputSku2TextController;
+  String? Function(BuildContext, String?)? sinputSku2TextControllerValidator;
+  // Stores action output result for [Backend Call - API (search)] action in sinput_sku2 widget.
+  ApiCallResponse? apiResultmnyCODE;
   // Stores action output result for [Backend Call - API (search)] action in IconButton widget.
   ApiCallResponse? apiResultmny;
-  var barcodeMode = '';
+  // Stores action output result for [Backend Call - API (search)] action in Button widget.
+  ApiCallResponse? apiResultmnyQR;
 
   @override
   void initState(BuildContext context) {
@@ -37,7 +40,7 @@ class PF1FinderModel extends FlutterFlowModel<PF1FinderWidget> {
   @override
   void dispose() {
     menulateralModel.dispose();
-    sinputSkuFocusNode?.dispose();
-    sinputSkuTextController?.dispose();
+    sinputSku2FocusNode?.dispose();
+    sinputSku2TextController?.dispose();
   }
 }

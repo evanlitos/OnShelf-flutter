@@ -424,7 +424,8 @@ class _REP5ResumeAfterFotoWidgetState extends State<REP5ResumeAfterFotoWidget> {
                           if (selectedMedia != null &&
                               selectedMedia.every((m) =>
                                   validateFileFormat(m.storagePath, context))) {
-                            safeSetState(() => _model.isDataUploading = true);
+                            safeSetState(() =>
+                                _model.isDataUploading_uploadDataR1jL = true);
                             var selectedUploadedFiles = <FFUploadedFile>[];
 
                             try {
@@ -438,12 +439,12 @@ class _REP5ResumeAfterFotoWidgetState extends State<REP5ResumeAfterFotoWidget> {
                                       ))
                                   .toList();
                             } finally {
-                              _model.isDataUploading = false;
+                              _model.isDataUploading_uploadDataR1jL = false;
                             }
                             if (selectedUploadedFiles.length ==
                                 selectedMedia.length) {
                               safeSetState(() {
-                                _model.uploadedLocalFile =
+                                _model.uploadedLocalFile_uploadDataR1jL =
                                     selectedUploadedFiles.first;
                               });
                             } else {
@@ -460,7 +461,7 @@ class _REP5ResumeAfterFotoWidgetState extends State<REP5ResumeAfterFotoWidget> {
                                 ParamType.FFUploadedFile,
                               ),
                               'aFoto': serializeParam(
-                                _model.uploadedLocalFile,
+                                _model.uploadedLocalFile_uploadDataR1jL,
                                 ParamType.FFUploadedFile,
                               ),
                             }.withoutNulls,

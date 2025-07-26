@@ -488,7 +488,8 @@ class _S2BlockCategoriesInstructionsWidgetState
                             if (selectedMedia != null &&
                                 selectedMedia.every((m) => validateFileFormat(
                                     m.storagePath, context))) {
-                              safeSetState(() => _model.isDataUploading = true);
+                              safeSetState(() =>
+                                  _model.isDataUploading_beforePhoto = true);
                               var selectedUploadedFiles = <FFUploadedFile>[];
 
                               try {
@@ -502,12 +503,12 @@ class _S2BlockCategoriesInstructionsWidgetState
                                         ))
                                     .toList();
                               } finally {
-                                _model.isDataUploading = false;
+                                _model.isDataUploading_beforePhoto = false;
                               }
                               if (selectedUploadedFiles.length ==
                                   selectedMedia.length) {
                                 safeSetState(() {
-                                  _model.uploadedLocalFile =
+                                  _model.uploadedLocalFile_beforePhoto =
                                       selectedUploadedFiles.first;
                                 });
                               } else {
@@ -516,7 +517,8 @@ class _S2BlockCategoriesInstructionsWidgetState
                               }
                             }
 
-                            if ((_model.uploadedLocalFile.bytes?.isNotEmpty ??
+                            if ((_model.uploadedLocalFile_beforePhoto.bytes
+                                        ?.isNotEmpty ??
                                     false)) {
                               FFAppState().beforPhoto = '';
                               safeSetState(() {});
@@ -544,7 +546,7 @@ class _S2BlockCategoriesInstructionsWidgetState
                               S22ResumeTakePhoto3Widget.routeName,
                               queryParameters: {
                                 'foto': serializeParam(
-                                  _model.uploadedLocalFile,
+                                  _model.uploadedLocalFile_beforePhoto,
                                   ParamType.FFUploadedFile,
                                 ),
                               }.withoutNulls,

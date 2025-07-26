@@ -15,8 +15,8 @@ class BackDoorDeliveryModel extends FlutterFlowModel<BackDoorDeliveryWidget> {
   String? Function(BuildContext, String?)? sinputSkuTextControllerValidator;
   // Stores action output result for [Backend Call - API (searchProduct)] action in Container widget.
   ApiCallResponse? resultadoSKUBusqueda;
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
+  bool isDataUploading_uploadDataX5foto = false;
+  FFUploadedFile uploadedLocalFile_uploadDataX5foto =
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
   // Stores action output result for [Backend Call - API (rtb)] action in Container widget.

@@ -345,7 +345,8 @@ class _InstructionsAlienProductPhotoWidgetState
                           if (selectedMedia != null &&
                               selectedMedia.every((m) =>
                                   validateFileFormat(m.storagePath, context))) {
-                            safeSetState(() => _model.isDataUploading = true);
+                            safeSetState(() =>
+                                _model.isDataUploading_uploadData6cx = true);
                             var selectedUploadedFiles = <FFUploadedFile>[];
 
                             try {
@@ -359,12 +360,12 @@ class _InstructionsAlienProductPhotoWidgetState
                                       ))
                                   .toList();
                             } finally {
-                              _model.isDataUploading = false;
+                              _model.isDataUploading_uploadData6cx = false;
                             }
                             if (selectedUploadedFiles.length ==
                                 selectedMedia.length) {
                               safeSetState(() {
-                                _model.uploadedLocalFile =
+                                _model.uploadedLocalFile_uploadData6cx =
                                     selectedUploadedFiles.first;
                               });
                             } else {

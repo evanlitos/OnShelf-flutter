@@ -34,7 +34,9 @@ class ApiShelfGroup {
   static InactivitytrackingCall inactivitytrackingCall =
       InactivitytrackingCall();
   static SearchProductCall searchProductCall = SearchProductCall();
+  static SearchProductUPCCall searchProductUPCCall = SearchProductUPCCall();
   static ValidateProductsCall validateProductsCall = ValidateProductsCall();
+  static NewPlanogramCall newPlanogramCall = NewPlanogramCall();
 }
 
 class LoginCall {
@@ -266,7 +268,7 @@ class SendPhotosCall {
 
 class SearchCall {
   Future<ApiCallResponse> call({
-    int? idp,
+    String? idp = '',
     String? token = '',
     String? toKen = '',
   }) async {
@@ -472,6 +474,35 @@ class SearchProductCall {
   }
 }
 
+class SearchProductUPCCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+    String? upc = '',
+    String? toKen = '',
+  }) async {
+    final baseUrl = ApiShelfGroup.getBaseUrl(
+      toKen: toKen,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'searchProductUPC',
+      apiUrl: '${baseUrl}/api/v1/products/get-product-by-upc/${upc}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${toKen}',
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ValidateProductsCall {
   Future<ApiCallResponse> call({
     dynamic bodyJson,
@@ -487,6 +518,38 @@ ${body}''';
     return ApiManager.instance.makeApiCall(
       callName: 'ValidateProducts',
       apiUrl: '${baseUrl}/api/v1/app/route-register-history/check',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${toKen}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class NewPlanogramCall {
+  Future<ApiCallResponse> call({
+    dynamic bodyJson,
+    String? toKen = '',
+  }) async {
+    final baseUrl = ApiShelfGroup.getBaseUrl(
+      toKen: toKen,
+    );
+
+    final body = _serializeJson(bodyJson);
+    final ffApiRequestBody = '''
+${body}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'newPlanogram',
+      apiUrl: '${baseUrl}/api/v1/planograms',
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${toKen}',

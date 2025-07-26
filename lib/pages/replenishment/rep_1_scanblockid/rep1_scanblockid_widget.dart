@@ -9,6 +9,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/alerts/no_found/no_found_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -689,6 +690,63 @@ class _Rep1ScanblockidWidgetState extends State<Rep1ScanblockidWidget> {
                                           controller:
                                               _model.sinputSkuTextController,
                                           focusNode: _model.sinputSkuFocusNode,
+                                          onChanged: (_) =>
+                                              EasyDebounce.debounce(
+                                            '_model.sinputSkuTextController',
+                                            Duration(milliseconds: 2000),
+                                            () async {
+                                              _model.apiResultmnyCopy3 =
+                                                  await ApiShelfGroup.searchCall
+                                                      .call(
+                                                idp: _model
+                                                    .sinputSkuTextController
+                                                    .text,
+                                                token: FFAppState().user.token,
+                                              );
+
+                                              if (getJsonField(
+                                                    (_model.apiResultmnyCopy3
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                    r'''$.error''',
+                                                  ) !=
+                                                  null) {
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text('Error'),
+                                                      content:
+                                                          Text(getJsonField(
+                                                        (_model.apiResultmnyCopy3
+                                                                ?.jsonBody ??
+                                                            ''),
+                                                        r'''$.details''',
+                                                      ).toString()),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('Ok'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              } else {
+                                                FFAppState().toShelfSelected =
+                                                    ShelfsStruct.maybeFromMap(
+                                                        (_model.apiResultmnyCopy3
+                                                                ?.jsonBody ??
+                                                            ''))!;
+                                                safeSetState(() {});
+                                              }
+
+                                              safeSetState(() {});
+                                            },
+                                          ),
                                           autofocus: false,
                                           obscureText: false,
                                           decoration: InputDecoration(
@@ -832,17 +890,12 @@ class _Rep1ScanblockidWidgetState extends State<Rep1ScanblockidWidget> {
                                                   required isFocused,
                                                   maxLength}) =>
                                               null,
-                                          keyboardType: TextInputType.number,
                                           cursorColor:
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
                                           validator: _model
                                               .sinputSkuTextControllerValidator
                                               .asValidator(context),
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter.allow(
-                                                RegExp('[0-9]'))
-                                          ],
                                         ),
                                       ),
                                       Align(
@@ -885,9 +938,9 @@ class _Rep1ScanblockidWidgetState extends State<Rep1ScanblockidWidget> {
                                                     await ApiShelfGroup
                                                         .searchCall
                                                         .call(
-                                                  idp: int.tryParse(_model
+                                                  idp: _model
                                                       .sinputSkuTextController
-                                                      .text),
+                                                      .text,
                                                   token:
                                                       FFAppState().user.token,
                                                 );
@@ -922,6 +975,50 @@ class _Rep1ScanblockidWidgetState extends State<Rep1ScanblockidWidget> {
                                         _model.sinputSkuTextController?.text =
                                             _model.barcodeMode;
                                       });
+                                      _model.apiResultmnyCopyQR =
+                                          await ApiShelfGroup.searchCall.call(
+                                        idp:
+                                            _model.sinputSkuTextController.text,
+                                        token: FFAppState().user.token,
+                                      );
+
+                                      if (getJsonField(
+                                            (_model.apiResultmnyCopyQR
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$.error''',
+                                          ) !=
+                                          null) {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text('Error'),
+                                              content: Text(getJsonField(
+                                                (_model.apiResultmnyCopy3
+                                                        ?.jsonBody ??
+                                                    ''),
+                                                r'''$.details''',
+                                              ).toString()),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('Ok'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      } else {
+                                        FFAppState().toShelfSelected =
+                                            ShelfsStruct.maybeFromMap((_model
+                                                    .apiResultmnyCopyQR
+                                                    ?.jsonBody ??
+                                                ''))!;
+                                        safeSetState(() {});
+                                      }
 
                                       safeSetState(() {});
                                     },

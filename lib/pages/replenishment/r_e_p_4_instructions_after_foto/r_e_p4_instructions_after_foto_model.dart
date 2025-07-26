@@ -11,8 +11,8 @@ class REP4InstructionsAfterFotoModel
 
   // Model for menulateral component.
   late MenulateralModel menulateralModel;
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
+  bool isDataUploading_afterPhotoB = false;
+  FFUploadedFile uploadedLocalFile_afterPhotoB =
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
   @override

@@ -791,8 +791,9 @@ class _BackDoorDeliveryWidgetState extends State<BackDoorDeliveryWidget> {
                                                   validateFileFormat(
                                                       m.storagePath,
                                                       context))) {
-                                            safeSetState(() =>
-                                                _model.isDataUploading = true);
+                                            safeSetState(() => _model
+                                                    .isDataUploading_uploadDataX5foto =
+                                                true);
                                             var selectedUploadedFiles =
                                                 <FFUploadedFile>[];
 
@@ -817,12 +818,13 @@ class _BackDoorDeliveryWidgetState extends State<BackDoorDeliveryWidget> {
                                                               ))
                                                       .toList();
                                             } finally {
-                                              _model.isDataUploading = false;
+                                              _model.isDataUploading_uploadDataX5foto =
+                                                  false;
                                             }
                                             if (selectedUploadedFiles.length ==
                                                 selectedMedia.length) {
                                               safeSetState(() {
-                                                _model.uploadedLocalFile =
+                                                _model.uploadedLocalFile_uploadDataX5foto =
                                                     selectedUploadedFiles.first;
                                               });
                                             } else {
@@ -835,7 +837,8 @@ class _BackDoorDeliveryWidgetState extends State<BackDoorDeliveryWidget> {
                                               await ApiShelfGroup.rtbCall.call(
                                             token: FFAppState().user.token,
                                             userId: FFAppState().user.user.id,
-                                            img: _model.uploadedLocalFile,
+                                            img: _model
+                                                .uploadedLocalFile_uploadDataX5foto,
                                             rec: 0,
                                             cof: 0,
                                             exp: 0,

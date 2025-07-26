@@ -494,7 +494,8 @@ class _S4AfterBlockCategoriesInstructionsCopyWidgetState
                             if (selectedMedia != null &&
                                 selectedMedia.every((m) => validateFileFormat(
                                     m.storagePath, context))) {
-                              safeSetState(() => _model.isDataUploading = true);
+                              safeSetState(() =>
+                                  _model.isDataUploading_afterPhoto = true);
                               var selectedUploadedFiles = <FFUploadedFile>[];
 
                               try {
@@ -508,12 +509,12 @@ class _S4AfterBlockCategoriesInstructionsCopyWidgetState
                                         ))
                                     .toList();
                               } finally {
-                                _model.isDataUploading = false;
+                                _model.isDataUploading_afterPhoto = false;
                               }
                               if (selectedUploadedFiles.length ==
                                   selectedMedia.length) {
                                 safeSetState(() {
-                                  _model.uploadedLocalFile =
+                                  _model.uploadedLocalFile_afterPhoto =
                                       selectedUploadedFiles.first;
                                 });
                               } else {
@@ -522,7 +523,8 @@ class _S4AfterBlockCategoriesInstructionsCopyWidgetState
                               }
                             }
 
-                            if ((_model.uploadedLocalFile.bytes?.isNotEmpty ??
+                            if ((_model.uploadedLocalFile_afterPhoto.bytes
+                                        ?.isNotEmpty ??
                                     false)) {
                               FFAppState().beforPhoto = '';
                               safeSetState(() {});
@@ -554,7 +556,7 @@ class _S4AfterBlockCategoriesInstructionsCopyWidgetState
                                   ParamType.FFUploadedFile,
                                 ),
                                 'aFoto': serializeParam(
-                                  _model.uploadedLocalFile,
+                                  _model.uploadedLocalFile_afterPhoto,
                                   ParamType.FFUploadedFile,
                                 ),
                               }.withoutNulls,

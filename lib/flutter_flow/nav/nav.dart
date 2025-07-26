@@ -392,6 +392,37 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: BackDoorDeliveryWidget.routeName,
           path: BackDoorDeliveryWidget.routePath,
           builder: (context, params) => BackDoorDeliveryWidget(),
+        ),
+        FFRoute(
+          name: P1FormnewplanoWidget.routeName,
+          path: P1FormnewplanoWidget.routePath,
+          builder: (context, params) => P1FormnewplanoWidget(),
+        ),
+        FFRoute(
+          name: P2ScanproductWidget.routeName,
+          path: P2ScanproductWidget.routePath,
+          builder: (context, params) => P2ScanproductWidget(
+            shelfWidthCM: params.getParam(
+              'shelfWidthCM',
+              ParamType.int,
+            ),
+            shelfHeightCM: params.getParam(
+              'shelfHeightCM',
+              ParamType.int,
+            ),
+            numRows: params.getParam(
+              'numRows',
+              ParamType.int,
+            ),
+            shelfDepthCM: params.getParam(
+              'shelfDepthCM',
+              ParamType.int,
+            ),
+            nameShelf: params.getParam(
+              'nameShelf',
+              ParamType.String,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

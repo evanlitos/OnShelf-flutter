@@ -11,8 +11,8 @@ class S5AferResumeTakePhoto3CopyModel
 
   // Model for menulateral component.
   late MenulateralModel menulateralModel;
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
+  bool isDataUploading_uploadDataR1jB = false;
+  FFUploadedFile uploadedLocalFile_uploadDataR1jB =
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
   @override

@@ -11,8 +11,8 @@ class InstructionsAlienProductModel
 
   // Model for menulateral component.
   late MenulateralModel menulateralModel;
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
+  bool isDataUploading_uploadDataMna = false;
+  FFUploadedFile uploadedLocalFile_uploadDataMna =
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
   @override

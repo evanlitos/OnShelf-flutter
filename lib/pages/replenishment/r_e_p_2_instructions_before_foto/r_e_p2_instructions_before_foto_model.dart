@@ -11,8 +11,8 @@ class REP2InstructionsBeforeFotoModel
 
   // Model for menulateral component.
   late MenulateralModel menulateralModel;
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
+  bool isDataUploading_beforePhotoRep = false;
+  FFUploadedFile uploadedLocalFile_beforePhotoRep =
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
   @override

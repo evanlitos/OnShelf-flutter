@@ -10,8 +10,8 @@ class S22ResumeTakePhoto3Model
 
   // Model for menulateral component.
   late MenulateralModel menulateralModel;
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
+  bool isDataUploading_uploadData0xq = false;
+  FFUploadedFile uploadedLocalFile_uploadData0xq =
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
   @override

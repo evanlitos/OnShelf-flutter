@@ -11,10 +11,8 @@ class CheckinModel extends FlutterFlowModel<CheckinWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
-
+  // Stores action output result for [Custom Action - pickFrontCameraImage] action in Column widget.
+  FFUploadedFile? photoCamera;
   // Stores action output result for [Backend Call - API (Checkin)] action in Button widget.
   ApiCallResponse? uploadPhotoCheckin;
 

@@ -68,3 +68,7 @@ export '/schedule_work/choose_route_freshness/choose_route_freshness_widget.dart
     show ChooseRouteFreshnessWidget;
 export '/pages/delivery/back_door_delivery/back_door_delivery_widget.dart'
     show BackDoorDeliveryWidget;
+export '/planogram/p1_formnewplano/p1_formnewplano_widget.dart'
+    show P1FormnewplanoWidget;
+export '/planogram/p2_scanproduct/p2_scanproduct_widget.dart'
+    show P2ScanproductWidget;

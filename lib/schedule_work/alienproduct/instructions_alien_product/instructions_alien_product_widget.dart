@@ -378,7 +378,8 @@ class _InstructionsAlienProductWidgetState
                           if (selectedMedia != null &&
                               selectedMedia.every((m) =>
                                   validateFileFormat(m.storagePath, context))) {
-                            safeSetState(() => _model.isDataUploading = true);
+                            safeSetState(() =>
+                                _model.isDataUploading_uploadDataMna = true);
                             var selectedUploadedFiles = <FFUploadedFile>[];
 
                             try {
@@ -392,12 +393,12 @@ class _InstructionsAlienProductWidgetState
                                       ))
                                   .toList();
                             } finally {
-                              _model.isDataUploading = false;
+                              _model.isDataUploading_uploadDataMna = false;
                             }
                             if (selectedUploadedFiles.length ==
                                 selectedMedia.length) {
                               safeSetState(() {
-                                _model.uploadedLocalFile =
+                                _model.uploadedLocalFile_uploadDataMna =
                                     selectedUploadedFiles.first;
                               });
                             } else {
@@ -406,7 +407,8 @@ class _InstructionsAlienProductWidgetState
                             }
                           }
 
-                          if ((_model.uploadedLocalFile.bytes?.isNotEmpty ??
+                          if ((_model.uploadedLocalFile_uploadDataMna.bytes
+                                      ?.isNotEmpty ??
                                   false)) {
                             context.safePop();
 
@@ -414,7 +416,7 @@ class _InstructionsAlienProductWidgetState
                               InstructionsAlienProductPhotoWidget.routeName,
                               queryParameters: {
                                 'photo': serializeParam(
-                                  _model.uploadedLocalFile,
+                                  _model.uploadedLocalFile_uploadDataMna,
                                   ParamType.FFUploadedFile,
                                 ),
                               }.withoutNulls,

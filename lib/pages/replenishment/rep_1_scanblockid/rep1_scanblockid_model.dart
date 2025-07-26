@@ -25,9 +25,13 @@ class Rep1ScanblockidModel extends FlutterFlowModel<Rep1ScanblockidWidget> {
   FocusNode? sinputSkuFocusNode;
   TextEditingController? sinputSkuTextController;
   String? Function(BuildContext, String?)? sinputSkuTextControllerValidator;
+  // Stores action output result for [Backend Call - API (search)] action in sinput_sku widget.
+  ApiCallResponse? apiResultmnyCopy3;
   // Stores action output result for [Backend Call - API (search)] action in IconButton widget.
   ApiCallResponse? apiResultmny;
   var barcodeMode = '';
+  // Stores action output result for [Backend Call - API (search)] action in Button widget.
+  ApiCallResponse? apiResultmnyCopyQR;
 
   @override
   void initState(BuildContext context) {

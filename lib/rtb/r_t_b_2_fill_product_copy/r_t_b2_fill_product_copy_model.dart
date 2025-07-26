@@ -17,8 +17,8 @@ class RTB2FillProductCopyModel
 
   ///  State fields for stateful widgets in this page.
 
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
+  bool isDataUploading_fotoProducto = false;
+  FFUploadedFile uploadedLocalFile_fotoProducto =
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
   // Stores action output result for [Backend Call - API (rtb)] action in Button widget.

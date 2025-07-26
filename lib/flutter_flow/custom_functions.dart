@@ -323,3 +323,50 @@ String getBackdoorProductName(dynamic products) {
   }
   return "";
 }
+
+List<int> buildRowList(int count) {
+  return List.generate(count, (index) => index);
+}
+
+int sumarProductos(
+  List<ProductListRowStruct> products,
+  ProductListRowStruct nuevo,
+) {
+  return products.fold<int>(
+    nuevo.width,
+    (suma, producto) => suma + producto.width,
+  );
+}
+
+dynamic newPlanogram(
+  List<ListProductsStruct> rows,
+  String name,
+  String width,
+  String height,
+  int row,
+  int depth,
+  String? backgroundImage,
+  String? img,
+) {
+  return {
+    "name": name.toString(), // O usa name.toString() si debe ser dinámico
+    "width": width,
+    "height": height,
+    "row": row,
+    "depth": depth.toString(),
+    "rows": rows.map((r) {
+      return {
+        "height": r.height?.toString() ?? "0",
+        "products": r.products
+            .map((p) => {
+                  "product_id": p.productId,
+                  "position": p.position,
+                  "quantity": p.quantity,
+                })
+            .toList(),
+      };
+    }).toList(),
+    "img": img,
+    "backgroundImage": backgroundImage,
+  };
+}

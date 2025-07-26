@@ -14,8 +14,8 @@ class S2BlockCategoriesInstructionsModel
   late MenulateralModel menulateralModel;
   // Model for progressShelfs component.
   late ProgressShelfsModel progressShelfsModel;
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
+  bool isDataUploading_beforePhoto = false;
+  FFUploadedFile uploadedLocalFile_beforePhoto =
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
   @override

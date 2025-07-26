@@ -184,6 +184,16 @@ final parametersBuilderMap =
       ),
   'ChooseRouteFreshness': ParameterData.none(),
   'BackDoorDelivery': ParameterData.none(),
+  'P1_FORMNEWPLANO': ParameterData.none(),
+  'P2_SCANPRODUCT': (data) async => ParameterData(
+        allParams: {
+          'shelfWidthCM': getParameter<int>(data, 'shelfWidthCM'),
+          'shelfHeightCM': getParameter<int>(data, 'shelfHeightCM'),
+          'numRows': getParameter<int>(data, 'numRows'),
+          'shelfDepthCM': getParameter<int>(data, 'shelfDepthCM'),
+          'nameShelf': getParameter<String>(data, 'nameShelf'),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

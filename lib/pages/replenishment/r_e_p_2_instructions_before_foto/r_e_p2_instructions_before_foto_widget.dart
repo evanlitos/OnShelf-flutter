@@ -668,8 +668,9 @@ class _REP2InstructionsBeforeFotoWidgetState
                                             selectedMedia.every((m) =>
                                                 validateFileFormat(
                                                     m.storagePath, context))) {
-                                          safeSetState(() =>
-                                              _model.isDataUploading = true);
+                                          safeSetState(() => _model
+                                                  .isDataUploading_beforePhotoRep =
+                                              true);
                                           var selectedUploadedFiles =
                                               <FFUploadedFile>[];
 
@@ -689,12 +690,13 @@ class _REP2InstructionsBeforeFotoWidgetState
                                                         ))
                                                     .toList();
                                           } finally {
-                                            _model.isDataUploading = false;
+                                            _model.isDataUploading_beforePhotoRep =
+                                                false;
                                           }
                                           if (selectedUploadedFiles.length ==
                                               selectedMedia.length) {
                                             safeSetState(() {
-                                              _model.uploadedLocalFile =
+                                              _model.uploadedLocalFile_beforePhotoRep =
                                                   selectedUploadedFiles.first;
                                             });
                                           } else {
@@ -703,8 +705,8 @@ class _REP2InstructionsBeforeFotoWidgetState
                                           }
                                         }
 
-                                        if ((_model.uploadedLocalFile.bytes
-                                                    ?.isNotEmpty ??
+                                        if ((_model.uploadedLocalFile_beforePhotoRep
+                                                    .bytes?.isNotEmpty ??
                                                 false)) {
                                           safeSetState(() {});
                                         } else {
@@ -732,7 +734,8 @@ class _REP2InstructionsBeforeFotoWidgetState
                                           REP3ResumeBeforeFotoWidget.routeName,
                                           queryParameters: {
                                             'foto': serializeParam(
-                                              _model.uploadedLocalFile,
+                                              _model
+                                                  .uploadedLocalFile_beforePhotoRep,
                                               ParamType.FFUploadedFile,
                                             ),
                                           }.withoutNulls,

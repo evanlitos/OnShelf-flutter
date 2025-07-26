@@ -56,7 +56,7 @@ class _RTB2FillProductCopyWidgetState extends State<RTB2FillProductCopyWidget> {
       if (selectedMedia != null &&
           selectedMedia
               .every((m) => validateFileFormat(m.storagePath, context))) {
-        safeSetState(() => _model.isDataUploading = true);
+        safeSetState(() => _model.isDataUploading_fotoProducto = true);
         var selectedUploadedFiles = <FFUploadedFile>[];
 
         try {
@@ -70,11 +70,11 @@ class _RTB2FillProductCopyWidgetState extends State<RTB2FillProductCopyWidget> {
                   ))
               .toList();
         } finally {
-          _model.isDataUploading = false;
+          _model.isDataUploading_fotoProducto = false;
         }
         if (selectedUploadedFiles.length == selectedMedia.length) {
           safeSetState(() {
-            _model.uploadedLocalFile = selectedUploadedFiles.first;
+            _model.uploadedLocalFile_fotoProducto = selectedUploadedFiles.first;
           });
         } else {
           safeSetState(() {});
@@ -519,7 +519,8 @@ class _RTB2FillProductCopyWidgetState extends State<RTB2FillProductCopyWidget> {
                                           borderRadius:
                                               BorderRadius.circular(8.0),
                                           child: Image.memory(
-                                            _model.uploadedLocalFile.bytes ??
+                                            _model.uploadedLocalFile_fotoProducto
+                                                    .bytes ??
                                                 Uint8List.fromList([]),
                                             width: 200.0,
                                             height: 200.0,
@@ -1533,7 +1534,8 @@ class _RTB2FillProductCopyWidgetState extends State<RTB2FillProductCopyWidget> {
                                             cof: _model.localCof,
                                             exp: _model.localExp,
                                             dam: _model.localDam,
-                                            img: _model.uploadedLocalFile,
+                                            img: _model
+                                                .uploadedLocalFile_fotoProducto,
                                             productId:
                                                 widget.product?.productId,
                                           );

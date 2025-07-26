@@ -2,7 +2,6 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_data.dart';
 import '/pages/alerts/no_picture_selfie/no_picture_selfie_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -236,66 +235,13 @@ class _CheckinWidgetState extends State<CheckinWidget> {
                                                 highlightColor:
                                                     Colors.transparent,
                                                 onTap: () async {
-                                                  final selectedMedia =
-                                                      await selectMedia(
-                                                    maxWidth: 1000.00,
-                                                    maxHeight: 1000.00,
-                                                    imageQuality: 80,
-                                                    multiImage: false,
-                                                  );
-                                                  if (selectedMedia != null &&
-                                                      selectedMedia.every((m) =>
-                                                          validateFileFormat(
-                                                              m.storagePath,
-                                                              context))) {
-                                                    safeSetState(() =>
-                                                        _model.isDataUploading =
-                                                            true);
-                                                    var selectedUploadedFiles =
-                                                        <FFUploadedFile>[];
-
-                                                    try {
-                                                      selectedUploadedFiles =
-                                                          selectedMedia
-                                                              .map((m) =>
-                                                                  FFUploadedFile(
-                                                                    name: m
-                                                                        .storagePath
-                                                                        .split(
-                                                                            '/')
-                                                                        .last,
-                                                                    bytes:
-                                                                        m.bytes,
-                                                                    height: m
-                                                                        .dimensions
-                                                                        ?.height,
-                                                                    width: m
-                                                                        .dimensions
-                                                                        ?.width,
-                                                                    blurHash: m
-                                                                        .blurHash,
-                                                                  ))
-                                                              .toList();
-                                                    } finally {
-                                                      _model.isDataUploading =
-                                                          false;
-                                                    }
-                                                    if (selectedUploadedFiles
-                                                            .length ==
-                                                        selectedMedia.length) {
-                                                      safeSetState(() {
-                                                        _model.uploadedLocalFile =
-                                                            selectedUploadedFiles
-                                                                .first;
-                                                      });
-                                                    } else {
-                                                      safeSetState(() {});
-                                                      return;
-                                                    }
-                                                  }
-
+                                                  _model.photoCamera =
+                                                      await actions
+                                                          .pickFrontCameraImage();
                                                   _model.uploadPic =
                                                       _model.uploadPic != null;
+                                                  safeSetState(() {});
+
                                                   safeSetState(() {});
                                                 },
                                                 child: Column(
@@ -374,8 +320,7 @@ class _CheckinWidgetState extends State<CheckinWidget> {
                                                 borderRadius:
                                                     BorderRadius.circular(20.0),
                                                 child: Image.memory(
-                                                  _model.uploadedLocalFile
-                                                          .bytes ??
+                                                  _model.photoCamera?.bytes ??
                                                       Uint8List.fromList([]),
                                                   width:
                                                       MediaQuery.sizeOf(context)
@@ -388,7 +333,10 @@ class _CheckinWidgetState extends State<CheckinWidget> {
                                                   fit: BoxFit.contain,
                                                 ),
                                               ),
-                                            if (_model.isDataUploading)
+                                            if (_model.photoCamera != null &&
+                                                (_model.photoCamera?.bytes
+                                                        ?.isNotEmpty ??
+                                                    false))
                                               Align(
                                                 alignment: AlignmentDirectional(
                                                     0.0, 1.0),
@@ -406,16 +354,6 @@ class _CheckinWidgetState extends State<CheckinWidget> {
                                                     highlightColor:
                                                         Colors.transparent,
                                                     onTap: () async {
-                                                      safeSetState(() {
-                                                        _model.isDataUploading =
-                                                            false;
-                                                        _model.uploadedLocalFile =
-                                                            FFUploadedFile(
-                                                                bytes: Uint8List
-                                                                    .fromList(
-                                                                        []));
-                                                      });
-
                                                       _model.uploadPic = false;
                                                       safeSetState(() {});
                                                     },
@@ -642,9 +580,11 @@ class _CheckinWidgetState extends State<CheckinWidget> {
                                                       : () async {
                                                           var _shouldSetState =
                                                               false;
-                                                          if ((_model
-                                                                      .uploadedLocalFile
-                                                                      .bytes
+                                                          if (_model.photoCamera !=
+                                                                  null &&
+                                                              (_model
+                                                                      .photoCamera
+                                                                      ?.bytes
                                                                       ?.isNotEmpty ??
                                                                   false)) {
                                                             _model.uploadPhotoCheckin =
@@ -662,7 +602,7 @@ class _CheckinWidgetState extends State<CheckinWidget> {
                                                                       .id,
                                                               ubicacion: 'mxn',
                                                               img: _model
-                                                                  .uploadedLocalFile,
+                                                                  .photoCamera,
                                                             );
 
                                                             _shouldSetState =

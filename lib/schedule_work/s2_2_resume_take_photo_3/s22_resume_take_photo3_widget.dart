@@ -417,7 +417,8 @@ class _S22ResumeTakePhoto3WidgetState extends State<S22ResumeTakePhoto3Widget> {
                           if (selectedMedia != null &&
                               selectedMedia.every((m) =>
                                   validateFileFormat(m.storagePath, context))) {
-                            safeSetState(() => _model.isDataUploading = true);
+                            safeSetState(() =>
+                                _model.isDataUploading_uploadData0xq = true);
                             var selectedUploadedFiles = <FFUploadedFile>[];
 
                             try {
@@ -431,12 +432,12 @@ class _S22ResumeTakePhoto3WidgetState extends State<S22ResumeTakePhoto3Widget> {
                                       ))
                                   .toList();
                             } finally {
-                              _model.isDataUploading = false;
+                              _model.isDataUploading_uploadData0xq = false;
                             }
                             if (selectedUploadedFiles.length ==
                                 selectedMedia.length) {
                               safeSetState(() {
-                                _model.uploadedLocalFile =
+                                _model.uploadedLocalFile_uploadData0xq =
                                     selectedUploadedFiles.first;
                               });
                             } else {
@@ -452,7 +453,7 @@ class _S22ResumeTakePhoto3WidgetState extends State<S22ResumeTakePhoto3Widget> {
                             S22ResumeTakePhoto3Widget.routeName,
                             queryParameters: {
                               'foto': serializeParam(
-                                _model.uploadedLocalFile,
+                                _model.uploadedLocalFile_uploadData0xq,
                                 ParamType.FFUploadedFile,
                               ),
                             }.withoutNulls,

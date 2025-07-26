@@ -682,8 +682,9 @@ class _REP4InstructionsAfterFotoWidgetState
                                             selectedMedia.every((m) =>
                                                 validateFileFormat(
                                                     m.storagePath, context))) {
-                                          safeSetState(() =>
-                                              _model.isDataUploading = true);
+                                          safeSetState(() => _model
+                                                  .isDataUploading_afterPhotoB =
+                                              true);
                                           var selectedUploadedFiles =
                                               <FFUploadedFile>[];
 
@@ -703,12 +704,13 @@ class _REP4InstructionsAfterFotoWidgetState
                                                         ))
                                                     .toList();
                                           } finally {
-                                            _model.isDataUploading = false;
+                                            _model.isDataUploading_afterPhotoB =
+                                                false;
                                           }
                                           if (selectedUploadedFiles.length ==
                                               selectedMedia.length) {
                                             safeSetState(() {
-                                              _model.uploadedLocalFile =
+                                              _model.uploadedLocalFile_afterPhotoB =
                                                   selectedUploadedFiles.first;
                                             });
                                           } else {
@@ -717,8 +719,8 @@ class _REP4InstructionsAfterFotoWidgetState
                                           }
                                         }
 
-                                        if ((_model.uploadedLocalFile.bytes
-                                                    ?.isNotEmpty ??
+                                        if ((_model.uploadedLocalFile_afterPhotoB
+                                                    .bytes?.isNotEmpty ??
                                                 false)) {
                                           FFAppState().beforPhoto = '';
                                           safeSetState(() {});
@@ -751,7 +753,8 @@ class _REP4InstructionsAfterFotoWidgetState
                                               ParamType.FFUploadedFile,
                                             ),
                                             'aFoto': serializeParam(
-                                              _model.uploadedLocalFile,
+                                              _model
+                                                  .uploadedLocalFile_afterPhotoB,
                                               ParamType.FFUploadedFile,
                                             ),
                                           }.withoutNulls,
