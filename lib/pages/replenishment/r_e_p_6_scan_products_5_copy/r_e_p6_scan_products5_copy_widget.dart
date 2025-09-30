@@ -4,7 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/alerts/not_scanner_products/not_scanner_products_widget.dart';
-import '/pages/alerts/success_register_products/success_register_products_widget.dart';
+import '/pages/alerts/success_register_products_copy/success_register_products_copy_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:flutter/material.dart';
@@ -154,7 +154,7 @@ class _REP6ScanProducts5CopyWidgetState
                                         ),
                                       ),
                                       Text(
-                                        'Replenishment-Top up',
+                                        '6Replenishment-Top up',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -811,7 +811,7 @@ class _REP6ScanProducts5CopyWidgetState
                                                       ?.unfocus();
                                                 },
                                                 child:
-                                                    SuccessRegisterProductsWidget(
+                                                    SuccessRegisterProductsCopyWidget(
                                                   aFoto: widget.aFoto,
                                                   bFoto: widget.bFoto,
                                                 ),
@@ -1024,17 +1024,12 @@ class _REP6ScanProducts5CopyWidgetState
                                                   required isFocused,
                                                   maxLength}) =>
                                               null,
-                                          keyboardType: TextInputType.number,
                                           cursorColor:
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
                                           validator: _model
                                               .sinputSkuTextControllerValidator
                                               .asValidator(context),
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter.allow(
-                                                RegExp('[0-9]'))
-                                          ],
                                         ),
                                       ),
                                       Align(

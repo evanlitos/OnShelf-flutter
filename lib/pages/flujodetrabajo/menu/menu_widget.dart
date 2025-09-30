@@ -3,6 +3,7 @@ import '/components/menulateral_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:flutter/material.dart';
@@ -34,12 +35,22 @@ class _MenuWidgetState extends State<MenuWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      FFAppState().beforPhoto = '';
-      FFAppState().ShelfSelected = ShelfsStruct();
-      FFAppState().ShelfSelectedIndex = 0;
-      FFAppState().toShelfSelected = ShelfsStruct();
-      FFAppState().startShelf = SendItemsShelfStruct();
-      FFAppState().update(() {});
+      await Future.wait([
+        Future(() async {
+          FFAppState().beforPhoto = '';
+          FFAppState().ShelfSelected = ShelfsStruct();
+          FFAppState().ShelfSelectedIndex = 0;
+          FFAppState().toShelfSelected = ShelfsStruct();
+          FFAppState().startShelf = SendItemsShelfStruct();
+          FFAppState().topup = false;
+          FFAppState().update(() {});
+        }),
+        Future(() async {
+          await actions.inactivitymanager(
+            context,
+          );
+        }),
+      ]);
     });
   }
 
@@ -1107,6 +1118,10 @@ class _MenuWidgetState extends State<MenuWidget> {
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
+                                          await actions.inactivitymanager(
+                                            context,
+                                          );
+
                                           context.goNamed(
                                               ChooseRouteWidget.routeName);
                                         },
@@ -1202,6 +1217,10 @@ class _MenuWidgetState extends State<MenuWidget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            await actions.inactivitymanager(
+                                              context,
+                                            );
+
                                             context.pushNamed(
                                                 Rep1ScanblockidWidget
                                                     .routeName);
@@ -1301,6 +1320,10 @@ class _MenuWidgetState extends State<MenuWidget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            await actions.inactivitymanager(
+                                              context,
+                                            );
+
                                             context.pushNamed(
                                                 ChooseRouteFreshnessWidget
                                                     .routeName);
@@ -1400,6 +1423,10 @@ class _MenuWidgetState extends State<MenuWidget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            await actions.inactivitymanager(
+                                              context,
+                                            );
+
                                             context.goNamed(
                                                 PF1FinderWidget.routeName);
                                           },
@@ -1498,6 +1525,10 @@ class _MenuWidgetState extends State<MenuWidget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            await actions.inactivitymanager(
+                                              context,
+                                            );
+
                                             context.pushNamed(
                                                 RTB1FindCodeWidget.routeName);
                                           },
@@ -1596,6 +1627,10 @@ class _MenuWidgetState extends State<MenuWidget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            await actions.inactivitymanager(
+                                              context,
+                                            );
+
                                             context.pushNamed(
                                                 BackDoorDeliveryWidget
                                                     .routeName);
@@ -1695,6 +1730,10 @@ class _MenuWidgetState extends State<MenuWidget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            await actions.inactivitymanager(
+                                              context,
+                                            );
+
                                             context.pushNamed(
                                                 P1FormnewplanoWidget.routeName);
                                           },
@@ -1714,7 +1753,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                                   buttonSize: 40.0,
                                                   fillColor: Color(0xFFE3F5FF),
                                                   icon: Icon(
-                                                    FFIcons.knewIcon2,
+                                                    Icons.shelves,
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .primary,
@@ -1793,6 +1832,10 @@ class _MenuWidgetState extends State<MenuWidget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            await actions.inactivitymanager(
+                                              context,
+                                            );
+
                                             context.pushNamed(
                                                 AbsenseWidget.routeName);
                                           },

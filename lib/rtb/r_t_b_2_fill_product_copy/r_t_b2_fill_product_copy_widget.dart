@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/pages/alerts/not_scanner_products/not_scanner_products_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -1622,35 +1623,56 @@ class _RTB2FillProductCopyWidgetState extends State<RTB2FillProductCopyWidget> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  20.0, 0.0, 20.0, 10.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 10.0, 0.0, 0.0),
-                                    child: FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
-                                      },
-                                      text: 'Submit',
-                                      options: FFButtonOptions(
-                                        width: 150.0,
-                                        height: 40.0,
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            16.0, 0.0, 16.0, 0.0),
-                                        iconPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              font: GoogleFonts.hankenGrotesk(
+                            if (responsiveVisibility(
+                              context: context,
+                              phone: false,
+                            ))
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    20.0, 0.0, 20.0, 10.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 10.0, 0.0, 0.0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          await actions.inactivitymanager(
+                                            context,
+                                          );
+                                        },
+                                        text: 'Submit',
+                                        options: FFButtonOptions(
+                                          width: 150.0,
+                                          height: 40.0,
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16.0, 0.0, 16.0, 0.0),
+                                          iconPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .titleSmall
+                                              .override(
+                                                font: GoogleFonts.hankenGrotesk(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall
+                                                          .fontStyle,
+                                                ),
+                                                color: Colors.white,
+                                                letterSpacing: 0.0,
                                                 fontWeight:
                                                     FlutterFlowTheme.of(context)
                                                         .titleSmall
@@ -1660,26 +1682,15 @@ class _RTB2FillProductCopyWidgetState extends State<RTB2FillProductCopyWidget> {
                                                         .titleSmall
                                                         .fontStyle,
                                               ),
-                                              color: Colors.white,
-                                              letterSpacing: 0.0,
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontStyle,
-                                            ),
-                                        elevation: 0.0,
-                                        borderRadius:
-                                            BorderRadius.circular(24.0),
+                                          elevation: 0.0,
+                                          borderRadius:
+                                              BorderRadius.circular(24.0),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
                             Expanded(
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
@@ -1697,6 +1708,16 @@ class _RTB2FillProductCopyWidgetState extends State<RTB2FillProductCopyWidget> {
                                                 _model.sinputSkuTextController,
                                             focusNode:
                                                 _model.sinputSkuFocusNode,
+                                            onChanged: (_) =>
+                                                EasyDebounce.debounce(
+                                              '_model.sinputSkuTextController',
+                                              Duration(milliseconds: 2000),
+                                              () async {
+                                                await actions.inactivitymanager(
+                                                  context,
+                                                );
+                                              },
+                                            ),
                                             autofocus: false,
                                             obscureText: false,
                                             decoration: InputDecoration(
@@ -1899,6 +1920,10 @@ class _RTB2FillProductCopyWidgetState extends State<RTB2FillProductCopyWidget> {
                                                     if (_model.sinputSkuTextController
                                                                 .text ==
                                                             '') {
+                                                      await actions
+                                                          .inactivitymanager(
+                                                        context,
+                                                      );
                                                       await showDialog(
                                                         context: context,
                                                         builder:
@@ -1938,6 +1963,11 @@ class _RTB2FillProductCopyWidgetState extends State<RTB2FillProductCopyWidget> {
                                                       );
 
                                                       return;
+                                                    } else {
+                                                      await actions
+                                                          .inactivitymanager(
+                                                        context,
+                                                      );
                                                     }
                                                   },
                                                 ),
@@ -1949,6 +1979,9 @@ class _RTB2FillProductCopyWidgetState extends State<RTB2FillProductCopyWidget> {
                                     ),
                                     FFButtonWidget(
                                       onPressed: () async {
+                                        await actions.inactivitymanager(
+                                          context,
+                                        );
                                         _model.barcode2 =
                                             await FlutterBarcodeScanner
                                                 .scanBarcode(
@@ -2008,28 +2041,47 @@ class _RTB2FillProductCopyWidgetState extends State<RTB2FillProductCopyWidget> {
                                             BorderRadius.circular(24.0),
                                       ),
                                     ),
-                                    FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
-                                      },
-                                      text: '',
-                                      icon: Icon(
-                                        FFIcons.kscanIcon,
-                                        size: 15.0,
-                                      ),
-                                      options: FFButtonOptions(
-                                        height: 40.0,
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            26.0, 0.0, 26.0, 0.0),
-                                        iconPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              font: GoogleFonts.hankenGrotesk(
+                                    if (responsiveVisibility(
+                                      context: context,
+                                      phone: false,
+                                    ))
+                                      FFButtonWidget(
+                                        onPressed: () {
+                                          print('Button pressed ...');
+                                        },
+                                        text: '',
+                                        icon: Icon(
+                                          FFIcons.kscanIcon,
+                                          size: 15.0,
+                                        ),
+                                        options: FFButtonOptions(
+                                          height: 40.0,
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  26.0, 0.0, 26.0, 0.0),
+                                          iconPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .titleSmall
+                                              .override(
+                                                font: GoogleFonts.hankenGrotesk(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall
+                                                          .fontStyle,
+                                                ),
+                                                color: Colors.white,
+                                                letterSpacing: 0.0,
                                                 fontWeight:
                                                     FlutterFlowTheme.of(context)
                                                         .titleSmall
@@ -2039,22 +2091,11 @@ class _RTB2FillProductCopyWidgetState extends State<RTB2FillProductCopyWidget> {
                                                         .titleSmall
                                                         .fontStyle,
                                               ),
-                                              color: Colors.white,
-                                              letterSpacing: 0.0,
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontStyle,
-                                            ),
-                                        elevation: 0.0,
-                                        borderRadius:
-                                            BorderRadius.circular(24.0),
+                                          elevation: 0.0,
+                                          borderRadius:
+                                              BorderRadius.circular(24.0),
+                                        ),
                                       ),
-                                    ),
                                   ].divide(SizedBox(width: 10.0)),
                                 ),
                               ),

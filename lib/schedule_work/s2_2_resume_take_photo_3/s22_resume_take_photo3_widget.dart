@@ -3,8 +3,10 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 's22_resume_take_photo3_model.dart';
@@ -35,6 +37,13 @@ class _S22ResumeTakePhoto3WidgetState extends State<S22ResumeTakePhoto3Widget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => S22ResumeTakePhoto3Model());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.inactivitymanager(
+        context,
+      );
+    });
   }
 
   @override
@@ -106,6 +115,9 @@ class _S22ResumeTakePhoto3WidgetState extends State<S22ResumeTakePhoto3Widget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            await actions.inactivitymanager(
+                                              context,
+                                            );
                                             scaffoldKey.currentState!
                                                 .openDrawer();
                                           },
@@ -329,7 +341,7 @@ class _S22ResumeTakePhoto3WidgetState extends State<S22ResumeTakePhoto3Widget> {
                                     ),
                               ),
                               Text(
-                                'Category: ${FFAppState().ShelfSelected.category1}',
+                                'Display Name: ${FFAppState().ShelfSelected.planogramName}',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -351,7 +363,7 @@ class _S22ResumeTakePhoto3WidgetState extends State<S22ResumeTakePhoto3Widget> {
                                     ),
                               ),
                               Text(
-                                'Display Number: ${FFAppState().ShelfSelected.mapCanvaId.toString()}',
+                                'Category: ${FFAppState().ShelfSelected.name}',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -448,6 +460,9 @@ class _S22ResumeTakePhoto3WidgetState extends State<S22ResumeTakePhoto3Widget> {
 
                           FFAppState().beforPhoto = '';
                           safeSetState(() {});
+                          await actions.inactivitymanager(
+                            context,
+                          );
 
                           context.goNamed(
                             S22ResumeTakePhoto3Widget.routeName,
@@ -494,6 +509,10 @@ class _S22ResumeTakePhoto3WidgetState extends State<S22ResumeTakePhoto3Widget> {
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
+                          await actions.inactivitymanager(
+                            context,
+                          );
+
                           context.goNamed(
                             S3BeforePhotoDiagram4Widget.routeName,
                             queryParameters: {

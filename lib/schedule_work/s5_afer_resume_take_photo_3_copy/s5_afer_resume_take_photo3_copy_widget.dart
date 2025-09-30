@@ -1,8 +1,10 @@
 import '/components/menulateral_widget.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -332,7 +334,7 @@ class _S5AferResumeTakePhoto3CopyWidgetState
                                     ),
                               ),
                               Text(
-                                'Category: ${FFAppState().ShelfSelected.category1}',
+                                'Display Name: ${FFAppState().ShelfSelected.planogramName}',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -354,7 +356,7 @@ class _S5AferResumeTakePhoto3CopyWidgetState
                                     ),
                               ),
                               Text(
-                                'Display Number: ${FFAppState().ShelfSelected.mapCanvaId.toString()}',
+                                'Category: ${FFAppState().ShelfSelected.category1}',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -390,13 +392,44 @@ class _S5AferResumeTakePhoto3CopyWidgetState
                   children: [
                     Align(
                       alignment: AlignmentDirectional(0.0, 0.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Image.memory(
-                          widget.aFoto?.bytes ?? Uint8List.fromList([]),
-                          width: MediaQuery.sizeOf(context).width * 0.9,
-                          height: MediaQuery.sizeOf(context).height * 0.9,
-                          fit: BoxFit.contain,
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          await actions.inactivitymanager(
+                            context,
+                          );
+                          await Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.fade,
+                              child: FlutterFlowExpandedImageView(
+                                image: Image.memory(
+                                  widget.aFoto?.bytes ??
+                                      Uint8List.fromList([]),
+                                  fit: BoxFit.contain,
+                                ),
+                                allowRotation: false,
+                                tag: 'imageTag3',
+                                useHeroAnimation: true,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Hero(
+                          tag: 'imageTag3',
+                          transitionOnUserGestures: true,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.memory(
+                              widget.aFoto?.bytes ?? Uint8List.fromList([]),
+                              width: MediaQuery.sizeOf(context).width * 0.9,
+                              height: MediaQuery.sizeOf(context).height * 0.9,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -411,6 +444,9 @@ class _S5AferResumeTakePhoto3CopyWidgetState
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
+                          await actions.inactivitymanager(
+                            context,
+                          );
                           final selectedMedia = await selectMedia(
                             maxWidth: 400.00,
                             maxHeight: 600.00,
@@ -498,6 +534,10 @@ class _S5AferResumeTakePhoto3CopyWidgetState
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
+                          await actions.inactivitymanager(
+                            context,
+                          );
+
                           context.goNamed(
                             S6ScanProducts5Widget.routeName,
                             queryParameters: {

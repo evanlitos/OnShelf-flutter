@@ -593,27 +593,19 @@ class _ChooseRouteFreshnessWidgetState
                                                         ),
                                               ),
                                             ),
-                                            Expanded(
-                                              child: Text(
-                                                'End date: ${routesItem.endDate}',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          font: GoogleFonts
-                                                              .hankenGrotesk(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontStyle,
-                                                          ),
-                                                          letterSpacing: 0.0,
+                                            if (responsiveVisibility(
+                                              context: context,
+                                              phone: false,
+                                            ))
+                                              Expanded(
+                                                child: Text(
+                                                  'End date: ${routesItem.endDate}',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        font: GoogleFonts
+                                                            .hankenGrotesk(
                                                           fontWeight:
                                                               FlutterFlowTheme.of(
                                                                       context)
@@ -625,8 +617,20 @@ class _ChooseRouteFreshnessWidgetState
                                                                   .bodyMedium
                                                                   .fontStyle,
                                                         ),
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                ),
                                               ),
-                                            ),
                                           ],
                                         ),
                                       ],

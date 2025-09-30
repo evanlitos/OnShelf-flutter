@@ -120,7 +120,11 @@ class _SuccessRegisterProductsWidgetState
                       imgMainShelfAfter: widget.aFoto,
                     );
 
-                    context.goNamed(S1BlockCategories2Widget.routeName);
+                    if (FFAppState().topup == true) {
+                      context.goNamed(Rep1ScanblockidWidget.routeName);
+                    } else {
+                      context.goNamed(S1BlockCategories2Widget.routeName);
+                    }
 
                     safeSetState(() {});
                   },

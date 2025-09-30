@@ -6,8 +6,10 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -34,6 +36,13 @@ class _RTB1FindCodeWidgetState extends State<RTB1FindCodeWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => RTB1FindCodeModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.inactivitymanager(
+        context,
+      );
+    });
 
     _model.sinputSkuTextController ??= TextEditingController();
     _model.sinputSkuFocusNode ??= FocusNode();
@@ -726,6 +735,10 @@ class _RTB1FindCodeWidgetState extends State<RTB1FindCodeWidget> {
                                                   if (_model.sinputSkuTextController
                                                               .text !=
                                                           '') {
+                                                    await actions
+                                                        .inactivitymanager(
+                                                      context,
+                                                    );
                                                     _model.resultadoSKU =
                                                         await ApiShelfGroup
                                                             .searchProductCall
@@ -819,6 +832,10 @@ class _RTB1FindCodeWidgetState extends State<RTB1FindCodeWidget> {
                                                       return;
                                                     }
                                                   } else {
+                                                    await actions
+                                                        .inactivitymanager(
+                                                      context,
+                                                    );
                                                     await showDialog(
                                                       context: context,
                                                       builder:
@@ -855,6 +872,9 @@ class _RTB1FindCodeWidgetState extends State<RTB1FindCodeWidget> {
                                   ),
                                   FFButtonWidget(
                                     onPressed: () async {
+                                      await actions.inactivitymanager(
+                                        context,
+                                      );
                                       _model.barcodeMode =
                                           await FlutterBarcodeScanner
                                               .scanBarcode(

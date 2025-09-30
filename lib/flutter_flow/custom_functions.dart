@@ -282,7 +282,7 @@ String completeAndPendigs(dynamic shelfs) {
   int countComplete =
       shelfs.where((shelf) => shelf['status'] == 'disponible').length;
 
-  return "Completed $count/${shelfs.length}";
+  return "$count/${shelfs.length}";
 }
 
 int pintarProgresoShelfs(dynamic shelfs) {
@@ -303,10 +303,32 @@ bool isAlienOrNot(
   dynamic shelf,
   String sku,
 ) {
+  print('🔍 Verificando shelf: $shelf');
+  print('🔎 Buscando coincidencia para SKU o UPC: $sku');
+
   if (shelf.containsKey('products') && shelf['products'] is List) {
     List<dynamic> products = shelf['products'];
-    return products.any((product) => product['sku'] == sku);
+    print('📦 Lista de productos encontrada: ${products.length} elementos');
+
+    for (var product in products) {
+      print('➡️ Revisando producto: $product');
+
+      final productSku = product['sku'];
+      final productUpc = product['upc'];
+
+      print('🔸 SKU: $productSku, UPC: $productUpc');
+
+      if (productSku == sku || productUpc == sku) {
+        print('✅ Coincidencia encontrada con SKU o UPC');
+        return true;
+      }
+    }
+
+    print('❌ No se encontró coincidencia');
+    return false;
   }
+
+  print('⚠️ No se encontró la clave "products" o no es una lista');
   return false;
 }
 
@@ -347,6 +369,8 @@ dynamic newPlanogram(
   int depth,
   String? backgroundImage,
   String? img,
+  String retailerName,
+  List<RetailersStruct> retailers,
 ) {
   return {
     "name": name.toString(), // O usa name.toString() si debe ser dinámico
@@ -354,6 +378,11 @@ dynamic newPlanogram(
     "height": height,
     "row": row,
     "depth": depth.toString(),
+    "retailer_id": retailers
+        .firstWhere(
+          (r) => r.retailerName.toLowerCase() == retailerName.toLowerCase(),
+        )
+        .id,
     "rows": rows.map((r) {
       return {
         "height": r.height?.toString() ?? "0",
@@ -369,4 +398,24 @@ dynamic newPlanogram(
     "img": img,
     "backgroundImage": backgroundImage,
   };
+}
+
+List<String> obtenerNombresRetailers(List<RetailersStruct> ret) {
+  //  return retailers.map((r) => r.retailer_name).toList();
+  return ret.map((r) => r.retailerName).toList();
+}
+
+List<ShelfsStruct>? filterarUPC(
+  String? test,
+  List<ShelfsStruct>? listData,
+) {
+  if (listData == null || listData.isEmpty) return [];
+
+  final query = (test ?? '').trim().toLowerCase();
+  if (query.isEmpty) return listData;
+
+  return listData.where((item) {
+    final itemUpc = (item.planogramName ?? '').toLowerCase();
+    return itemUpc.contains(query);
+  }).toList();
 }

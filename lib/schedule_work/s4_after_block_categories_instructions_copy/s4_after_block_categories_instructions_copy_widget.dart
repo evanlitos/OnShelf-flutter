@@ -4,8 +4,10 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 's4_after_block_categories_instructions_copy_model.dart';
@@ -38,6 +40,13 @@ class _S4AfterBlockCategoriesInstructionsCopyWidgetState
     super.initState();
     _model = createModel(
         context, () => S4AfterBlockCategoriesInstructionsCopyModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.inactivitymanager(
+        context,
+      );
+    });
   }
 
   @override
@@ -358,7 +367,7 @@ class _S4AfterBlockCategoriesInstructionsCopyWidgetState
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              'Category:${FFAppState().ShelfSelected.category1}',
+                                              'Display Name: ${FFAppState().ShelfSelected.planogramName}',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -390,7 +399,7 @@ class _S4AfterBlockCategoriesInstructionsCopyWidgetState
                                                       ),
                                             ),
                                             Text(
-                                              'Display Number: ${FFAppState().ShelfSelected.mapCanvaId.toString()}',
+                                              'Category:${FFAppState().ShelfSelected.category1}',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -485,6 +494,9 @@ class _S4AfterBlockCategoriesInstructionsCopyWidgetState
                             50.0, 30.0, 50.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
+                            await actions.inactivitymanager(
+                              context,
+                            );
                             final selectedMedia = await selectMedia(
                               maxWidth: 400.00,
                               maxHeight: 600.00,

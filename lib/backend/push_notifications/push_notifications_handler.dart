@@ -145,7 +145,11 @@ final parametersBuilderMap =
         },
       ),
   'REP_1_SCANBLOCKID': ParameterData.none(),
-  'REP_2_InstructionsBeforeFoto': ParameterData.none(),
+  'REP_2_InstructionsBeforeFoto': (data) async => ParameterData(
+        allParams: {
+          'name': getParameter<String>(data, 'name'),
+        },
+      ),
   'REP_3_Resume_BeforeFoto': (data) async => ParameterData(
         allParams: <String, dynamic>{},
       ),
@@ -192,6 +196,19 @@ final parametersBuilderMap =
           'numRows': getParameter<int>(data, 'numRows'),
           'shelfDepthCM': getParameter<int>(data, 'shelfDepthCM'),
           'nameShelf': getParameter<String>(data, 'nameShelf'),
+          'retailerName': getParameter<String>(data, 'retailerName'),
+        },
+      ),
+  'REP6_SCANPRODUCTS': (data) async => ParameterData(
+        allParams: <String, dynamic>{},
+      ),
+  'REP3_4_Before_photo_diagram_4Copy': (data) async => ParameterData(
+        allParams: <String, dynamic>{},
+      ),
+  'EDITNEWPLAN': (data) async => ParameterData(
+        allParams: {
+          'pX': getParameter<int>(data, 'pX'),
+          'pY': getParameter<int>(data, 'pY'),
         },
       ),
 };

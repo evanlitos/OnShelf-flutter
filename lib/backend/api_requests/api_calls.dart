@@ -37,6 +37,13 @@ class ApiShelfGroup {
   static SearchProductUPCCall searchProductUPCCall = SearchProductUPCCall();
   static ValidateProductsCall validateProductsCall = ValidateProductsCall();
   static NewPlanogramCall newPlanogramCall = NewPlanogramCall();
+  static ActualizarProductoCall actualizarProductoCall =
+      ActualizarProductoCall();
+  static UpdatephotoproductCall updatephotoproductCall =
+      UpdatephotoproductCall();
+  static UpdateProductCall updateProductCall = UpdateProductCall();
+  static CreateProductCall createProductCall = CreateProductCall();
+  static RoutestatusCall routestatusCall = RoutestatusCall();
 }
 
 class LoginCall {
@@ -549,7 +556,7 @@ class NewPlanogramCall {
 ${body}''';
     return ApiManager.instance.makeApiCall(
       callName: 'newPlanogram',
-      apiUrl: '${baseUrl}/api/v1/planograms',
+      apiUrl: '${baseUrl}/api/v1/planograms/mobile',
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${toKen}',
@@ -557,6 +564,170 @@ ${body}''';
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ActualizarProductoCall {
+  Future<ApiCallResponse> call({
+    int? productId,
+    dynamic productJson,
+    String? toKen = '',
+  }) async {
+    final baseUrl = ApiShelfGroup.getBaseUrl(
+      toKen: toKen,
+    );
+
+    final product = _serializeJson(productJson);
+    final ffApiRequestBody = '''
+${product}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'ActualizarProducto',
+      apiUrl: '${baseUrl}/api/v1/products/${productId}',
+      callType: ApiCallType.PUT,
+      headers: {
+        'Authorization': 'Bearer ${toKen}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class UpdatephotoproductCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? img = '-',
+    String? toKen = '',
+  }) async {
+    final baseUrl = ApiShelfGroup.getBaseUrl(
+      toKen: toKen,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "img": "${escapeStringForJson(img)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'UPDATEPHOTOPRODUCT',
+      apiUrl: '${baseUrl}/api/v1/products/update-photo/${id}',
+      callType: ApiCallType.PUT,
+      headers: {
+        'Authorization': 'Bearer ${toKen}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class UpdateProductCall {
+  Future<ApiCallResponse> call({
+    int? id = 0,
+    String? height = '0',
+    String? width = '0',
+    String? depth = '0',
+    String? toKen = '',
+  }) async {
+    final baseUrl = ApiShelfGroup.getBaseUrl(
+      toKen: toKen,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "height": "${escapeStringForJson(height)}",
+  "width": "${escapeStringForJson(width)}",
+  "depth": "${escapeStringForJson(depth)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'UPDATE PRODUCT',
+      apiUrl: '${baseUrl}/api/v1/products/no-fields-required/${id}',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${toKen}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class CreateProductCall {
+  Future<ApiCallResponse> call({
+    dynamic productJson,
+    String? toKen = '',
+  }) async {
+    final baseUrl = ApiShelfGroup.getBaseUrl(
+      toKen: toKen,
+    );
+
+    final product = _serializeJson(productJson);
+    final ffApiRequestBody = '''
+${product}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'CreateProduct',
+      apiUrl: '${baseUrl}/api/v1/products',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${toKen}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class RoutestatusCall {
+  Future<ApiCallResponse> call({
+    int? idRoute,
+    String? toKen = '',
+  }) async {
+    final baseUrl = ApiShelfGroup.getBaseUrl(
+      toKen: toKen,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'routestatus',
+      apiUrl: '${baseUrl}/api/v1/app/route-status/${idRoute}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${toKen}',
+      },
+      params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

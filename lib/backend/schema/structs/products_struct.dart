@@ -47,6 +47,11 @@ class ProductsStruct extends FFFirebaseStruct {
     int? isAvailability,
     int? isAlien,
     bool? isBackdoor,
+    String? upc,
+    int? outOfPlanogram,
+    double? height,
+    double? width,
+    double? depth,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _id = id,
         _productId = productId,
@@ -87,6 +92,11 @@ class ProductsStruct extends FFFirebaseStruct {
         _isAvailability = isAvailability,
         _isAlien = isAlien,
         _isBackdoor = isBackdoor,
+        _upc = upc,
+        _outOfPlanogram = outOfPlanogram,
+        _height = height,
+        _width = width,
+        _depth = depth,
         super(firestoreUtilData);
 
   // "id" field.
@@ -408,6 +418,50 @@ class ProductsStruct extends FFFirebaseStruct {
 
   bool hasIsBackdoor() => _isBackdoor != null;
 
+  // "upc" field.
+  String? _upc;
+  String get upc => _upc ?? '';
+  set upc(String? val) => _upc = val;
+
+  bool hasUpc() => _upc != null;
+
+  // "outOfPlanogram" field.
+  int? _outOfPlanogram;
+  int get outOfPlanogram => _outOfPlanogram ?? 0;
+  set outOfPlanogram(int? val) => _outOfPlanogram = val;
+
+  void incrementOutOfPlanogram(int amount) =>
+      outOfPlanogram = outOfPlanogram + amount;
+
+  bool hasOutOfPlanogram() => _outOfPlanogram != null;
+
+  // "height" field.
+  double? _height;
+  double get height => _height ?? 0.0;
+  set height(double? val) => _height = val;
+
+  void incrementHeight(double amount) => height = height + amount;
+
+  bool hasHeight() => _height != null;
+
+  // "width" field.
+  double? _width;
+  double get width => _width ?? 0.0;
+  set width(double? val) => _width = val;
+
+  void incrementWidth(double amount) => width = width + amount;
+
+  bool hasWidth() => _width != null;
+
+  // "depth" field.
+  double? _depth;
+  double get depth => _depth ?? 0.0;
+  set depth(double? val) => _depth = val;
+
+  void incrementDepth(double amount) => depth = depth + amount;
+
+  bool hasDepth() => _depth != null;
+
   static ProductsStruct fromMap(Map<String, dynamic> data) => ProductsStruct(
         id: castToType<int>(data['id']),
         productId: castToType<int>(data['product_id']),
@@ -448,6 +502,11 @@ class ProductsStruct extends FFFirebaseStruct {
         isAvailability: castToType<int>(data['isAvailability']),
         isAlien: castToType<int>(data['isAlien']),
         isBackdoor: data['isBackdoor'] as bool?,
+        upc: data['upc'] as String?,
+        outOfPlanogram: castToType<int>(data['outOfPlanogram']),
+        height: castToType<double>(data['height']),
+        width: castToType<double>(data['width']),
+        depth: castToType<double>(data['depth']),
       );
 
   static ProductsStruct? maybeFromMap(dynamic data) =>
@@ -493,6 +552,11 @@ class ProductsStruct extends FFFirebaseStruct {
         'isAvailability': _isAvailability,
         'isAlien': _isAlien,
         'isBackdoor': _isBackdoor,
+        'upc': _upc,
+        'outOfPlanogram': _outOfPlanogram,
+        'height': _height,
+        'width': _width,
+        'depth': _depth,
       }.withoutNulls;
 
   @override
@@ -652,6 +716,26 @@ class ProductsStruct extends FFFirebaseStruct {
         'isBackdoor': serializeParam(
           _isBackdoor,
           ParamType.bool,
+        ),
+        'upc': serializeParam(
+          _upc,
+          ParamType.String,
+        ),
+        'outOfPlanogram': serializeParam(
+          _outOfPlanogram,
+          ParamType.int,
+        ),
+        'height': serializeParam(
+          _height,
+          ParamType.double,
+        ),
+        'width': serializeParam(
+          _width,
+          ParamType.double,
+        ),
+        'depth': serializeParam(
+          _depth,
+          ParamType.double,
         ),
       }.withoutNulls;
 
@@ -852,6 +936,31 @@ class ProductsStruct extends FFFirebaseStruct {
           ParamType.bool,
           false,
         ),
+        upc: deserializeParam(
+          data['upc'],
+          ParamType.String,
+          false,
+        ),
+        outOfPlanogram: deserializeParam(
+          data['outOfPlanogram'],
+          ParamType.int,
+          false,
+        ),
+        height: deserializeParam(
+          data['height'],
+          ParamType.double,
+          false,
+        ),
+        width: deserializeParam(
+          data['width'],
+          ParamType.double,
+          false,
+        ),
+        depth: deserializeParam(
+          data['depth'],
+          ParamType.double,
+          false,
+        ),
       );
 
   @override
@@ -898,7 +1007,12 @@ class ProductsStruct extends FFFirebaseStruct {
         cof == other.cof &&
         isAvailability == other.isAvailability &&
         isAlien == other.isAlien &&
-        isBackdoor == other.isBackdoor;
+        isBackdoor == other.isBackdoor &&
+        upc == other.upc &&
+        outOfPlanogram == other.outOfPlanogram &&
+        height == other.height &&
+        width == other.width &&
+        depth == other.depth;
   }
 
   @override
@@ -941,7 +1055,12 @@ class ProductsStruct extends FFFirebaseStruct {
         cof,
         isAvailability,
         isAlien,
-        isBackdoor
+        isBackdoor,
+        upc,
+        outOfPlanogram,
+        height,
+        width,
+        depth
       ]);
 }
 
@@ -985,6 +1104,11 @@ ProductsStruct createProductsStruct({
   int? isAvailability,
   int? isAlien,
   bool? isBackdoor,
+  String? upc,
+  int? outOfPlanogram,
+  double? height,
+  double? width,
+  double? depth,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -1030,6 +1154,11 @@ ProductsStruct createProductsStruct({
       isAvailability: isAvailability,
       isAlien: isAlien,
       isBackdoor: isBackdoor,
+      upc: upc,
+      outOfPlanogram: outOfPlanogram,
+      height: height,
+      width: width,
+      depth: depth,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

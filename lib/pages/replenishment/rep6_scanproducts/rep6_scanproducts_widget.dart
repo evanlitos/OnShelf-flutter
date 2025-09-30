@@ -1,31 +1,29 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/components/alient_product_confirm_copy_widget.dart';
 import '/components/alient_product_confirm_widget.dart';
 import '/components/menulateral_widget.dart';
 import '/components/product_in_backdoor_widget.dart';
-import '/components/progress_shelfs_widget.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_data.dart';
 import '/pages/alerts/success/success_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 's6_scan_products5_model.dart';
-export 's6_scan_products5_model.dart';
+import 'rep6_scanproducts_model.dart';
+export 'rep6_scanproducts_model.dart';
 
-class S6ScanProducts5Widget extends StatefulWidget {
-  const S6ScanProducts5Widget({
+class Rep6ScanproductsWidget extends StatefulWidget {
+  const Rep6ScanproductsWidget({
     super.key,
     required this.aFoto,
     required this.bFoto,
@@ -34,29 +32,25 @@ class S6ScanProducts5Widget extends StatefulWidget {
   final FFUploadedFile? aFoto;
   final FFUploadedFile? bFoto;
 
-  static String routeName = 'S6_ScanProducts_5';
-  static String routePath = '/s6ScanProducts5';
+  static String routeName = 'REP6_SCANPRODUCTS';
+  static String routePath = '/rep6Scanproducts';
 
   @override
-  State<S6ScanProducts5Widget> createState() => _S6ScanProducts5WidgetState();
+  State<Rep6ScanproductsWidget> createState() => _Rep6ScanproductsWidgetState();
 }
 
-class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
-  late S6ScanProducts5Model _model;
+class _Rep6ScanproductsWidgetState extends State<Rep6ScanproductsWidget> {
+  late Rep6ScanproductsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => S6ScanProducts5Model());
+    _model = createModel(context, () => Rep6ScanproductsModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await actions.inactivitymanager(
-        context,
-      );
-      FFAppState().productListRoute = [];
       safeSetState(() {});
     });
 
@@ -158,12 +152,28 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                           size: 24.0,
                                         ),
                                       ),
-                                      Text(
-                                        'Schedule work',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              font: GoogleFonts.hankenGrotesk(
+                                      Expanded(
+                                        child: Text(
+                                          '6- Top up',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                font: GoogleFonts.hankenGrotesk(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                                letterSpacing: 0.0,
                                                 fontWeight:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
@@ -173,19 +183,7 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                                         .bodyMedium
                                                         .fontStyle,
                                               ),
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              letterSpacing: 0.0,
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontStyle,
-                                            ),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -317,126 +315,10 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                   ),
                 ],
               ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: wrapWithModel(
-                      model: _model.progressShelfsModel,
-                      updateCallback: () => safeSetState(() {}),
-                      child: ProgressShelfsWidget(),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 89.3,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFF2F7FB),
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                      child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                await actions.inactivitymanager(
-                                  context,
-                                );
-                                await Navigator.push(
-                                  context,
-                                  PageTransition(
-                                    type: PageTransitionType.fade,
-                                    child: FlutterFlowExpandedImageView(
-                                      image: Image.network(
-                                        functions.imagePathFromUrl(FFAppState()
-                                            .ShelfSelected
-                                            .planogramImg),
-                                        fit: BoxFit.contain,
-                                      ),
-                                      allowRotation: false,
-                                      tag: functions.imagePathFromUrl(
-                                          FFAppState()
-                                              .ShelfSelected
-                                              .planogramImg),
-                                      useHeroAnimation: true,
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: Hero(
-                                tag: functions.imagePathFromUrl(
-                                    FFAppState().ShelfSelected.planogramImg),
-                                transitionOnUserGestures: true,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.network(
-                                    functions.imagePathFromUrl(FFAppState()
-                                        .ShelfSelected
-                                        .planogramImg),
-                                    width: 80.0,
-                                    height: 80.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 0.0, 0.0, 0.0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Display Name:${FFAppState().ShelfSelected.planogramName}',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            font: GoogleFonts.hankenGrotesk(
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontStyle,
-                                            ),
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
-                                          ),
-                                    ),
-                                  ].divide(SizedBox(height: 10.0)),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
               Expanded(
                 child: Builder(
                   builder: (context) {
-                    final items = FFAppState().productListRoute.toList();
+                    final items = FFAppState().productListTopUp.toList();
                     if (items.isEmpty) {
                       return Center(
                         child: Image.asset(
@@ -493,27 +375,17 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     2.0, 2.0, 2.0, 2.0),
-                                            child: InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                await actions.inactivitymanager(
-                                                  context,
-                                                );
-                                              },
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                child: Image.network(
-                                                  functions.imagePathFromUrl(
-                                                      itemsItem.img),
-                                                  width: 200.0,
-                                                  height: 200.0,
-                                                  fit: BoxFit.contain,
-                                                ),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.network(
+                                                getJsonField(
+                                                  itemsItem.toMap(),
+                                                  r'''$.img''',
+                                                ).toString(),
+                                                width: 200.0,
+                                                height: 200.0,
+                                                fit: BoxFit.contain,
                                               ),
                                             ),
                                           ),
@@ -565,45 +437,47 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                               Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
-                                                  Text(
-                                                    'SKU :  ${itemsItem.sku}',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          font: GoogleFonts
-                                                              .hankenGrotesk(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
+                                                  if (responsiveVisibility(
+                                                    context: context,
+                                                    phone: false,
+                                                  ))
+                                                    Text(
+                                                      'SKU :  ${itemsItem.sku}',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                font: GoogleFonts
+                                                                    .hankenGrotesk(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyMedium
                                                                     .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
+                                                                fontStyle: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyMedium
                                                                     .fontStyle,
-                                                          ),
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                  ),
+                                                              ),
+                                                    ),
                                                 ],
                                               ),
                                               Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
                                                   Text(
-                                                    'No. Panogram: ${FFAppState().ShelfSelected.planogramName}',
+                                                    'No. Planogram: ${FFAppState().toShelfSelected.planogramName}',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyMedium
@@ -646,25 +520,20 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                                                 0.0, 0.0),
                                                     child: FFButtonWidget(
                                                       onPressed: () async {
-                                                        await actions
-                                                            .inactivitymanager(
-                                                          context,
-                                                        );
-
                                                         context.pushNamed(
-                                                          S7FillProductWidget
+                                                          REP7FillProductWidget
                                                               .routeName,
                                                           queryParameters: {
+                                                            'itemIndex':
+                                                                serializeParam(
+                                                              itemsIndex,
+                                                              ParamType.int,
+                                                            ),
                                                             'product':
                                                                 serializeParam(
                                                               itemsItem,
                                                               ParamType
                                                                   .DataStruct,
-                                                            ),
-                                                            'itemIndex':
-                                                                serializeParam(
-                                                              itemsIndex,
-                                                              ParamType.int,
                                                             ),
                                                           }.withoutNulls,
                                                         );
@@ -783,22 +652,115 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
+                                Expanded(
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(-1.0, 0.0),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            await Navigator.push(
+                                              context,
+                                              PageTransition(
+                                                type: PageTransitionType.fade,
+                                                child:
+                                                    FlutterFlowExpandedImageView(
+                                                  image: Image.network(
+                                                    functions.imagePathFromUrl(
+                                                        FFAppState()
+                                                            .toShelfSelected
+                                                            .planogramImg),
+                                                    fit: BoxFit.contain,
+                                                  ),
+                                                  allowRotation: false,
+                                                  tag: functions
+                                                      .imagePathFromUrl(
+                                                          FFAppState()
+                                                              .toShelfSelected
+                                                              .planogramImg),
+                                                  useHeroAnimation: true,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          child: Hero(
+                                            tag: functions.imagePathFromUrl(
+                                                FFAppState()
+                                                    .toShelfSelected
+                                                    .planogramImg),
+                                            transitionOnUserGestures: true,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.network(
+                                                functions.imagePathFromUrl(
+                                                    FFAppState()
+                                                        .toShelfSelected
+                                                        .planogramImg),
+                                                width: 40.0,
+                                                height: 40.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            10.0, 0.0, 0.0, 0.0),
+                                        child: Text(
+                                          FFAppState().toShelfSelected.name,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                font: GoogleFonts.hankenGrotesk(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                                 Builder(
                                   builder: (context) => Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 10.0, 0.0, 0.0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        await actions.inactivitymanager(
-                                          context,
-                                        );
+                                        FFAppState().topup = true;
+                                        safeSetState(() {});
                                         _model.updateShipSendStruct(
                                           (e) => e
                                             ..productsMerchaiser = FFAppState()
-                                                .productListRoute
+                                                .productListTopUp
                                                 .toList()
                                             ..productsErp = FFAppState()
-                                                .ShelfSelected
+                                                .toShelfSelected
                                                 .products
                                                 .toList(),
                                         );
@@ -890,8 +852,28 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                                                 .toList()
                                                             ..imgTodayPlanogram =
                                                                 FFAppState()
-                                                                    .ShelfSelected
-                                                                    .planogramImg,
+                                                                    .toShelfSelected
+                                                                    .planogramImg
+                                                            ..merchandizerId =
+                                                                FFAppState()
+                                                                    .user
+                                                                    .user
+                                                                    .id
+                                                            ..planogramId =
+                                                                FFAppState()
+                                                                    .toShelfSelected
+                                                                    .planogramId
+                                                            ..mapCanvaId =
+                                                                FFAppState()
+                                                                    .toShelfSelected
+                                                                    .mapCanvaId
+                                                            ..startedAt = functions
+                                                                .obtenerFechaHoraActual()
+                                                            ..storeId = 2
+                                                            ..imgMainShelfBefore =
+                                                                'NA'
+                                                            ..imgMainShelfAfter =
+                                                                'NA',
                                                         );
                                                         safeSetState(() {});
                                                         await actions.logAction(
@@ -942,22 +924,6 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                                                     ?.jsonBody ??
                                                                 ''),
                                                           );
-                                                          FFAppState()
-                                                              .updateRouteOfDayStruct(
-                                                            (e) => e
-                                                              ..updateShelfs(
-                                                                (e) => e[
-                                                                    valueOrDefault<
-                                                                        int>(
-                                                                  FFAppState()
-                                                                      .shelfPositionEditing,
-                                                                  0,
-                                                                )]
-                                                                  ..status =
-                                                                      'progress',
-                                                              ),
-                                                          );
-                                                          safeSetState(() {});
                                                           _model.sendPhotos =
                                                               await ApiShelfGroup
                                                                   .sendPhotosCall
@@ -1128,16 +1094,6 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                           controller:
                                               _model.sinputSkuTextController,
                                           focusNode: _model.sinputSkuFocusNode,
-                                          onChanged: (_) =>
-                                              EasyDebounce.debounce(
-                                            '_model.sinputSkuTextController',
-                                            Duration(milliseconds: 2000),
-                                            () async {
-                                              await actions.inactivitymanager(
-                                                context,
-                                              );
-                                            },
-                                          ),
                                           autofocus: false,
                                           obscureText: false,
                                           decoration: InputDecoration(
@@ -1322,10 +1278,6 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                                   if (_model.sinputSkuTextController
                                                               .text !=
                                                           '') {
-                                                    await actions
-                                                        .inactivitymanager(
-                                                      context,
-                                                    );
                                                     _model.resultadoSKU =
                                                         await ApiShelfGroup
                                                             .searchProductCall
@@ -1341,7 +1293,7 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                                     _shouldSetState = true;
                                                     if (functions.isAlienOrNot(
                                                         FFAppState()
-                                                            .ShelfSelected
+                                                            .toShelfSelected
                                                             .toMap(),
                                                         _model
                                                             .sinputSkuTextController
@@ -1355,7 +1307,14 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                                                     ''))
                                                                 ?.notFound ==
                                                             false) {
-                                                          FFAppState().addToProductListRoute(
+                                                          _model.addToProductsList(
+                                                              ProductsStruct
+                                                                  .maybeFromMap((_model
+                                                                          .resultadoSKU
+                                                                          ?.jsonBody ??
+                                                                      ''))!);
+                                                          safeSetState(() {});
+                                                          FFAppState().addToProductListTopUp(
                                                               ProductsStruct
                                                                   .maybeFromMap((_model
                                                                           .resultadoSKU
@@ -1430,7 +1389,7 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                                                     ?.unfocus();
                                                               },
                                                               child:
-                                                                  AlientProductConfirmWidget(
+                                                                  AlientProductConfirmCopyWidget(
                                                                 products: ProductsStruct
                                                                     .maybeFromMap((_model
                                                                             .resultadoSKU
@@ -1439,7 +1398,7 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                                                 test: () async {
                                                                   Navigator.pop(
                                                                       context);
-                                                                  FFAppState().addToProductListRoute(
+                                                                  FFAppState().addToProductListTopUp(
                                                                       ProductsStruct.maybeFromMap((_model
                                                                               .resultadoSKU
                                                                               ?.jsonBody ??
@@ -1468,10 +1427,6 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                                       return;
                                                     }
                                                   } else {
-                                                    await actions
-                                                        .inactivitymanager(
-                                                      context,
-                                                    );
                                                     await showDialog(
                                                       context: context,
                                                       builder:
@@ -1510,10 +1465,7 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                     builder: (context) => FFButtonWidget(
                                       onPressed: () async {
                                         var _shouldSetState = false;
-                                        await actions.inactivitymanager(
-                                          context,
-                                        );
-                                        _model.barcode2 =
+                                        _model.barcode3 =
                                             await FlutterBarcodeScanner
                                                 .scanBarcode(
                                           '#C62828', // scanning line color
@@ -1525,185 +1477,50 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                         _shouldSetState = true;
                                         safeSetState(() {
                                           _model.sinputSkuTextController?.text =
-                                              _model.barcode2;
+                                              _model.barcode3;
                                         });
-                                        _model.resultadoSKU4 =
-                                            await ApiShelfGroup
-                                                .searchProductCall
-                                                .call(
-                                          token: FFAppState().user.token,
-                                          sku: _model.barcode2,
-                                        );
+                                        if (_model.sinputSkuTextController
+                                                    .text !=
+                                                '') {
+                                          _model.resultadoSKU3 =
+                                              await ApiShelfGroup
+                                                  .searchProductCall
+                                                  .call(
+                                            token: FFAppState().user.token,
+                                            sku: _model.barcode3,
+                                          );
 
-                                        _shouldSetState = true;
-                                        if (functions.isAlienOrNot(
-                                            FFAppState().ShelfSelected.toMap(),
-                                            _model.sinputSkuTextController
-                                                .text)) {
-                                          if ((_model
-                                                  .resultadoSKU4?.succeeded ??
-                                              true)) {
-                                            if (ProductsStruct.maybeFromMap(
-                                                        (_model.resultadoSKU4
-                                                                ?.jsonBody ??
-                                                            ''))
-                                                    ?.notFound ==
-                                                false) {
+                                          _shouldSetState = true;
+                                          if (functions.isAlienOrNot(
                                               FFAppState()
-                                                  .addToProductListRoute(
-                                                      ProductsStruct
-                                                          .maybeFromMap((_model
-                                                                  .resultadoSKU4
-                                                                  ?.jsonBody ??
-                                                              ''))!);
-                                              safeSetState(() {});
-                                              safeSetState(() {
-                                                _model.sinputSkuTextController
-                                                    ?.clear();
-                                              });
-                                              if (_shouldSetState)
-                                                safeSetState(() {});
-                                              return;
-                                            } else {
-                                              await showDialog(
-                                                context: context,
-                                                builder: (alertDialogContext) {
-                                                  return AlertDialog(
-                                                    title: Text('Not found'),
-                                                    content: Text(
-                                                        'Product not found'),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () =>
-                                                            Navigator.pop(
-                                                                alertDialogContext),
-                                                        child: Text('Ok'),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              );
-                                              if (_shouldSetState)
-                                                safeSetState(() {});
-                                              return;
-                                            }
-                                          } else {
-                                            if (_shouldSetState)
-                                              safeSetState(() {});
-                                            return;
-                                          }
-                                        } else {
-                                          var confirmDialogResponse =
-                                              await showDialog<bool>(
-                                                    context: context,
-                                                    builder:
-                                                        (alertDialogContext) {
-                                                      return AlertDialog(
-                                                        title: Text(
-                                                            'Out of Planogram?'),
-                                                        content: Text(
-                                                            'This product is not listed on the shelf, it will be inserted as an Out Of Planogram. Do you want to continue?'),
-                                                        actions: [
-                                                          TextButton(
-                                                            onPressed: () =>
-                                                                Navigator.pop(
-                                                                    alertDialogContext,
-                                                                    false),
-                                                            child:
-                                                                Text('Cancel'),
-                                                          ),
-                                                          TextButton(
-                                                            onPressed: () =>
-                                                                Navigator.pop(
-                                                                    alertDialogContext,
-                                                                    true),
-                                                            child:
-                                                                Text('Confirm'),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  ) ??
-                                                  false;
-                                          if (confirmDialogResponse) {
+                                                  .toShelfSelected
+                                                  .toMap(),
+                                              _model.sinputSkuTextController
+                                                  .text)) {
                                             if ((_model
-                                                    .resultadoSKU4?.succeeded ??
+                                                    .resultadoSKU3?.succeeded ??
                                                 true)) {
                                               if (ProductsStruct.maybeFromMap(
-                                                          (_model.resultadoSKU4
+                                                          (_model.resultadoSKU3
                                                                   ?.jsonBody ??
                                                               ''))
                                                       ?.notFound ==
                                                   false) {
+                                                _model.addToProductsList(
+                                                    ProductsStruct.maybeFromMap(
+                                                        (_model.resultadoSKU3
+                                                                ?.jsonBody ??
+                                                            ''))!);
                                                 safeSetState(() {});
-                                                FFAppState()
-                                                    .addToProductListTopUp(
-                                                        ProductsStruct(
-                                                  id: ProductsStruct
-                                                          .maybeFromMap((_model
-                                                                  .resultadoSKU4
-                                                                  ?.jsonBody ??
-                                                              ''))
-                                                      ?.id,
-                                                  name: ProductsStruct
-                                                          .maybeFromMap((_model
-                                                                  .resultadoSKU4
-                                                                  ?.jsonBody ??
-                                                              ''))
-                                                      ?.name,
-                                                  img: ProductsStruct
-                                                          .maybeFromMap((_model
-                                                                  .resultadoSKU4
-                                                                  ?.jsonBody ??
-                                                              ''))
-                                                      ?.img,
-                                                  upc: ProductsStruct
-                                                          .maybeFromMap((_model
-                                                                  .resultadoSKU4
-                                                                  ?.jsonBody ??
-                                                              ''))
-                                                      ?.upc,
-                                                  outOfPlanogram: 1,
-                                                ));
-                                                FFAppState()
-                                                    .addToProductListRoute(
-                                                        ProductsStruct(
-                                                  id: ProductsStruct
-                                                          .maybeFromMap((_model
-                                                                  .resultadoSKU4
-                                                                  ?.jsonBody ??
-                                                              ''))
-                                                      ?.id,
-                                                  name: ProductsStruct
-                                                          .maybeFromMap((_model
-                                                                  .resultadoSKU4
-                                                                  ?.jsonBody ??
-                                                              ''))
-                                                      ?.name,
-                                                  img: ProductsStruct
-                                                          .maybeFromMap((_model
-                                                                  .resultadoSKU4
-                                                                  ?.jsonBody ??
-                                                              ''))
-                                                      ?.img,
-                                                  sku: ProductsStruct
-                                                          .maybeFromMap((_model
-                                                                  .resultadoSKU4
-                                                                  ?.jsonBody ??
-                                                              ''))
-                                                      ?.sku,
-                                                  upc: ProductsStruct
-                                                          .maybeFromMap((_model
-                                                                  .resultadoSKU4
-                                                                  ?.jsonBody ??
-                                                              ''))
-                                                      ?.upc,
-                                                  outOfPlanogram: 1,
-                                                ));
+                                                FFAppState().addToProductListTopUp(
+                                                    ProductsStruct.maybeFromMap(
+                                                        (_model.resultadoSKU3
+                                                                ?.jsonBody ??
+                                                            ''))!);
                                                 safeSetState(() {});
                                                 safeSetState(() {
                                                   _model.sinputSkuTextController
-                                                      ?.text = ' ';
+                                                      ?.clear();
                                                 });
                                                 if (_shouldSetState)
                                                   safeSetState(() {});
@@ -1711,194 +1528,23 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                               } else {
                                                 await showDialog(
                                                   context: context,
-                                                  builder: (dialogContext) {
-                                                    return Dialog(
-                                                      elevation: 0,
-                                                      insetPadding:
-                                                          EdgeInsets.zero,
-                                                      backgroundColor:
-                                                          Colors.transparent,
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                                  0.0, 0.0)
-                                                              .resolve(
-                                                                  Directionality.of(
-                                                                      context)),
-                                                      child: GestureDetector(
-                                                        onTap: () {
-                                                          FocusScope.of(
-                                                                  dialogContext)
-                                                              .unfocus();
-                                                          FocusManager.instance
-                                                              .primaryFocus
-                                                              ?.unfocus();
-                                                        },
-                                                        child:
-                                                            AlientProductConfirmWidget(
-                                                          products:
-                                                              ProductsStruct(
-                                                            name:
-                                                                _model.barcode2,
-                                                            sku:
-                                                                _model.barcode2,
-                                                            upc:
-                                                                _model.barcode2,
-                                                            category1: '1',
-                                                            category2: '2',
-                                                            category3: '3',
-                                                            isAlien: 1,
-                                                            height: 10.0,
-                                                            width: 5.0,
-                                                            depth: 5.0,
-                                                          ),
-                                                          test: () async {
-                                                            final selectedMedia =
-                                                                await selectMedia(
-                                                              maxWidth: 500.00,
-                                                              maxHeight: 500.00,
-                                                              imageQuality: 80,
-                                                              multiImage: false,
-                                                            );
-                                                            if (selectedMedia !=
-                                                                    null &&
-                                                                selectedMedia.every((m) =>
-                                                                    validateFileFormat(
-                                                                        m.storagePath,
-                                                                        context))) {
-                                                              safeSetState(() =>
-                                                                  _model.isDataUploading_uploadDataS6e =
-                                                                      true);
-                                                              var selectedUploadedFiles =
-                                                                  <FFUploadedFile>[];
-
-                                                              try {
-                                                                selectedUploadedFiles =
-                                                                    selectedMedia
-                                                                        .map((m) =>
-                                                                            FFUploadedFile(
-                                                                              name: m.storagePath.split('/').last,
-                                                                              bytes: m.bytes,
-                                                                              height: m.dimensions?.height,
-                                                                              width: m.dimensions?.width,
-                                                                              blurHash: m.blurHash,
-                                                                            ))
-                                                                        .toList();
-                                                              } finally {
-                                                                _model.isDataUploading_uploadDataS6e =
-                                                                    false;
-                                                              }
-                                                              if (selectedUploadedFiles
-                                                                      .length ==
-                                                                  selectedMedia
-                                                                      .length) {
-                                                                safeSetState(
-                                                                    () {
-                                                                  _model.uploadedLocalFile_uploadDataS6e =
-                                                                      selectedUploadedFiles
-                                                                          .first;
-                                                                });
-                                                              } else {
-                                                                safeSetState(
-                                                                    () {});
-                                                                return;
-                                                              }
-                                                            }
-
-                                                            _model.salidaB64 =
-                                                                await actions
-                                                                    .convertImageFileToBase64(
-                                                              _model
-                                                                  .uploadedLocalFile_uploadDataS6e,
-                                                            );
-                                                            _model.apiResultsrc =
-                                                                await ApiShelfGroup
-                                                                    .createProductCall
-                                                                    .call(
-                                                              productJson: <String,
-                                                                  dynamic>{
-                                                                'upc': _model
-                                                                    .barcode2,
-                                                                'sku': _model
-                                                                    .barcode2,
-                                                                'name': _model
-                                                                    .barcode2,
-                                                                'category_1':
-                                                                    _model
-                                                                        .barcode2,
-                                                                'category_2':
-                                                                    _model
-                                                                        .barcode2,
-                                                                'category_3':
-                                                                    _model
-                                                                        .barcode2,
-                                                                'width': '5',
-                                                                'height': '5',
-                                                                'depth': '5',
-                                                                'status':
-                                                                    'Active',
-                                                                'vendor':
-                                                                    'Pending',
-                                                                'img': _model
-                                                                    .salidaB64,
-                                                              },
-                                                              toKen:
-                                                                  FFAppState()
-                                                                      .user
-                                                                      .token,
-                                                            );
-
-                                                            _model.searcchNewAlien2 =
-                                                                await ApiShelfGroup
-                                                                    .searchProductCall
-                                                                    .call(
-                                                              sku: _model
-                                                                  .barcode2,
-                                                              toKen:
-                                                                  FFAppState()
-                                                                      .user
-                                                                      .token,
-                                                              token:
-                                                                  FFAppState()
-                                                                      .user
-                                                                      .token,
-                                                            );
-
-                                                            FFAppState().addToProductListRoute(
-                                                                ProductsStruct
-                                                                    .maybeFromMap((_model
-                                                                            .searcchNewAlien2
-                                                                            ?.jsonBody ??
-                                                                        ''))!);
-                                                            safeSetState(() {});
-                                                            ScaffoldMessenger
-                                                                    .of(context)
-                                                                .showSnackBar(
-                                                              SnackBar(
-                                                                content: Text(
-                                                                  'The Alien product is added',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryText,
-                                                                  ),
-                                                                ),
-                                                                duration: Duration(
-                                                                    milliseconds:
-                                                                        4000),
-                                                                backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondary,
-                                                              ),
-                                                            );
-                                                          },
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text('Not found'),
+                                                      content: Text(
+                                                          'Product not found'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('Ok'),
                                                         ),
-                                                      ),
+                                                      ],
                                                     );
                                                   },
                                                 );
-
                                                 if (_shouldSetState)
                                                   safeSetState(() {});
                                                 return;
@@ -1908,7 +1554,235 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                                 safeSetState(() {});
                                               return;
                                             }
+                                          } else {
+                                            var confirmDialogResponse =
+                                                await showDialog<bool>(
+                                                      context: context,
+                                                      builder:
+                                                          (alertDialogContext) {
+                                                        return AlertDialog(
+                                                          title: Text(
+                                                              'Out of Planogram?'),
+                                                          content: Text(
+                                                              'This product is not listed on the shelf, it will be inserted as an Out Of Planogram. Do you want to continue?'),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext,
+                                                                      false),
+                                                              child: Text(
+                                                                  'Cancel'),
+                                                            ),
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext,
+                                                                      true),
+                                                              child: Text(
+                                                                  'Confirm'),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    ) ??
+                                                    false;
+                                            if (confirmDialogResponse) {
+                                              if ((_model.resultadoSKU3
+                                                      ?.succeeded ??
+                                                  true)) {
+                                                if (ProductsStruct.maybeFromMap(
+                                                            (_model.resultadoSKU3
+                                                                    ?.jsonBody ??
+                                                                ''))
+                                                        ?.notFound ==
+                                                    false) {
+                                                  FFAppState()
+                                                      .addToProductListTopUp(
+                                                          ProductsStruct(
+                                                    id: ProductsStruct
+                                                            .maybeFromMap((_model
+                                                                    .resultadoSKU3
+                                                                    ?.jsonBody ??
+                                                                ''))
+                                                        ?.id,
+                                                    productId: ProductsStruct
+                                                            .maybeFromMap((_model
+                                                                    .resultadoSKU3
+                                                                    ?.jsonBody ??
+                                                                ''))
+                                                        ?.productId,
+                                                    name: ProductsStruct
+                                                            .maybeFromMap((_model
+                                                                    .resultadoSKU3
+                                                                    ?.jsonBody ??
+                                                                ''))
+                                                        ?.name,
+                                                    img: ProductsStruct
+                                                            .maybeFromMap((_model
+                                                                    .resultadoSKU3
+                                                                    ?.jsonBody ??
+                                                                ''))
+                                                        ?.img,
+                                                    upc: ProductsStruct
+                                                            .maybeFromMap((_model
+                                                                    .resultadoSKU3
+                                                                    ?.jsonBody ??
+                                                                ''))
+                                                        ?.upc,
+                                                    outOfPlanogram: 1,
+                                                  ));
+                                                  safeSetState(() {});
+                                                  safeSetState(() {
+                                                    _model
+                                                        .sinputSkuTextController
+                                                        ?.clear();
+                                                  });
+                                                  if (_shouldSetState)
+                                                    safeSetState(() {});
+                                                  return;
+                                                } else {
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder: (dialogContext) {
+                                                      return Dialog(
+                                                        elevation: 0,
+                                                        insetPadding:
+                                                            EdgeInsets.zero,
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        alignment:
+                                                            AlignmentDirectional(
+                                                                    0.0, 0.0)
+                                                                .resolve(
+                                                                    Directionality.of(
+                                                                        context)),
+                                                        child: GestureDetector(
+                                                          onTap: () {
+                                                            FocusScope.of(
+                                                                    dialogContext)
+                                                                .unfocus();
+                                                            FocusManager
+                                                                .instance
+                                                                .primaryFocus
+                                                                ?.unfocus();
+                                                          },
+                                                          child:
+                                                              AlientProductConfirmWidget(
+                                                            products:
+                                                                ProductsStruct(
+                                                              name: _model
+                                                                  .barcode3,
+                                                              sku: _model
+                                                                  .barcode3,
+                                                              upc: _model
+                                                                  .barcode3,
+                                                              category1: '1',
+                                                              category2: '2',
+                                                              category3: '3',
+                                                              isAlien: 1,
+                                                              height: 10.0,
+                                                              width: 5.0,
+                                                              depth: 5.0,
+                                                            ),
+                                                            test: () async {
+                                                              _model.apiResultsrc =
+                                                                  await ApiShelfGroup
+                                                                      .createProductCall
+                                                                      .call(
+                                                                productJson: <String,
+                                                                    dynamic>{
+                                                                  'upc': _model
+                                                                      .barcode3,
+                                                                  'sku': _model
+                                                                      .barcode3,
+                                                                  'name': _model
+                                                                      .barcode3,
+                                                                  'category_1':
+                                                                      _model
+                                                                          .barcode3,
+                                                                  'category_2':
+                                                                      _model
+                                                                          .barcode3,
+                                                                  'category_3':
+                                                                      _model
+                                                                          .barcode3,
+                                                                  'width': '5',
+                                                                  'height': '5',
+                                                                  'depth': '5',
+                                                                  'status':
+                                                                      'Active',
+                                                                  'vendor':
+                                                                      'Pending',
+                                                                  'img':
+                                                                      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA8AAAAJjCAYAAADDKXhvAAAAAXNSR0IArs4c6QAAIABJREFUeF7t3XmUXVWd6PFfBknMQMKMIGEe2sTwHoh26xOJr5GpW2kcaF9jGkW0QYZODIpETJAO2BF4YtNIg4BMb2CBTK95jOLUKrTgExNslDCZYBIiGQikEmp4615WYlIJqZtT51SdXftTa/UfJvecu/fnt',
+                                                                },
+                                                                toKen:
+                                                                    FFAppState()
+                                                                        .user
+                                                                        .token,
+                                                              );
+
+                                                              _model.searcchNewAlien =
+                                                                  await ApiShelfGroup
+                                                                      .searchProductCall
+                                                                      .call(
+                                                                sku: _model
+                                                                    .barcode3,
+                                                                toKen:
+                                                                    FFAppState()
+                                                                        .user
+                                                                        .token,
+                                                                token:
+                                                                    FFAppState()
+                                                                        .user
+                                                                        .token,
+                                                              );
+
+                                                              FFAppState().addToProductListTopUp(
+                                                                  ProductsStruct
+                                                                      .maybeFromMap((_model
+                                                                              .searcchNewAlien
+                                                                              ?.jsonBody ??
+                                                                          ''))!);
+                                                              safeSetState(
+                                                                  () {});
+                                                            },
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  );
+
+                                                  if (_shouldSetState)
+                                                    safeSetState(() {});
+                                                  return;
+                                                }
+                                              } else {
+                                                if (_shouldSetState)
+                                                  safeSetState(() {});
+                                                return;
+                                              }
+                                            }
                                           }
+                                        } else {
+                                          await showDialog(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                title: Text('Error'),
+                                                content: Text('Scan product'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext),
+                                                    child: Text('Ok'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
                                           if (_shouldSetState)
                                             safeSetState(() {});
                                           return;

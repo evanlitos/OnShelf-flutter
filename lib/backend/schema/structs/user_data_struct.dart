@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 
+import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class UserDataStruct extends FFFirebaseStruct {
@@ -26,6 +27,7 @@ class UserDataStruct extends FFFirebaseStruct {
     String? image,
     String? vendorName,
     String? vendorr,
+    List<RetailersStruct>? retailers,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _id = id,
         _name = name,
@@ -45,6 +47,7 @@ class UserDataStruct extends FFFirebaseStruct {
         _image = image,
         _vendorName = vendorName,
         _vendorr = vendorr,
+        _retailers = retailers,
         super(firestoreUtilData);
 
   // "id" field.
@@ -175,6 +178,17 @@ class UserDataStruct extends FFFirebaseStruct {
 
   bool hasVendorr() => _vendorr != null;
 
+  // "retailers" field.
+  List<RetailersStruct>? _retailers;
+  List<RetailersStruct> get retailers => _retailers ?? const [];
+  set retailers(List<RetailersStruct>? val) => _retailers = val;
+
+  void updateRetailers(Function(List<RetailersStruct>) updateFn) {
+    updateFn(_retailers ??= []);
+  }
+
+  bool hasRetailers() => _retailers != null;
+
   static UserDataStruct fromMap(Map<String, dynamic> data) => UserDataStruct(
         id: castToType<int>(data['id']),
         name: data['name'] as String?,
@@ -194,6 +208,10 @@ class UserDataStruct extends FFFirebaseStruct {
         image: data['image'] as String?,
         vendorName: data['vendorName'] as String?,
         vendorr: data['vendorr'] as String?,
+        retailers: getStructList(
+          data['retailers'],
+          RetailersStruct.fromMap,
+        ),
       );
 
   static UserDataStruct? maybeFromMap(dynamic data) =>
@@ -218,6 +236,7 @@ class UserDataStruct extends FFFirebaseStruct {
         'image': _image,
         'vendorName': _vendorName,
         'vendorr': _vendorr,
+        'retailers': _retailers?.map((e) => e.toMap()).toList(),
       }.withoutNulls;
 
   @override
@@ -293,6 +312,11 @@ class UserDataStruct extends FFFirebaseStruct {
         'vendorr': serializeParam(
           _vendorr,
           ParamType.String,
+        ),
+        'retailers': serializeParam(
+          _retailers,
+          ParamType.DataStruct,
+          isList: true,
         ),
       }.withoutNulls;
 
@@ -388,6 +412,12 @@ class UserDataStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        retailers: deserializeStructParam<RetailersStruct>(
+          data['retailers'],
+          ParamType.DataStruct,
+          true,
+          structBuilder: RetailersStruct.fromSerializableMap,
+        ),
       );
 
   @override
@@ -395,6 +425,7 @@ class UserDataStruct extends FFFirebaseStruct {
 
   @override
   bool operator ==(Object other) {
+    const listEquality = ListEquality();
     return other is UserDataStruct &&
         id == other.id &&
         name == other.name &&
@@ -413,7 +444,8 @@ class UserDataStruct extends FFFirebaseStruct {
         imageId == other.imageId &&
         image == other.image &&
         vendorName == other.vendorName &&
-        vendorr == other.vendorr;
+        vendorr == other.vendorr &&
+        listEquality.equals(retailers, other.retailers);
   }
 
   @override
@@ -435,7 +467,8 @@ class UserDataStruct extends FFFirebaseStruct {
         imageId,
         image,
         vendorName,
-        vendorr
+        vendorr,
+        retailers
       ]);
 }
 

@@ -2,6 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/menulateral_widget.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -11,6 +12,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,6 +39,14 @@ class _Rep1ScanblockidWidgetState extends State<Rep1ScanblockidWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => Rep1ScanblockidModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      FFAppState().toShelfSelected = ShelfsStruct();
+      FFAppState().topup = true;
+      FFAppState().productListTopUp = [];
+      safeSetState(() {});
+    });
 
     _model.sinputSkuTextController ??= TextEditingController();
     _model.sinputSkuFocusNode ??= FocusNode();
@@ -142,7 +152,7 @@ class _Rep1ScanblockidWidgetState extends State<Rep1ScanblockidWidget> {
                                         ),
                                       ),
                                       Text(
-                                        'Replenishment-Top up',
+                                        '1Replenishment-Top up',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -335,17 +345,60 @@ class _Rep1ScanblockidWidgetState extends State<Rep1ScanblockidWidget> {
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                child: Image.network(
-                                                  functions.imagePathFromUrl(
-                                                      FFAppState()
-                                                          .toShelfSelected
-                                                          .planogramImg),
-                                                  width: 80.0,
-                                                  height: 80.0,
-                                                  fit: BoxFit.cover,
+                                              InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  await Navigator.push(
+                                                    context,
+                                                    PageTransition(
+                                                      type: PageTransitionType
+                                                          .fade,
+                                                      child:
+                                                          FlutterFlowExpandedImageView(
+                                                        image: Image.network(
+                                                          functions.imagePathFromUrl(
+                                                              FFAppState()
+                                                                  .toShelfSelected
+                                                                  .planogramImg),
+                                                          fit: BoxFit.contain,
+                                                        ),
+                                                        allowRotation: false,
+                                                        tag: functions
+                                                            .imagePathFromUrl(
+                                                                FFAppState()
+                                                                    .toShelfSelected
+                                                                    .planogramImg),
+                                                        useHeroAnimation: true,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                                child: Hero(
+                                                  tag: functions
+                                                      .imagePathFromUrl(
+                                                          FFAppState()
+                                                              .toShelfSelected
+                                                              .planogramImg),
+                                                  transitionOnUserGestures:
+                                                      true,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    child: Image.network(
+                                                      functions.imagePathFromUrl(
+                                                          FFAppState()
+                                                              .toShelfSelected
+                                                              .planogramImg),
+                                                      width: 80.0,
+                                                      height: 80.0,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                               Expanded(
@@ -358,7 +411,7 @@ class _Rep1ScanblockidWidgetState extends State<Rep1ScanblockidWidget> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      'Category:${FFAppState().toShelfSelected.category1}',
+                                                      'Category:${FFAppState().toShelfSelected.type}',
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -388,7 +441,7 @@ class _Rep1ScanblockidWidgetState extends State<Rep1ScanblockidWidget> {
                                                               ),
                                                     ),
                                                     Text(
-                                                      'Display Number:${FFAppState().toShelfSelected.mapCanvaId.toString()}',
+                                                      'Display Number:${FFAppState().toShelfSelected.name}',
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -560,8 +613,17 @@ class _Rep1ScanblockidWidgetState extends State<Rep1ScanblockidWidget> {
                                               child: FFButtonWidget(
                                                 onPressed: () async {
                                                   context.pushNamed(
-                                                      REP2InstructionsBeforeFotoWidget
-                                                          .routeName);
+                                                    REP2InstructionsBeforeFotoWidget
+                                                        .routeName,
+                                                    queryParameters: {
+                                                      'name': serializeParam(
+                                                        _model
+                                                            .sinputSkuTextController
+                                                            .text,
+                                                        ParamType.String,
+                                                      ),
+                                                    }.withoutNulls,
+                                                  );
                                                 },
                                                 text: 'CONTINUE',
                                                 options: FFButtonOptions(

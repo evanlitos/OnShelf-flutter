@@ -196,6 +196,92 @@ class FFAppState extends ChangeNotifier {
       int index, ProductsStruct value) {
     productosEscaneadosEnElDia.insert(index, value);
   }
+
+  ProductListRowStruct _rowUpdateData = ProductListRowStruct();
+  ProductListRowStruct get rowUpdateData => _rowUpdateData;
+  set rowUpdateData(ProductListRowStruct value) {
+    _rowUpdateData = value;
+  }
+
+  void updateRowUpdateDataStruct(Function(ProductListRowStruct) updateFn) {
+    updateFn(_rowUpdateData);
+  }
+
+  bool _needUpdate = false;
+  bool get needUpdate => _needUpdate;
+  set needUpdate(bool value) {
+    _needUpdate = value;
+  }
+
+  bool _topup = false;
+  bool get topup => _topup;
+  set topup(bool value) {
+    _topup = value;
+  }
+
+  List<ProductsStruct> _productListTopUp = [];
+  List<ProductsStruct> get productListTopUp => _productListTopUp;
+  set productListTopUp(List<ProductsStruct> value) {
+    _productListTopUp = value;
+  }
+
+  void addToProductListTopUp(ProductsStruct value) {
+    productListTopUp.add(value);
+  }
+
+  void removeFromProductListTopUp(ProductsStruct value) {
+    productListTopUp.remove(value);
+  }
+
+  void removeAtIndexFromProductListTopUp(int index) {
+    productListTopUp.removeAt(index);
+  }
+
+  void updateProductListTopUpAtIndex(
+    int index,
+    ProductsStruct Function(ProductsStruct) updateFn,
+  ) {
+    productListTopUp[index] = updateFn(_productListTopUp[index]);
+  }
+
+  void insertAtIndexInProductListTopUp(int index, ProductsStruct value) {
+    productListTopUp.insert(index, value);
+  }
+
+  List<ProductsStruct> _productListRoute = [];
+  List<ProductsStruct> get productListRoute => _productListRoute;
+  set productListRoute(List<ProductsStruct> value) {
+    _productListRoute = value;
+  }
+
+  void addToProductListRoute(ProductsStruct value) {
+    productListRoute.add(value);
+  }
+
+  void removeFromProductListRoute(ProductsStruct value) {
+    productListRoute.remove(value);
+  }
+
+  void removeAtIndexFromProductListRoute(int index) {
+    productListRoute.removeAt(index);
+  }
+
+  void updateProductListRouteAtIndex(
+    int index,
+    ProductsStruct Function(ProductsStruct) updateFn,
+  ) {
+    productListRoute[index] = updateFn(_productListRoute[index]);
+  }
+
+  void insertAtIndexInProductListRoute(int index, ProductsStruct value) {
+    productListRoute.insert(index, value);
+  }
+
+  int _shelfPositionEditing = 0;
+  int get shelfPositionEditing => _shelfPositionEditing;
+  set shelfPositionEditing(int value) {
+    _shelfPositionEditing = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

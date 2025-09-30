@@ -138,7 +138,7 @@ class _REP3ResumeBeforeFotoWidgetState
                                         ),
                                       ),
                                       Text(
-                                        'Replenishment-Top up',
+                                        '3Replenishment-Top up',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -335,7 +335,7 @@ class _REP3ResumeBeforeFotoWidgetState
                                     ),
                               ),
                               Text(
-                                'Category: ${FFAppState().toShelfSelected.category1}',
+                                'Category: ${FFAppState().toShelfSelected.type}',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -357,7 +357,7 @@ class _REP3ResumeBeforeFotoWidgetState
                                     ),
                               ),
                               Text(
-                                'Display Number: ${FFAppState().toShelfSelected.planogramId.toString()}',
+                                'Display Number: ${FFAppState().toShelfSelected.name}',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -500,10 +500,10 @@ class _REP3ResumeBeforeFotoWidgetState
                       child: FFButtonWidget(
                         onPressed: () async {
                           context.goNamed(
-                            REP4InstructionsAfterFotoWidget.routeName,
+                            REP34BeforePhotoDiagram4CopyWidget.routeName,
                             queryParameters: {
                               'bFoto': serializeParam(
-                                _model.uploadedLocalFile_uploadData0xqREF,
+                                widget.foto,
                                 ParamType.FFUploadedFile,
                               ),
                             }.withoutNulls,

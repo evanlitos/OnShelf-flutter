@@ -5,8 +5,10 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'absense_model.dart';
@@ -31,6 +33,13 @@ class _AbsenseWidgetState extends State<AbsenseWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => AbsenseModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.inactivitymanager(
+        context,
+      );
+    });
   }
 
   @override
@@ -340,7 +349,12 @@ class _AbsenseWidgetState extends State<AbsenseWidget> {
                                 'Putting promo price',
                                 'Looking / waiting for ladder'
                               ].toList(),
-                              onChanged: (val) => safeSetState(() {}),
+                              onChanged: (val) async {
+                                safeSetState(() {});
+                                await actions.inactivitymanager(
+                                  context,
+                                );
+                              },
                               controller: _model.radioButtonValueController ??=
                                   FormFieldController<String>(null),
                               optionHeight: 32.0,

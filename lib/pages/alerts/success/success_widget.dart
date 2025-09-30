@@ -4,11 +4,17 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'success_model.dart';
 export 'success_model.dart';
 
 class SuccessWidget extends StatefulWidget {
-  const SuccessWidget({super.key});
+  const SuccessWidget({
+    super.key,
+    required this.actionShip,
+  });
+
+  final Future Function()? actionShip;
 
   @override
   State<SuccessWidget> createState() => _SuccessWidgetState();
@@ -38,6 +44,8 @@ class _SuccessWidgetState extends State<SuccessWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: 333.0,
       height: 100.0,
@@ -85,7 +93,12 @@ class _SuccessWidgetState extends State<SuccessWidget> {
               children: [
                 FFButtonWidget(
                   onPressed: () async {
-                    context.goNamed(ChooseRouteWidget.routeName);
+                    await widget.actionShip?.call();
+                    if (FFAppState().topup == true) {
+                      context.goNamed(Rep1ScanblockidWidget.routeName);
+                    } else {
+                      context.goNamed(S1BlockCategories2Widget.routeName);
+                    }
                   },
                   text: 'Yes',
                   options: FFButtonOptions(

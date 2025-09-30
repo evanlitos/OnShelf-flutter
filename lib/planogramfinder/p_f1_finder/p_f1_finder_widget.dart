@@ -8,10 +8,14 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/alerts/no_found/no_found_widget.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'p_f1_finder_model.dart';
@@ -36,6 +40,13 @@ class _PF1FinderWidgetState extends State<PF1FinderWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => PF1FinderModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.inactivitymanager(
+        context,
+      );
+    });
 
     _model.sinputSku2TextController ??= TextEditingController();
     _model.sinputSku2FocusNode ??= FocusNode();
@@ -457,6 +468,10 @@ class _PF1FinderWidgetState extends State<PF1FinderWidget> {
                                                 builder: (context) =>
                                                     FFButtonWidget(
                                                   onPressed: () async {
+                                                    await actions
+                                                        .inactivitymanager(
+                                                      context,
+                                                    );
                                                     await showDialog(
                                                       context: context,
                                                       builder: (dialogContext) {
@@ -547,6 +562,10 @@ class _PF1FinderWidgetState extends State<PF1FinderWidget> {
                                             Expanded(
                                               child: FFButtonWidget(
                                                 onPressed: () async {
+                                                  await actions
+                                                      .inactivitymanager(
+                                                    context,
+                                                  );
                                                   FFAppState().ShelfSelected =
                                                       FFAppState()
                                                           .toShelfSelected;
@@ -695,6 +714,17 @@ class _PF1FinderWidgetState extends State<PF1FinderWidget> {
                                                   .sinputSku2TextController,
                                               focusNode:
                                                   _model.sinputSku2FocusNode,
+                                              onChanged: (_) =>
+                                                  EasyDebounce.debounce(
+                                                '_model.sinputSku2TextController',
+                                                Duration(milliseconds: 2000),
+                                                () async {
+                                                  await actions
+                                                      .inactivitymanager(
+                                                    context,
+                                                  );
+                                                },
+                                              ),
                                               onFieldSubmitted: (_) async {
                                                 var _shouldSetState = false;
                                                 _model.apiResultmnyCODE =
@@ -978,6 +1008,10 @@ class _PF1FinderWidgetState extends State<PF1FinderWidget> {
                                                   ),
                                                   onPressed: () async {
                                                     var _shouldSetState = false;
+                                                    await actions
+                                                        .inactivitymanager(
+                                                      context,
+                                                    );
                                                     _model.apiResultmny =
                                                         await ApiShelfGroup
                                                             .searchCall
@@ -1064,10 +1098,25 @@ class _PF1FinderWidgetState extends State<PF1FinderWidget> {
                                   ),
                                   FFButtonWidget(
                                     onPressed: () async {
+                                      await actions.inactivitymanager(
+                                        context,
+                                      );
+                                      _model.barcodeModeKLS =
+                                          await FlutterBarcodeScanner
+                                              .scanBarcode(
+                                        '#C62828', // scanning line color
+                                        'Cancel', // cancel button text
+                                        true, // whether to show the flash icon
+                                        ScanMode.BARCODE,
+                                      );
+
+                                      safeSetState(() {
+                                        _model.sinputSku2TextController?.text =
+                                            _model.barcodeModeKLS;
+                                      });
                                       _model.apiResultmnyQR =
                                           await ApiShelfGroup.searchCall.call(
-                                        idp: _model
-                                            .sinputSku2TextController.text,
+                                        idp: _model.barcodeModeKLS,
                                         token: FFAppState().user.token,
                                       );
 

@@ -19,6 +19,7 @@ class RouteForMerchandiseStruct extends FFFirebaseStruct {
     String? startDate,
     String? endDate,
     int? isFreshness,
+    String? planogramName,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _routeId = routeId,
         _storeId = storeId,
@@ -30,6 +31,7 @@ class RouteForMerchandiseStruct extends FFFirebaseStruct {
         _startDate = startDate,
         _endDate = endDate,
         _isFreshness = isFreshness,
+        _planogramName = planogramName,
         super(firestoreUtilData);
 
   // "route_id" field.
@@ -112,6 +114,13 @@ class RouteForMerchandiseStruct extends FFFirebaseStruct {
 
   bool hasIsFreshness() => _isFreshness != null;
 
+  // "planogram_name" field.
+  String? _planogramName;
+  String get planogramName => _planogramName ?? '';
+  set planogramName(String? val) => _planogramName = val;
+
+  bool hasPlanogramName() => _planogramName != null;
+
   static RouteForMerchandiseStruct fromMap(Map<String, dynamic> data) =>
       RouteForMerchandiseStruct(
         routeId: castToType<int>(data['route_id']),
@@ -127,6 +136,7 @@ class RouteForMerchandiseStruct extends FFFirebaseStruct {
         startDate: data['start_date'] as String?,
         endDate: data['end_date'] as String?,
         isFreshness: castToType<int>(data['isFreshness']),
+        planogramName: data['planogram_name'] as String?,
       );
 
   static RouteForMerchandiseStruct? maybeFromMap(dynamic data) => data is Map
@@ -144,6 +154,7 @@ class RouteForMerchandiseStruct extends FFFirebaseStruct {
         'start_date': _startDate,
         'end_date': _endDate,
         'isFreshness': _isFreshness,
+        'planogram_name': _planogramName,
       }.withoutNulls;
 
   @override
@@ -188,6 +199,10 @@ class RouteForMerchandiseStruct extends FFFirebaseStruct {
         'isFreshness': serializeParam(
           _isFreshness,
           ParamType.int,
+        ),
+        'planogram_name': serializeParam(
+          _planogramName,
+          ParamType.String,
         ),
       }.withoutNulls;
 
@@ -245,6 +260,11 @@ class RouteForMerchandiseStruct extends FFFirebaseStruct {
           ParamType.int,
           false,
         ),
+        planogramName: deserializeParam(
+          data['planogram_name'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -263,7 +283,8 @@ class RouteForMerchandiseStruct extends FFFirebaseStruct {
         storeName == other.storeName &&
         startDate == other.startDate &&
         endDate == other.endDate &&
-        isFreshness == other.isFreshness;
+        isFreshness == other.isFreshness &&
+        planogramName == other.planogramName;
   }
 
   @override
@@ -277,7 +298,8 @@ class RouteForMerchandiseStruct extends FFFirebaseStruct {
         storeName,
         startDate,
         endDate,
-        isFreshness
+        isFreshness,
+        planogramName
       ]);
 }
 
@@ -291,6 +313,7 @@ RouteForMerchandiseStruct createRouteForMerchandiseStruct({
   String? startDate,
   String? endDate,
   int? isFreshness,
+  String? planogramName,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -306,6 +329,7 @@ RouteForMerchandiseStruct createRouteForMerchandiseStruct({
       startDate: startDate,
       endDate: endDate,
       isFreshness: isFreshness,
+      planogramName: planogramName,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

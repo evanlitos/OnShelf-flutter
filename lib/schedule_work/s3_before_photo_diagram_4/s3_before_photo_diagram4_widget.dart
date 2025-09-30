@@ -1,7 +1,9 @@
 import '/components/menulateral_widget.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -329,7 +331,7 @@ class _S3BeforePhotoDiagram4WidgetState
                                     ),
                               ),
                               Text(
-                                'Category: ${FFAppState().ShelfSelected.category1}',
+                                'Display Name: ${FFAppState().ShelfSelected.planogramName}',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -351,7 +353,7 @@ class _S3BeforePhotoDiagram4WidgetState
                                     ),
                               ),
                               Text(
-                                'Display Number: ${FFAppState().ShelfSelected.mapCanvaId.toString()}',
+                                'Category: ${FFAppState().ShelfSelected.name}',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -388,16 +390,55 @@ class _S3BeforePhotoDiagram4WidgetState
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 20.0, 20.0, 20.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network(
-                            getJsonField(
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            await actions.inactivitymanager(
+                              context,
+                            );
+                            await Navigator.push(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.fade,
+                                child: FlutterFlowExpandedImageView(
+                                  image: Image.network(
+                                    getJsonField(
+                                      FFAppState().ShelfSelected.toMap(),
+                                      r'''$.planogram_img''',
+                                    ).toString(),
+                                    fit: BoxFit.contain,
+                                  ),
+                                  allowRotation: false,
+                                  tag: getJsonField(
+                                    FFAppState().ShelfSelected.toMap(),
+                                    r'''$.planogram_img''',
+                                  ).toString(),
+                                  useHeroAnimation: true,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Hero(
+                            tag: getJsonField(
                               FFAppState().ShelfSelected.toMap(),
                               r'''$.planogram_img''',
                             ).toString(),
-                            width: MediaQuery.sizeOf(context).width * 1.0,
-                            height: MediaQuery.sizeOf(context).height * 1.0,
-                            fit: BoxFit.contain,
+                            transitionOnUserGestures: true,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.network(
+                                getJsonField(
+                                  FFAppState().ShelfSelected.toMap(),
+                                  r'''$.planogram_img''',
+                                ).toString(),
+                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                height: MediaQuery.sizeOf(context).height * 1.0,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -481,6 +522,9 @@ class _S3BeforePhotoDiagram4WidgetState
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
+                          await actions.inactivitymanager(
+                            context,
+                          );
                           context.safePop();
                         },
                         text: 'Back',
@@ -518,6 +562,10 @@ class _S3BeforePhotoDiagram4WidgetState
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
+                          await actions.inactivitymanager(
+                            context,
+                          );
+
                           context.goNamed(
                             S4AfterBlockCategoriesInstructionsCopyWidget
                                 .routeName,

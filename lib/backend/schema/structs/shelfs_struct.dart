@@ -23,6 +23,8 @@ class ShelfsStruct extends FFFirebaseStruct {
     int? storeId,
     int? merchandizerId,
     String? status,
+    String? name,
+    String? planogramName,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _planogramId = planogramId,
         _planogramImg = planogramImg,
@@ -38,6 +40,8 @@ class ShelfsStruct extends FFFirebaseStruct {
         _storeId = storeId,
         _merchandizerId = merchandizerId,
         _status = status,
+        _name = name,
+        _planogramName = planogramName,
         super(firestoreUtilData);
 
   // "planogram_id" field.
@@ -151,6 +155,20 @@ class ShelfsStruct extends FFFirebaseStruct {
 
   bool hasStatus() => _status != null;
 
+  // "name" field.
+  String? _name;
+  String get name => _name ?? '';
+  set name(String? val) => _name = val;
+
+  bool hasName() => _name != null;
+
+  // "planogram_name" field.
+  String? _planogramName;
+  String get planogramName => _planogramName ?? '';
+  set planogramName(String? val) => _planogramName = val;
+
+  bool hasPlanogramName() => _planogramName != null;
+
   static ShelfsStruct fromMap(Map<String, dynamic> data) => ShelfsStruct(
         planogramId: castToType<int>(data['planogram_id']),
         planogramImg: data['planogram_img'] as String?,
@@ -169,6 +187,8 @@ class ShelfsStruct extends FFFirebaseStruct {
         storeId: castToType<int>(data['store_id']),
         merchandizerId: castToType<int>(data['merchandizer_id']),
         status: data['status'] as String?,
+        name: data['name'] as String?,
+        planogramName: data['planogram_name'] as String?,
       );
 
   static ShelfsStruct? maybeFromMap(dynamic data) =>
@@ -189,6 +209,8 @@ class ShelfsStruct extends FFFirebaseStruct {
         'store_id': _storeId,
         'merchandizer_id': _merchandizerId,
         'status': _status,
+        'name': _name,
+        'planogram_name': _planogramName,
       }.withoutNulls;
 
   @override
@@ -248,6 +270,14 @@ class ShelfsStruct extends FFFirebaseStruct {
         ),
         'status': serializeParam(
           _status,
+          ParamType.String,
+        ),
+        'name': serializeParam(
+          _name,
+          ParamType.String,
+        ),
+        'planogram_name': serializeParam(
+          _planogramName,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -325,6 +355,16 @@ class ShelfsStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        name: deserializeParam(
+          data['name'],
+          ParamType.String,
+          false,
+        ),
+        planogramName: deserializeParam(
+          data['planogram_name'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -347,7 +387,9 @@ class ShelfsStruct extends FFFirebaseStruct {
         routeId == other.routeId &&
         storeId == other.storeId &&
         merchandizerId == other.merchandizerId &&
-        status == other.status;
+        status == other.status &&
+        name == other.name &&
+        planogramName == other.planogramName;
   }
 
   @override
@@ -365,7 +407,9 @@ class ShelfsStruct extends FFFirebaseStruct {
         routeId,
         storeId,
         merchandizerId,
-        status
+        status,
+        name,
+        planogramName
       ]);
 }
 
@@ -383,6 +427,8 @@ ShelfsStruct createShelfsStruct({
   int? storeId,
   int? merchandizerId,
   String? status,
+  String? name,
+  String? planogramName,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -402,6 +448,8 @@ ShelfsStruct createShelfsStruct({
       storeId: storeId,
       merchandizerId: merchandizerId,
       status: status,
+      name: name,
+      planogramName: planogramName,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

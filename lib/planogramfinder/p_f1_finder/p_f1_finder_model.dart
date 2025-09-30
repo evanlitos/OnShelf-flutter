@@ -29,6 +29,7 @@ class PF1FinderModel extends FlutterFlowModel<PF1FinderWidget> {
   ApiCallResponse? apiResultmnyCODE;
   // Stores action output result for [Backend Call - API (search)] action in IconButton widget.
   ApiCallResponse? apiResultmny;
+  var barcodeModeKLS = '';
   // Stores action output result for [Backend Call - API (search)] action in Button widget.
   ApiCallResponse? apiResultmnyQR;
 

@@ -14,6 +14,10 @@ class ProductListRowStruct extends FFFirebaseStruct {
     int? height,
     int? width,
     String? img,
+    String? sku,
+    String? name,
+    int? depht,
+    String? upc,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _productId = productId,
         _position = position,
@@ -21,6 +25,10 @@ class ProductListRowStruct extends FFFirebaseStruct {
         _height = height,
         _width = width,
         _img = img,
+        _sku = sku,
+        _name = name,
+        _depht = depht,
+        _upc = upc,
         super(firestoreUtilData);
 
   // "product_id" field.
@@ -75,6 +83,36 @@ class ProductListRowStruct extends FFFirebaseStruct {
 
   bool hasImg() => _img != null;
 
+  // "sku" field.
+  String? _sku;
+  String get sku => _sku ?? '';
+  set sku(String? val) => _sku = val;
+
+  bool hasSku() => _sku != null;
+
+  // "name" field.
+  String? _name;
+  String get name => _name ?? '';
+  set name(String? val) => _name = val;
+
+  bool hasName() => _name != null;
+
+  // "depht" field.
+  int? _depht;
+  int get depht => _depht ?? 0;
+  set depht(int? val) => _depht = val;
+
+  void incrementDepht(int amount) => depht = depht + amount;
+
+  bool hasDepht() => _depht != null;
+
+  // "upc" field.
+  String? _upc;
+  String get upc => _upc ?? '';
+  set upc(String? val) => _upc = val;
+
+  bool hasUpc() => _upc != null;
+
   static ProductListRowStruct fromMap(Map<String, dynamic> data) =>
       ProductListRowStruct(
         productId: castToType<int>(data['product_id']),
@@ -83,6 +121,10 @@ class ProductListRowStruct extends FFFirebaseStruct {
         height: castToType<int>(data['height']),
         width: castToType<int>(data['width']),
         img: data['img'] as String?,
+        sku: data['sku'] as String?,
+        name: data['name'] as String?,
+        depht: castToType<int>(data['depht']),
+        upc: data['upc'] as String?,
       );
 
   static ProductListRowStruct? maybeFromMap(dynamic data) => data is Map
@@ -96,6 +138,10 @@ class ProductListRowStruct extends FFFirebaseStruct {
         'height': _height,
         'width': _width,
         'img': _img,
+        'sku': _sku,
+        'name': _name,
+        'depht': _depht,
+        'upc': _upc,
       }.withoutNulls;
 
   @override
@@ -122,6 +168,22 @@ class ProductListRowStruct extends FFFirebaseStruct {
         ),
         'img': serializeParam(
           _img,
+          ParamType.String,
+        ),
+        'sku': serializeParam(
+          _sku,
+          ParamType.String,
+        ),
+        'name': serializeParam(
+          _name,
+          ParamType.String,
+        ),
+        'depht': serializeParam(
+          _depht,
+          ParamType.int,
+        ),
+        'upc': serializeParam(
+          _upc,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -158,6 +220,26 @@ class ProductListRowStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        sku: deserializeParam(
+          data['sku'],
+          ParamType.String,
+          false,
+        ),
+        name: deserializeParam(
+          data['name'],
+          ParamType.String,
+          false,
+        ),
+        depht: deserializeParam(
+          data['depht'],
+          ParamType.int,
+          false,
+        ),
+        upc: deserializeParam(
+          data['upc'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -171,12 +253,26 @@ class ProductListRowStruct extends FFFirebaseStruct {
         quantity == other.quantity &&
         height == other.height &&
         width == other.width &&
-        img == other.img;
+        img == other.img &&
+        sku == other.sku &&
+        name == other.name &&
+        depht == other.depht &&
+        upc == other.upc;
   }
 
   @override
-  int get hashCode => const ListEquality()
-      .hash([productId, position, quantity, height, width, img]);
+  int get hashCode => const ListEquality().hash([
+        productId,
+        position,
+        quantity,
+        height,
+        width,
+        img,
+        sku,
+        name,
+        depht,
+        upc
+      ]);
 }
 
 ProductListRowStruct createProductListRowStruct({
@@ -186,6 +282,10 @@ ProductListRowStruct createProductListRowStruct({
   int? height,
   int? width,
   String? img,
+  String? sku,
+  String? name,
+  int? depht,
+  String? upc,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -198,6 +298,10 @@ ProductListRowStruct createProductListRowStruct({
       height: height,
       width: width,
       img: img,
+      sku: sku,
+      name: name,
+      depht: depht,
+      upc: upc,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

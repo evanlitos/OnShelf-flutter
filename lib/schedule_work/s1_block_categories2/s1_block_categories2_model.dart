@@ -1,3 +1,5 @@
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/components/menulateral_widget.dart';
 import '/components/progress_shelfs_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -10,6 +12,18 @@ class S1BlockCategories2Model
   ///  Local state fields for this page.
 
   dynamic routeToday;
+
+  List<ShelfsStruct> shelfsOfDayList = [];
+  void addToShelfsOfDayList(ShelfsStruct item) => shelfsOfDayList.add(item);
+  void removeFromShelfsOfDayList(ShelfsStruct item) =>
+      shelfsOfDayList.remove(item);
+  void removeAtIndexFromShelfsOfDayList(int index) =>
+      shelfsOfDayList.removeAt(index);
+  void insertAtIndexInShelfsOfDayList(int index, ShelfsStruct item) =>
+      shelfsOfDayList.insert(index, item);
+  void updateShelfsOfDayListAtIndex(
+          int index, Function(ShelfsStruct) updateFn) =>
+      shelfsOfDayList[index] = updateFn(shelfsOfDayList[index]);
 
   ///  State fields for stateful widgets in this page.
 

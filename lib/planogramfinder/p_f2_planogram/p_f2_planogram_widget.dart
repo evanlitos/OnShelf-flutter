@@ -1,8 +1,10 @@
 import '/backend/schema/structs/index.dart';
 import '/components/menulateral_widget.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:flutter/material.dart';
@@ -388,14 +390,47 @@ class _PF2PlanogramWidgetState extends State<PF2PlanogramWidget> {
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 20.0, 20.0, 20.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network(
-                            functions
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            await Navigator.push(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.fade,
+                                child: FlutterFlowExpandedImageView(
+                                  image: Image.network(
+                                    functions.imagePathFromUrl(
+                                        widget.shelf!.planogramImg),
+                                    fit: BoxFit.contain,
+                                  ),
+                                  allowRotation: false,
+                                  tag: functions.imagePathFromUrl(
+                                      widget.shelf!.planogramImg),
+                                  useHeroAnimation: true,
+                                ),
+                              ),
+                            );
+                            await actions.inactivitymanager(
+                              context,
+                            );
+                          },
+                          child: Hero(
+                            tag: functions
                                 .imagePathFromUrl(widget.shelf!.planogramImg),
-                            width: MediaQuery.sizeOf(context).width * 1.0,
-                            height: MediaQuery.sizeOf(context).height * 1.0,
-                            fit: BoxFit.contain,
+                            transitionOnUserGestures: true,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.network(
+                                functions.imagePathFromUrl(
+                                    widget.shelf!.planogramImg),
+                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                height: MediaQuery.sizeOf(context).height * 1.0,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -479,6 +514,9 @@ class _PF2PlanogramWidgetState extends State<PF2PlanogramWidget> {
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
+                          await actions.inactivitymanager(
+                            context,
+                          );
                           context.safePop();
                         },
                         text: 'Back',
@@ -516,6 +554,10 @@ class _PF2PlanogramWidgetState extends State<PF2PlanogramWidget> {
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
+                          await actions.inactivitymanager(
+                            context,
+                          );
+
                           context.goNamed(MenuWidget.routeName);
                         },
                         text: 'Continue',

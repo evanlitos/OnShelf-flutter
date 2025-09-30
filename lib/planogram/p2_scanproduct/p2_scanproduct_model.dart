@@ -27,6 +27,23 @@ class P2ScanproductModel extends FlutterFlowModel<P2ScanproductWidget> {
 
   int loop = 0;
 
+  ProductListRowStruct? productEdit;
+  void updateProductEditStruct(Function(ProductListRowStruct) updateFn) {
+    updateFn(productEdit ??= ProductListRowStruct());
+  }
+
+  int pXEdit = 0;
+
+  int pYEdit = 0;
+
+  bool edit = false;
+
+  int index = 0;
+
+  int widthDisponibleRowActual = 0;
+
+  int rowEdit = 0;
+
   ///  State fields for stateful widgets in this page.
 
   // Model for menulateral component.
@@ -39,6 +56,8 @@ class P2ScanproductModel extends FlutterFlowModel<P2ScanproductWidget> {
   String? Function(BuildContext, String?)? sinputSkuTextControllerValidator;
   // Stores action output result for [Backend Call - API (searchProductUPC)] action in sinput_sku widget.
   ApiCallResponse? searchUPCPRODUCT;
+  // Stores action output result for [Backend Call - API (searchProductUPC)] action in Image widget.
+  ApiCallResponse? barcodeModeUPCQ12;
   var barcodeModeUPC = '';
   // Stores action output result for [Backend Call - API (searchProductUPC)] action in Image widget.
   ApiCallResponse? barcodeModeUPCQR;

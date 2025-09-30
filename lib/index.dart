@@ -72,3 +72,8 @@ export '/planogram/p1_formnewplano/p1_formnewplano_widget.dart'
     show P1FormnewplanoWidget;
 export '/planogram/p2_scanproduct/p2_scanproduct_widget.dart'
     show P2ScanproductWidget;
+export '/pages/replenishment/rep6_scanproducts/rep6_scanproducts_widget.dart'
+    show Rep6ScanproductsWidget;
+export '/pages/replenishment/r_e_p3_4_before_photo_diagram_4_copy/r_e_p34_before_photo_diagram4_copy_widget.dart'
+    show REP34BeforePhotoDiagram4CopyWidget;
+export '/planogram/editnewplan/editnewplan_widget.dart' show EditnewplanWidget;

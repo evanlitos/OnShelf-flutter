@@ -373,6 +373,9 @@ class _InstructionsAlienProductWidgetState
                       child: FFButtonWidget(
                         onPressed: () async {
                           final selectedMedia = await selectMedia(
+                            maxWidth: 400.00,
+                            maxHeight: 500.00,
+                            imageQuality: 46,
                             multiImage: false,
                           );
                           if (selectedMedia != null &&

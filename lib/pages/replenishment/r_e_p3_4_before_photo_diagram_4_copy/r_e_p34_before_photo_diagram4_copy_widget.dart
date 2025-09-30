@@ -1,42 +1,42 @@
 import '/components/menulateral_widget.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_data.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'r_e_p5_resume_after_foto_model.dart';
-export 'r_e_p5_resume_after_foto_model.dart';
+import 'r_e_p34_before_photo_diagram4_copy_model.dart';
+export 'r_e_p34_before_photo_diagram4_copy_model.dart';
 
-class REP5ResumeAfterFotoWidget extends StatefulWidget {
-  const REP5ResumeAfterFotoWidget({
+class REP34BeforePhotoDiagram4CopyWidget extends StatefulWidget {
+  const REP34BeforePhotoDiagram4CopyWidget({
     super.key,
     required this.bFoto,
-    required this.aFoto,
   });
 
   final FFUploadedFile? bFoto;
-  final FFUploadedFile? aFoto;
 
-  static String routeName = 'REP_5_Resume_AfterFoto';
-  static String routePath = '/rEP5ResumeAfterFoto';
+  static String routeName = 'REP3_4_Before_photo_diagram_4Copy';
+  static String routePath = '/rEP34BeforePhotoDiagram4Copy';
 
   @override
-  State<REP5ResumeAfterFotoWidget> createState() =>
-      _REP5ResumeAfterFotoWidgetState();
+  State<REP34BeforePhotoDiagram4CopyWidget> createState() =>
+      _REP34BeforePhotoDiagram4CopyWidgetState();
 }
 
-class _REP5ResumeAfterFotoWidgetState extends State<REP5ResumeAfterFotoWidget> {
-  late REP5ResumeAfterFotoModel _model;
+class _REP34BeforePhotoDiagram4CopyWidgetState
+    extends State<REP34BeforePhotoDiagram4CopyWidget> {
+  late REP34BeforePhotoDiagram4CopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => REP5ResumeAfterFotoModel());
+    _model = createModel(context, () => REP34BeforePhotoDiagram4CopyModel());
   }
 
   @override
@@ -91,12 +91,11 @@ class _REP5ResumeAfterFotoWidgetState extends State<REP5ResumeAfterFotoWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Expanded(
-                            flex: 4,
+                            flex: 1,
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Expanded(
-                                  flex: 4,
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
@@ -126,20 +125,16 @@ class _REP5ResumeAfterFotoWidgetState extends State<REP5ResumeAfterFotoWidget> {
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 0.0, 0.0, 0.0),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(0.0),
-                                          child: Image.asset(
-                                            'assets/images/self.png',
-                                            width: 22.0,
-                                            height: 17.0,
-                                            fit: BoxFit.contain,
-                                          ),
+                                            5.0, 0.0, 5.0, 0.0),
+                                        child: Icon(
+                                          FFIcons.kic2,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                          size: 24.0,
                                         ),
                                       ),
                                       Text(
-                                        '5Replenishment-Top up',
+                                        'Top up',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -174,7 +169,7 @@ class _REP5ResumeAfterFotoWidgetState extends State<REP5ResumeAfterFotoWidget> {
                             ),
                           ),
                           Expanded(
-                            flex: 3,
+                            flex: 1,
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
@@ -318,7 +313,7 @@ class _REP5ResumeAfterFotoWidgetState extends State<REP5ResumeAfterFotoWidget> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'After Photo',
+                                'Planogram Photo',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -336,7 +331,7 @@ class _REP5ResumeAfterFotoWidgetState extends State<REP5ResumeAfterFotoWidget> {
                                     ),
                               ),
                               Text(
-                                'Category: ${FFAppState().toShelfSelected.type}',
+                                'Category: ${FFAppState().ShelfSelected.name}',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -358,7 +353,7 @@ class _REP5ResumeAfterFotoWidgetState extends State<REP5ResumeAfterFotoWidget> {
                                     ),
                               ),
                               Text(
-                                'Display Number: ${FFAppState().toShelfSelected.name}',
+                                'Display Number: ${FFAppState().ShelfSelected.mapCanvaId.toString()}',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -390,22 +385,125 @@ class _REP5ResumeAfterFotoWidgetState extends State<REP5ResumeAfterFotoWidget> {
               Expanded(
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Image.memory(
-                          widget.aFoto?.bytes ?? Uint8List.fromList([]),
-                          width: MediaQuery.sizeOf(context).width * 0.9,
-                          height: MediaQuery.sizeOf(context).height * 0.9,
-                          fit: BoxFit.contain,
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            20.0, 20.0, 20.0, 20.0),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            await Navigator.push(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.fade,
+                                child: FlutterFlowExpandedImageView(
+                                  image: Image.network(
+                                    functions.imagePathFromUrl(FFAppState()
+                                        .toShelfSelected
+                                        .planogramImg),
+                                    fit: BoxFit.contain,
+                                  ),
+                                  allowRotation: false,
+                                  tag: functions.imagePathFromUrl(FFAppState()
+                                      .toShelfSelected
+                                      .planogramImg),
+                                  useHeroAnimation: true,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Hero(
+                            tag: functions.imagePathFromUrl(
+                                FFAppState().toShelfSelected.planogramImg),
+                            transitionOnUserGestures: true,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.network(
+                                functions.imagePathFromUrl(
+                                    FFAppState().toShelfSelected.planogramImg),
+                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                height: MediaQuery.sizeOf(context).height * 1.0,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Opacity(
+                    opacity: 0.0,
+                    child: Text(
+                      'Zoom ',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            font: GoogleFonts.hankenGrotesk(
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
+                            ),
+                            letterSpacing: 0.0,
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontStyle,
+                          ),
+                    ),
+                  ),
+                  Opacity(
+                    opacity: 0.0,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(0.0),
+                      child: Image.asset(
+                        'assets/images/zoom_out_hover.webp',
+                        width: 28.0,
+                        height: 28.0,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  Opacity(
+                    opacity: 0.0,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(0.0),
+                      child: Image.asset(
+                        'assets/images/zoom_in.webp',
+                        width: 28.0,
+                        height: 28.0,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ].divide(SizedBox(width: 10.0)),
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.asset(
+                      'assets/images/group_7380.webp',
+                      width: MediaQuery.sizeOf(context).width * 0.9,
+                      height: 200.0,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ],
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
@@ -415,59 +513,9 @@ class _REP5ResumeAfterFotoWidgetState extends State<REP5ResumeAfterFotoWidget> {
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
-                          final selectedMedia = await selectMedia(
-                            maxWidth: 400.00,
-                            maxHeight: 600.00,
-                            imageQuality: 50,
-                            multiImage: false,
-                          );
-                          if (selectedMedia != null &&
-                              selectedMedia.every((m) =>
-                                  validateFileFormat(m.storagePath, context))) {
-                            safeSetState(() =>
-                                _model.isDataUploading_uploadDataR1jL = true);
-                            var selectedUploadedFiles = <FFUploadedFile>[];
-
-                            try {
-                              selectedUploadedFiles = selectedMedia
-                                  .map((m) => FFUploadedFile(
-                                        name: m.storagePath.split('/').last,
-                                        bytes: m.bytes,
-                                        height: m.dimensions?.height,
-                                        width: m.dimensions?.width,
-                                        blurHash: m.blurHash,
-                                      ))
-                                  .toList();
-                            } finally {
-                              _model.isDataUploading_uploadDataR1jL = false;
-                            }
-                            if (selectedUploadedFiles.length ==
-                                selectedMedia.length) {
-                              safeSetState(() {
-                                _model.uploadedLocalFile_uploadDataR1jL =
-                                    selectedUploadedFiles.first;
-                              });
-                            } else {
-                              safeSetState(() {});
-                              return;
-                            }
-                          }
-
-                          context.goNamed(
-                            REP5ResumeAfterFotoWidget.routeName,
-                            queryParameters: {
-                              'bFoto': serializeParam(
-                                widget.bFoto,
-                                ParamType.FFUploadedFile,
-                              ),
-                              'aFoto': serializeParam(
-                                _model.uploadedLocalFile_uploadDataR1jL,
-                                ParamType.FFUploadedFile,
-                              ),
-                            }.withoutNulls,
-                          );
+                          context.safePop();
                         },
-                        text: 'Retake',
+                        text: 'Back',
                         options: FFButtonOptions(
                           height: 40.0,
                           padding: EdgeInsetsDirectional.fromSTEB(
@@ -503,12 +551,8 @@ class _REP5ResumeAfterFotoWidgetState extends State<REP5ResumeAfterFotoWidget> {
                       child: FFButtonWidget(
                         onPressed: () async {
                           context.goNamed(
-                            Rep6ScanproductsWidget.routeName,
+                            REP4InstructionsAfterFotoWidget.routeName,
                             queryParameters: {
-                              'aFoto': serializeParam(
-                                widget.aFoto,
-                                ParamType.FFUploadedFile,
-                              ),
                               'bFoto': serializeParam(
                                 widget.bFoto,
                                 ParamType.FFUploadedFile,

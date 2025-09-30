@@ -1,3 +1,5 @@
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/components/menulateral_widget.dart';
 import '/components/progress_shelfs_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -6,11 +8,12 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/alerts/no_found/no_found_widget.dart';
 import '/pages/alerts/success_register_products/success_register_products_widget.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -40,14 +43,13 @@ class _S1BlockCategories2WidgetState extends State<S1BlockCategories2Widget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      FFAppState().updateRouteOfDayStruct(
-        (e) => e
-          ..shelfs = FFAppState()
-              .routeOfDay
-              .shelfs
-              .sortedList(keyOf: (e) => e.status, desc: false)
-              .toList(),
+      await actions.inactivitymanager(
+        context,
       );
+      _model.shelfsOfDayList =
+          FFAppState().routeOfDay.shelfs.toList().cast<ShelfsStruct>();
+      safeSetState(() {});
+      FFAppState().topup = false;
       safeSetState(() {});
     });
 
@@ -124,6 +126,9 @@ class _S1BlockCategories2WidgetState extends State<S1BlockCategories2Widget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            await actions.inactivitymanager(
+                                              context,
+                                            );
                                             scaffoldKey.currentState!
                                                 .openDrawer();
                                           },
@@ -331,8 +336,7 @@ class _S1BlockCategories2WidgetState extends State<S1BlockCategories2Widget> {
                             20.0, 20.0, 20.0, 0.0),
                         child: Builder(
                           builder: (context) {
-                            final shelfsOfDay =
-                                FFAppState().routeOfDay.shelfs.toList();
+                            final shelfsOfDay = _model.shelfsOfDayList.toList();
 
                             return RefreshIndicator(
                               onRefresh: () async {},
@@ -441,6 +445,20 @@ class _S1BlockCategories2WidgetState extends State<S1BlockCategories2Widget> {
                                                                         CrossAxisAlignment
                                                                             .start,
                                                                     children: [
+                                                                      Text(
+                                                                        'Display Name:${shelfsOfDayItem.planogramName}',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              font: GoogleFonts.hankenGrotesk(
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                              ),
+                                                                              letterSpacing: 0.0,
+                                                                              fontWeight: FontWeight.bold,
+                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                            ),
+                                                                      ),
                                                                       Row(
                                                                         mainAxisSize:
                                                                             MainAxisSize.max,
@@ -472,20 +490,6 @@ class _S1BlockCategories2WidgetState extends State<S1BlockCategories2Widget> {
                                                                                 ),
                                                                           ),
                                                                         ],
-                                                                      ),
-                                                                      Text(
-                                                                        'Display Number:${shelfsOfDayItem.mapCanvaId.toString()}',
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              font: GoogleFonts.hankenGrotesk(
-                                                                                fontWeight: FontWeight.bold,
-                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                              ),
-                                                                              letterSpacing: 0.0,
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                            ),
                                                                       ),
                                                                       Text(
                                                                         'Type Display: ${shelfsOfDayItem.type}',
@@ -523,6 +527,10 @@ class _S1BlockCategories2WidgetState extends State<S1BlockCategories2Widget> {
                                                       builder: (context) =>
                                                           FFButtonWidget(
                                                         onPressed: () async {
+                                                          await actions
+                                                              .inactivitymanager(
+                                                            context,
+                                                          );
                                                           await showDialog(
                                                             context: context,
                                                             builder:
@@ -632,6 +640,10 @@ class _S1BlockCategories2WidgetState extends State<S1BlockCategories2Widget> {
                                                   Expanded(
                                                     child: FFButtonWidget(
                                                       onPressed: () async {
+                                                        await actions
+                                                            .inactivitymanager(
+                                                          context,
+                                                        );
                                                         FFAppState()
                                                                 .ShelfSelected =
                                                             shelfsOfDayItem;
@@ -671,6 +683,9 @@ class _S1BlockCategories2WidgetState extends State<S1BlockCategories2Widget> {
                                                             ..startedAt = functions
                                                                 .obtenerFechaHoraActual(),
                                                         );
+                                                        FFAppState()
+                                                                .shelfPositionEditing =
+                                                            shelfsOfDayIndex;
                                                         safeSetState(() {});
 
                                                         context.pushNamed(
@@ -899,11 +914,21 @@ class _S1BlockCategories2WidgetState extends State<S1BlockCategories2Widget> {
                                     alignment: AlignmentDirectional(1.0, 0.0),
                                     children: [
                                       Container(
-                                        width: 200.0,
+                                        width: 270.0,
                                         child: TextFormField(
                                           controller:
                                               _model.sinputSkuTextController,
                                           focusNode: _model.sinputSkuFocusNode,
+                                          onChanged: (_) =>
+                                              EasyDebounce.debounce(
+                                            '_model.sinputSkuTextController',
+                                            Duration(milliseconds: 2000),
+                                            () async {
+                                              await actions.inactivitymanager(
+                                                context,
+                                              );
+                                            },
+                                          ),
                                           autofocus: false,
                                           obscureText: false,
                                           decoration: InputDecoration(
@@ -1039,73 +1064,69 @@ class _S1BlockCategories2WidgetState extends State<S1BlockCategories2Widget> {
                                                         .bodyMedium
                                                         .fontStyle,
                                               ),
-                                          maxLength: 10,
-                                          maxLengthEnforcement:
-                                              MaxLengthEnforcement.enforced,
-                                          buildCounter: (context,
-                                                  {required currentLength,
-                                                  required isFocused,
-                                                  maxLength}) =>
-                                              null,
-                                          keyboardType: TextInputType.number,
                                           cursorColor:
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
                                           validator: _model
                                               .sinputSkuTextControllerValidator
                                               .asValidator(context),
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter.allow(
-                                                RegExp('[0-9]'))
-                                          ],
                                         ),
                                       ),
-                                      Align(
-                                        alignment:
-                                            AlignmentDirectional(1.0, 0.0),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 5.0, 0.0),
-                                          child: Container(
-                                            width: 30.0,
-                                            height: 30.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              border: Border.all(
+                                      if (responsiveVisibility(
+                                        context: context,
+                                        phone: false,
+                                      ))
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(1.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 5.0, 0.0),
+                                            child: Container(
+                                              width: 30.0,
+                                              height: 30.0,
+                                              decoration: BoxDecoration(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondary,
-                                                width: 1.0,
+                                                        .secondaryBackground,
+                                                border: Border.all(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondary,
+                                                  width: 1.0,
+                                                ),
                                               ),
-                                            ),
-                                            alignment:
-                                                AlignmentDirectional(1.0, 0.0),
-                                            child: FlutterFlowIconButton(
-                                              borderColor: Colors.transparent,
-                                              borderRadius: 8.0,
-                                              buttonSize: 40.0,
-                                              fillColor: Color(0xFFE3F5FF),
-                                              icon: Icon(
-                                                FFIcons.kzoomIn,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondary,
-                                                size: 14.0,
+                                              alignment: AlignmentDirectional(
+                                                  1.0, 0.0),
+                                              child: FlutterFlowIconButton(
+                                                borderColor: Colors.transparent,
+                                                borderRadius: 8.0,
+                                                buttonSize: 40.0,
+                                                fillColor: Color(0xFFE3F5FF),
+                                                icon: Icon(
+                                                  FFIcons.kzoomIn,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondary,
+                                                  size: 14.0,
+                                                ),
+                                                onPressed: () {
+                                                  print(
+                                                      'IconButton pressed ...');
+                                                },
                                               ),
-                                              onPressed: () {
-                                                print('IconButton pressed ...');
-                                              },
                                             ),
                                           ),
                                         ),
-                                      ),
                                     ],
                                   ),
                                   FFButtonWidget(
                                     onPressed: () async {
+                                      var _shouldSetState = false;
+                                      await actions.inactivitymanager(
+                                        context,
+                                      );
                                       _model.barcodeMode =
                                           await FlutterBarcodeScanner
                                               .scanBarcode(
@@ -1115,62 +1136,73 @@ class _S1BlockCategories2WidgetState extends State<S1BlockCategories2Widget> {
                                         ScanMode.BARCODE,
                                       );
 
+                                      _shouldSetState = true;
                                       safeSetState(() {
                                         _model.sinputSkuTextController?.text =
                                             _model.barcodeMode;
                                       });
+                                      if (functions.filterarUPC(
+                                                  _model.barcodeMode,
+                                                  FFAppState()
+                                                      .routeOfDay
+                                                      .shelfs
+                                                      .toList()) !=
+                                              null &&
+                                          (functions.filterarUPC(
+                                                  _model.barcodeMode,
+                                                  FFAppState()
+                                                      .routeOfDay
+                                                      .shelfs
+                                                      .toList()))!
+                                              .isNotEmpty) {
+                                        _model.shelfsOfDayList = functions
+                                            .filterarUPC(
+                                                _model.barcodeMode,
+                                                FFAppState()
+                                                    .routeOfDay
+                                                    .shelfs
+                                                    .toList())!
+                                            .toList()
+                                            .cast<ShelfsStruct>();
+                                        safeSetState(() {});
+                                        if (_shouldSetState)
+                                          safeSetState(() {});
+                                        return;
+                                      } else {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text('Shelf not found'),
+                                              content: Text(
+                                                  'The scanned shelf was not found in the list. Showing all available shelves.'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('Ok'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                        _model.shelfsOfDayList = FFAppState()
+                                            .routeOfDay
+                                            .shelfs
+                                            .toList()
+                                            .cast<ShelfsStruct>();
+                                        safeSetState(() {});
+                                        if (_shouldSetState)
+                                          safeSetState(() {});
+                                        return;
+                                      }
 
-                                      safeSetState(() {});
+                                      if (_shouldSetState) safeSetState(() {});
                                     },
                                     text: '',
                                     icon: Icon(
                                       FFIcons.kseachCamera,
-                                      size: 15.0,
-                                    ),
-                                    options: FFButtonOptions(
-                                      height: 40.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          26.0, 0.0, 26.0, 0.0),
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                            font: GoogleFonts.hankenGrotesk(
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontStyle,
-                                            ),
-                                            color: Colors.white,
-                                            letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .fontStyle,
-                                          ),
-                                      elevation: 0.0,
-                                      borderRadius: BorderRadius.circular(24.0),
-                                    ),
-                                  ),
-                                  FFButtonWidget(
-                                    onPressed: () {
-                                      print('Button pressed ...');
-                                    },
-                                    text: '',
-                                    icon: Icon(
-                                      FFIcons.kscanIcon,
                                       size: 15.0,
                                     ),
                                     options: FFButtonOptions(

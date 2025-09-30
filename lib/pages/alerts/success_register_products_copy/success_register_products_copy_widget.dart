@@ -120,7 +120,7 @@ class _SuccessRegisterProductsCopyWidgetState
                       imgMainShelfAfter: widget.aFoto,
                     );
 
-                    context.goNamed(S1BlockCategories2Widget.routeName);
+                    context.goNamed(Rep1ScanblockidWidget.routeName);
 
                     safeSetState(() {});
                   },

@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/alerts/not_scanner_products/not_scanner_products_widget.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -44,6 +45,10 @@ class _S7FillProductWidgetState extends State<S7FillProductWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.localDam = widget.product!.dam;
+      _model.localExp = widget.product!.exp;
+      _model.localCof = widget.product!.cof;
+      _model.localRec = widget.product!.rec;
       safeSetState(() {});
     });
 
@@ -374,37 +379,33 @@ class _S7FillProductWidgetState extends State<S7FillProductWidget> {
                                             Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
-                                                Text(
-                                                  'Category: ${widget.product?.category1}',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        font: GoogleFonts
-                                                            .hankenGrotesk(
+                                                Expanded(
+                                                  child: Text(
+                                                    '${widget.product?.name}',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .hankenGrotesk(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          letterSpacing: 0.0,
                                                           fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontWeight,
+                                                              FontWeight.bold,
                                                           fontStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
                                                                   .bodyMedium
                                                                   .fontStyle,
                                                         ),
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .fontStyle,
-                                                      ),
+                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -736,6 +737,10 @@ class _S7FillProductWidgetState extends State<S7FillProductWidget> {
                                                             if (_model
                                                                     .localDam >
                                                                 0) {
+                                                              await actions
+                                                                  .inactivitymanager(
+                                                                context,
+                                                              );
                                                               _model.localDam =
                                                                   _model.localDam +
                                                                       -1;
@@ -743,6 +748,10 @@ class _S7FillProductWidgetState extends State<S7FillProductWidget> {
                                                                   () {});
                                                               return;
                                                             } else {
+                                                              await actions
+                                                                  .inactivitymanager(
+                                                                context,
+                                                              );
                                                               return;
                                                             }
                                                           },
@@ -823,6 +832,10 @@ class _S7FillProductWidgetState extends State<S7FillProductWidget> {
                                                                 _model.localDam +
                                                                     1;
                                                             safeSetState(() {});
+                                                            await actions
+                                                                .inactivitymanager(
+                                                              context,
+                                                            );
                                                           },
                                                         ),
                                                       ),
@@ -885,48 +898,65 @@ class _S7FillProductWidgetState extends State<S7FillProductWidget> {
                                                               ),
                                                         ),
                                                       ),
-                                                      Container(
-                                                        width: 30.0,
-                                                        height: 100.0,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryBackground,
-                                                          border: Border.all(
+                                                      InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          await actions
+                                                              .inactivitymanager(
+                                                            context,
+                                                          );
+                                                        },
+                                                        child: Container(
+                                                          width: 30.0,
+                                                          height: 100.0,
+                                                          decoration:
+                                                              BoxDecoration(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
-                                                                .primary,
-                                                            width: 1.0,
+                                                                .secondaryBackground,
+                                                            border: Border.all(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primary,
+                                                              width: 1.0,
+                                                            ),
                                                           ),
-                                                        ),
-                                                        child:
-                                                            FlutterFlowIconButton(
-                                                          borderColor: Colors
-                                                              .transparent,
-                                                          borderRadius: 8.0,
-                                                          buttonSize: 30.0,
-                                                          icon: Icon(
-                                                            FFIcons.khover,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primary,
-                                                            size: 14.0,
+                                                          child:
+                                                              FlutterFlowIconButton(
+                                                            borderColor: Colors
+                                                                .transparent,
+                                                            borderRadius: 8.0,
+                                                            buttonSize: 30.0,
+                                                            icon: Icon(
+                                                              FFIcons.khover,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primary,
+                                                              size: 14.0,
+                                                            ),
+                                                            onPressed:
+                                                                () async {
+                                                              if (_model
+                                                                      .localExp >
+                                                                  0) {
+                                                                _model.localExp =
+                                                                    _model.localExp +
+                                                                        -1;
+                                                                safeSetState(
+                                                                    () {});
+                                                                return;
+                                                              } else {
+                                                                return;
+                                                              }
+                                                            },
                                                           ),
-                                                          onPressed: () async {
-                                                            if (_model
-                                                                    .localExp >
-                                                                0) {
-                                                              _model.localExp =
-                                                                  _model.localExp +
-                                                                      -1;
-                                                              safeSetState(
-                                                                  () {});
-                                                              return;
-                                                            } else {
-                                                              return;
-                                                            }
-                                                          },
                                                         ),
                                                       ),
                                                       Container(
@@ -1006,6 +1036,10 @@ class _S7FillProductWidgetState extends State<S7FillProductWidget> {
                                                                 _model.localExp +
                                                                     1;
                                                             safeSetState(() {});
+                                                            await actions
+                                                                .inactivitymanager(
+                                                              context,
+                                                            );
                                                           },
                                                         ),
                                                       ),
@@ -1100,6 +1134,10 @@ class _S7FillProductWidgetState extends State<S7FillProductWidget> {
                                                             if (_model
                                                                     .localCof >
                                                                 0) {
+                                                              await actions
+                                                                  .inactivitymanager(
+                                                                context,
+                                                              );
                                                               _model.localCof =
                                                                   _model.localCof +
                                                                       -1;
@@ -1189,6 +1227,10 @@ class _S7FillProductWidgetState extends State<S7FillProductWidget> {
                                                                 _model.localCof +
                                                                     1;
                                                             safeSetState(() {});
+                                                            await actions
+                                                                .inactivitymanager(
+                                                              context,
+                                                            );
                                                           },
                                                         ),
                                                       ),
@@ -1283,6 +1325,10 @@ class _S7FillProductWidgetState extends State<S7FillProductWidget> {
                                                             if (_model
                                                                     .localRec >
                                                                 0) {
+                                                              await actions
+                                                                  .inactivitymanager(
+                                                                context,
+                                                              );
                                                               _model.localRec =
                                                                   _model.localRec +
                                                                       -1;
@@ -1372,6 +1418,10 @@ class _S7FillProductWidgetState extends State<S7FillProductWidget> {
                                                                 _model.localRec +
                                                                     1;
                                                             safeSetState(() {});
+                                                            await actions
+                                                                .inactivitymanager(
+                                                              context,
+                                                            );
                                                           },
                                                         ),
                                                       ),
@@ -1395,6 +1445,9 @@ class _S7FillProductWidgetState extends State<S7FillProductWidget> {
                                             30.0, 20.0, 30.0, 0.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
+                                            await actions.inactivitymanager(
+                                              context,
+                                            );
                                             FFAppState()
                                                 .updateShelfSelectedStruct(
                                               (e) => e
@@ -1405,6 +1458,15 @@ class _S7FillProductWidgetState extends State<S7FillProductWidget> {
                                                     ..cof2 = _model.localCof
                                                     ..rec = _model.localRec,
                                                 ),
+                                            );
+                                            FFAppState()
+                                                .updateProductListRouteAtIndex(
+                                              widget.itemIndex!,
+                                              (e) => e
+                                                ..dam = _model.localDam
+                                                ..exp = _model.localExp
+                                                ..cof = _model.localCof
+                                                ..rec = _model.localRec,
                                             );
                                             safeSetState(() {});
                                             context.safePop();
@@ -1473,45 +1535,63 @@ class _S7FillProductWidgetState extends State<S7FillProductWidget> {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Container(
-                      width: MediaQuery.sizeOf(context).width * 1.0,
-                      height: 122.0,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFEFEFEF),
-                      ),
-                      child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 0.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    5.0, 0.0, 5.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Stack(
-                                      alignment: AlignmentDirectional(1.0, 0.0),
-                                      children: [
-                                        Container(
-                                          width: 200.0,
-                                          child: TextFormField(
-                                            controller:
-                                                _model.sinputSkuTextController,
-                                            focusNode:
-                                                _model.sinputSkuFocusNode,
-                                            autofocus: false,
-                                            obscureText: false,
-                                            decoration: InputDecoration(
-                                              isDense: true,
-                                              labelStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                font: GoogleFonts.hankenGrotesk(
+                    if (responsiveVisibility(
+                      context: context,
+                      phone: false,
+                    ))
+                      Container(
+                        width: MediaQuery.sizeOf(context).width * 1.0,
+                        height: 122.0,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFEFEFEF),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              2.0, 0.0, 0.0, 0.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      5.0, 0.0, 5.0, 0.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Stack(
+                                        alignment:
+                                            AlignmentDirectional(1.0, 0.0),
+                                        children: [
+                                          Container(
+                                            width: 200.0,
+                                            child: TextFormField(
+                                              controller: _model
+                                                  .sinputSkuTextController,
+                                              focusNode:
+                                                  _model.sinputSkuFocusNode,
+                                              autofocus: false,
+                                              obscureText: false,
+                                              decoration: InputDecoration(
+                                                isDense: true,
+                                                labelStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                  font:
+                                                      GoogleFonts.hankenGrotesk(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  letterSpacing: 0.0,
                                                   fontWeight:
                                                       FlutterFlowTheme.of(
                                                               context)
@@ -1522,33 +1602,38 @@ class _S7FillProductWidgetState extends State<S7FillProductWidget> {
                                                               context)
                                                           .labelMedium
                                                           .fontStyle,
+                                                  shadows: [
+                                                    Shadow(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      offset: Offset(2.0, 2.0),
+                                                      blurRadius: 2.0,
+                                                    )
+                                                  ],
                                                 ),
-                                                letterSpacing: 0.0,
-                                                fontWeight:
+                                                hintText: 'SKU',
+                                                hintStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .labelMedium
-                                                        .fontWeight,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium
-                                                        .fontStyle,
-                                                shadows: [
-                                                  Shadow(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    offset: Offset(2.0, 2.0),
-                                                    blurRadius: 2.0,
-                                                  )
-                                                ],
-                                              ),
-                                              hintText: 'SKU',
-                                              hintStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        font: GoogleFonts
-                                                            .hankenGrotesk(
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .hankenGrotesk(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .labelMedium
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .labelMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          color:
+                                                              Color(0xFFBABABA),
+                                                          letterSpacing: 0.0,
                                                           fontWeight:
                                                               FlutterFlowTheme.of(
                                                                       context)
@@ -1560,235 +1645,247 @@ class _S7FillProductWidgetState extends State<S7FillProductWidget> {
                                                                   .labelMedium
                                                                   .fontStyle,
                                                         ),
-                                                        color:
-                                                            Color(0xFFBABABA),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0xAAE1E1E1),
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0x00000000),
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
+                                                errorBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
+                                                focusedErrorBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
+                                                filled: true,
+                                                fillColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        font: GoogleFonts
+                                                            .hankenGrotesk(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
                                                         letterSpacing: 0.0,
                                                         fontWeight:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .labelMedium
+                                                                .bodyMedium
                                                                 .fontWeight,
                                                         fontStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .labelMedium
+                                                                .bodyMedium
                                                                 .fontStyle,
                                                       ),
-                                              enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0xAAE1E1E1),
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                              ),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                              ),
-                                              errorBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                              ),
-                                              focusedErrorBorder:
-                                                  OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                              ),
-                                              filled: true,
-                                              fillColor:
+                                              maxLength: 10,
+                                              maxLengthEnforcement:
+                                                  MaxLengthEnforcement.enforced,
+                                              buildCounter: (context,
+                                                      {required currentLength,
+                                                      required isFocused,
+                                                      maxLength}) =>
+                                                  null,
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              cursorColor:
                                                   FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
+                                                      .primaryText,
+                                              validator: _model
+                                                  .sinputSkuTextControllerValidator
+                                                  .asValidator(context),
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .allow(RegExp('[0-9]'))
+                                              ],
                                             ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  font:
-                                                      GoogleFonts.hankenGrotesk(
-                                                    fontWeight:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontWeight,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontStyle,
+                                          ),
+                                          Align(
+                                            alignment:
+                                                AlignmentDirectional(1.0, 0.0),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 5.0, 0.0),
+                                              child: Container(
+                                                width: 30.0,
+                                                height: 30.0,
+                                                decoration: BoxDecoration(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryBackground,
+                                                  border: Border.all(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondary,
+                                                    width: 1.0,
                                                   ),
-                                                  letterSpacing: 0.0,
+                                                ),
+                                                alignment: AlignmentDirectional(
+                                                    1.0, 0.0),
+                                                child: Builder(
+                                                  builder: (context) =>
+                                                      FlutterFlowIconButton(
+                                                    borderRadius: 8.0,
+                                                    buttonSize: 40.0,
+                                                    fillColor:
+                                                        Color(0xFFE3F5FF),
+                                                    icon: Icon(
+                                                      FFIcons.kzoomIn,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondary,
+                                                      size: 14.0,
+                                                    ),
+                                                    onPressed: () async {
+                                                      if (_model.sinputSkuTextController
+                                                                  .text ==
+                                                              '') {
+                                                        await showDialog(
+                                                          context: context,
+                                                          builder:
+                                                              (dialogContext) {
+                                                            return Dialog(
+                                                              elevation: 0,
+                                                              insetPadding:
+                                                                  EdgeInsets
+                                                                      .zero,
+                                                              backgroundColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              alignment: AlignmentDirectional(
+                                                                      0.0, 0.0)
+                                                                  .resolve(
+                                                                      Directionality.of(
+                                                                          context)),
+                                                              child:
+                                                                  GestureDetector(
+                                                                onTap: () {
+                                                                  FocusScope.of(
+                                                                          dialogContext)
+                                                                      .unfocus();
+                                                                  FocusManager
+                                                                      .instance
+                                                                      .primaryFocus
+                                                                      ?.unfocus();
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  height: 100.0,
+                                                                  width: 333.0,
+                                                                  child:
+                                                                      NotScannerProductsWidget(),
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        );
+
+                                                        return;
+                                                      }
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      FFButtonWidget(
+                                        onPressed: () async {
+                                          _model.barcode2 =
+                                              await FlutterBarcodeScanner
+                                                  .scanBarcode(
+                                            '#C62828', // scanning line color
+                                            'Cancel', // cancel button text
+                                            true, // whether to show the flash icon
+                                            ScanMode.QR,
+                                          );
+
+                                          safeSetState(() {
+                                            _model.sinputSkuTextController
+                                                ?.text = _model.barcode2;
+                                          });
+
+                                          safeSetState(() {});
+                                        },
+                                        text: '',
+                                        icon: Icon(
+                                          FFIcons.kseachCamera,
+                                          size: 15.0,
+                                        ),
+                                        options: FFButtonOptions(
+                                          height: 40.0,
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  26.0, 0.0, 26.0, 0.0),
+                                          iconPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .titleSmall
+                                              .override(
+                                                font: GoogleFonts.hankenGrotesk(
                                                   fontWeight:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyMedium
+                                                          .titleSmall
                                                           .fontWeight,
                                                   fontStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyMedium
+                                                          .titleSmall
                                                           .fontStyle,
                                                 ),
-                                            maxLength: 10,
-                                            maxLengthEnforcement:
-                                                MaxLengthEnforcement.enforced,
-                                            buildCounter: (context,
-                                                    {required currentLength,
-                                                    required isFocused,
-                                                    maxLength}) =>
-                                                null,
-                                            keyboardType: TextInputType.number,
-                                            cursorColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryText,
-                                            validator: _model
-                                                .sinputSkuTextControllerValidator
-                                                .asValidator(context),
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter.allow(
-                                                  RegExp('[0-9]'))
-                                            ],
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment:
-                                              AlignmentDirectional(1.0, 0.0),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 5.0, 0.0),
-                                            child: Container(
-                                              width: 30.0,
-                                              height: 30.0,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                border: Border.all(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondary,
-                                                  width: 1.0,
-                                                ),
-                                              ),
-                                              alignment: AlignmentDirectional(
-                                                  1.0, 0.0),
-                                              child: Builder(
-                                                builder: (context) =>
-                                                    FlutterFlowIconButton(
-                                                  borderRadius: 8.0,
-                                                  buttonSize: 40.0,
-                                                  fillColor: Color(0xFFE3F5FF),
-                                                  icon: Icon(
-                                                    FFIcons.kzoomIn,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondary,
-                                                    size: 14.0,
-                                                  ),
-                                                  onPressed: () async {
-                                                    if (_model.sinputSkuTextController
-                                                                .text ==
-                                                            '') {
-                                                      await showDialog(
-                                                        context: context,
-                                                        builder:
-                                                            (dialogContext) {
-                                                          return Dialog(
-                                                            elevation: 0,
-                                                            insetPadding:
-                                                                EdgeInsets.zero,
-                                                            backgroundColor:
-                                                                Colors
-                                                                    .transparent,
-                                                            alignment: AlignmentDirectional(
-                                                                    0.0, 0.0)
-                                                                .resolve(
-                                                                    Directionality.of(
-                                                                        context)),
-                                                            child:
-                                                                GestureDetector(
-                                                              onTap: () {
-                                                                FocusScope.of(
-                                                                        dialogContext)
-                                                                    .unfocus();
-                                                                FocusManager
-                                                                    .instance
-                                                                    .primaryFocus
-                                                                    ?.unfocus();
-                                                              },
-                                                              child: Container(
-                                                                height: 100.0,
-                                                                width: 333.0,
-                                                                child:
-                                                                    NotScannerProductsWidget(),
-                                                              ),
-                                                            ),
-                                                          );
-                                                        },
-                                                      );
-
-                                                      return;
-                                                    }
-                                                  },
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    FFButtonWidget(
-                                      onPressed: () async {
-                                        _model.barcode2 =
-                                            await FlutterBarcodeScanner
-                                                .scanBarcode(
-                                          '#C62828', // scanning line color
-                                          'Cancel', // cancel button text
-                                          true, // whether to show the flash icon
-                                          ScanMode.QR,
-                                        );
-
-                                        safeSetState(() {
-                                          _model.sinputSkuTextController?.text =
-                                              _model.barcode2;
-                                        });
-
-                                        safeSetState(() {});
-                                      },
-                                      text: '',
-                                      icon: Icon(
-                                        FFIcons.kseachCamera,
-                                        size: 15.0,
-                                      ),
-                                      options: FFButtonOptions(
-                                        height: 40.0,
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            26.0, 0.0, 26.0, 0.0),
-                                        iconPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              font: GoogleFonts.hankenGrotesk(
+                                                color: Colors.white,
+                                                letterSpacing: 0.0,
                                                 fontWeight:
                                                     FlutterFlowTheme.of(context)
                                                         .titleSmall
@@ -1798,44 +1895,48 @@ class _S7FillProductWidgetState extends State<S7FillProductWidget> {
                                                         .titleSmall
                                                         .fontStyle,
                                               ),
-                                              color: Colors.white,
-                                              letterSpacing: 0.0,
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontStyle,
-                                            ),
-                                        elevation: 0.0,
-                                        borderRadius:
-                                            BorderRadius.circular(24.0),
+                                          elevation: 0.0,
+                                          borderRadius:
+                                              BorderRadius.circular(24.0),
+                                        ),
                                       ),
-                                    ),
-                                    FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
-                                      },
-                                      text: '',
-                                      icon: Icon(
-                                        FFIcons.kscanIcon,
-                                        size: 15.0,
-                                      ),
-                                      options: FFButtonOptions(
-                                        height: 40.0,
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            26.0, 0.0, 26.0, 0.0),
-                                        iconPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              font: GoogleFonts.hankenGrotesk(
+                                      FFButtonWidget(
+                                        onPressed: () {
+                                          print('Button pressed ...');
+                                        },
+                                        text: '',
+                                        icon: Icon(
+                                          FFIcons.kscanIcon,
+                                          size: 15.0,
+                                        ),
+                                        options: FFButtonOptions(
+                                          height: 40.0,
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  26.0, 0.0, 26.0, 0.0),
+                                          iconPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .titleSmall
+                                              .override(
+                                                font: GoogleFonts.hankenGrotesk(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall
+                                                          .fontStyle,
+                                                ),
+                                                color: Colors.white,
+                                                letterSpacing: 0.0,
                                                 fontWeight:
                                                     FlutterFlowTheme.of(context)
                                                         .titleSmall
@@ -1845,30 +1946,19 @@ class _S7FillProductWidgetState extends State<S7FillProductWidget> {
                                                         .titleSmall
                                                         .fontStyle,
                                               ),
-                                              color: Colors.white,
-                                              letterSpacing: 0.0,
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontStyle,
-                                            ),
-                                        elevation: 0.0,
-                                        borderRadius:
-                                            BorderRadius.circular(24.0),
+                                          elevation: 0.0,
+                                          borderRadius:
+                                              BorderRadius.circular(24.0),
+                                        ),
                                       ),
-                                    ),
-                                  ].divide(SizedBox(width: 10.0)),
+                                    ].divide(SizedBox(width: 10.0)),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                    ),
                   ],
                 ),
               ),

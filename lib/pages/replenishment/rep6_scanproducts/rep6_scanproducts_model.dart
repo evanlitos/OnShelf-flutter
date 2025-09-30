@@ -2,14 +2,23 @@ import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/menulateral_widget.dart';
-import '/components/progress_shelfs_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
-import 's6_scan_products5_widget.dart' show S6ScanProducts5Widget;
+import 'rep6_scanproducts_widget.dart' show Rep6ScanproductsWidget;
 import 'package:flutter/material.dart';
 
-class S6ScanProducts5Model extends FlutterFlowModel<S6ScanProducts5Widget> {
+class Rep6ScanproductsModel extends FlutterFlowModel<Rep6ScanproductsWidget> {
   ///  Local state fields for this page.
+
+  List<ProductsStruct> productsList = [];
+  void addToProductsList(ProductsStruct item) => productsList.add(item);
+  void removeFromProductsList(ProductsStruct item) => productsList.remove(item);
+  void removeAtIndexFromProductsList(int index) => productsList.removeAt(index);
+  void insertAtIndexInProductsList(int index, ProductsStruct item) =>
+      productsList.insert(index, item);
+  void updateProductsListAtIndex(
+          int index, Function(ProductsStruct) updateFn) =>
+      productsList[index] = updateFn(productsList[index]);
 
   SendHistoryCheckStruct? shipSend;
   void updateShipSendStruct(Function(SendHistoryCheckStruct) updateFn) {
@@ -25,8 +34,6 @@ class S6ScanProducts5Model extends FlutterFlowModel<S6ScanProducts5Widget> {
 
   // Model for menulateral component.
   late MenulateralModel menulateralModel;
-  // Model for progressShelfs component.
-  late ProgressShelfsModel progressShelfsModel;
   // Stores action output result for [Backend Call - API (SendPhotos)] action in Button widget.
   ApiCallResponse? sendPhotos;
   // Stores action output result for [Backend Call - API (ShipShelf)] action in Button widget.
@@ -39,29 +46,28 @@ class S6ScanProducts5Model extends FlutterFlowModel<S6ScanProducts5Widget> {
   String? Function(BuildContext, String?)? sinputSkuTextControllerValidator;
   // Stores action output result for [Backend Call - API (searchProduct)] action in IconButton widget.
   ApiCallResponse? resultadoSKU;
-  var barcode2 = '';
+  bool isDataUploading_uploadDataWw5 = false;
+  FFUploadedFile uploadedLocalFile_uploadDataWw5 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+
+  // Stores action output result for [Custom Action - convertImageFileToBase64] action in Button widget.
+  String? fileOutputAlien;
+  var barcode3 = '';
   // Stores action output result for [Backend Call - API (searchProduct)] action in Button widget.
-  ApiCallResponse? resultadoSKU4;
+  ApiCallResponse? resultadoSKU3;
   // Stores action output result for [Backend Call - API (searchProduct)] action in Button widget.
-  ApiCallResponse? searcchNewAlien2;
+  ApiCallResponse? searcchNewAlien;
   // Stores action output result for [Backend Call - API (CreateProduct)] action in Button widget.
   ApiCallResponse? apiResultsrc;
-  // Stores action output result for [Custom Action - convertImageFileToBase64] action in Button widget.
-  String? salidaB64;
-  bool isDataUploading_uploadDataS6e = false;
-  FFUploadedFile uploadedLocalFile_uploadDataS6e =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
 
   @override
   void initState(BuildContext context) {
     menulateralModel = createModel(context, () => MenulateralModel());
-    progressShelfsModel = createModel(context, () => ProgressShelfsModel());
   }
 
   @override
   void dispose() {
     menulateralModel.dispose();
-    progressShelfsModel.dispose();
     sinputSkuFocusNode?.dispose();
     sinputSkuTextController?.dispose();
   }

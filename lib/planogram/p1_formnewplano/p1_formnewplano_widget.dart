@@ -1,10 +1,15 @@
 import '/backend/schema/structs/index.dart';
 import '/components/menulateral_widget.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
+import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -41,6 +46,11 @@ class _P1FormnewplanoWidgetState extends State<P1FormnewplanoWidget> {
       FFAppState().toShelfSelected = ShelfsStruct();
       FFAppState().startShelf = SendItemsShelfStruct();
       FFAppState().update(() {});
+      _model.retailers = functions
+          .obtenerNombresRetailers(FFAppState().user.user.retailers.toList())
+          .toList()
+          .cast<String>();
+      safeSetState(() {});
     });
 
     _model.pNameTextController ??= TextEditingController();
@@ -387,6 +397,15 @@ class _P1FormnewplanoWidgetState extends State<P1FormnewplanoWidget> {
                                 child: TextFormField(
                                   controller: _model.pNameTextController,
                                   focusNode: _model.pNameFocusNode,
+                                  onChanged: (_) => EasyDebounce.debounce(
+                                    '_model.pNameTextController',
+                                    Duration(milliseconds: 2000),
+                                    () async {
+                                      await actions.inactivitymanager(
+                                        context,
+                                      );
+                                    },
+                                  ),
                                   autofocus: false,
                                   obscureText: false,
                                   decoration: InputDecoration(
@@ -551,6 +570,15 @@ class _P1FormnewplanoWidgetState extends State<P1FormnewplanoWidget> {
                                   child: TextFormField(
                                     controller: _model.pWitdtjTextController,
                                     focusNode: _model.pWitdtjFocusNode,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      '_model.pWitdtjTextController',
+                                      Duration(milliseconds: 2000),
+                                      () async {
+                                        await actions.inactivitymanager(
+                                          context,
+                                        );
+                                      },
+                                    ),
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -715,6 +743,15 @@ class _P1FormnewplanoWidgetState extends State<P1FormnewplanoWidget> {
                                   child: TextFormField(
                                     controller: _model.pHeightTextController,
                                     focusNode: _model.pHeightFocusNode,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      '_model.pHeightTextController',
+                                      Duration(milliseconds: 2000),
+                                      () async {
+                                        await actions.inactivitymanager(
+                                          context,
+                                        );
+                                      },
+                                    ),
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -888,6 +925,15 @@ class _P1FormnewplanoWidgetState extends State<P1FormnewplanoWidget> {
                                   child: TextFormField(
                                     controller: _model.pRowsTextController,
                                     focusNode: _model.pRowsFocusNode,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      '_model.pRowsTextController',
+                                      Duration(milliseconds: 2000),
+                                      () async {
+                                        await actions.inactivitymanager(
+                                          context,
+                                        );
+                                      },
+                                    ),
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -1052,6 +1098,15 @@ class _P1FormnewplanoWidgetState extends State<P1FormnewplanoWidget> {
                                   child: TextFormField(
                                     controller: _model.pDepthTextController,
                                     focusNode: _model.pDepthFocusNode,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      '_model.pDepthTextController',
+                                      Duration(milliseconds: 2000),
+                                      () async {
+                                        await actions.inactivitymanager(
+                                          context,
+                                        );
+                                      },
+                                    ),
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -1186,6 +1241,95 @@ class _P1FormnewplanoWidgetState extends State<P1FormnewplanoWidget> {
                   ),
                 ),
                 Padding(
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Retailers',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    font: GoogleFonts.hankenGrotesk(
+                                      fontWeight: FontWeight.bold,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                            ),
+                            FlutterFlowDropDown<String>(
+                              controller: _model.dropDownValueController ??=
+                                  FormFieldController<String>(
+                                _model.dropDownValue ??=
+                                    _model.retailers.firstOrNull,
+                              ),
+                              options: _model.retailers,
+                              onChanged: (val) async {
+                                safeSetState(() => _model.dropDownValue = val);
+                                await actions.inactivitymanager(
+                                  context,
+                                );
+                              },
+                              height: 40.0,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    font: GoogleFonts.hankenGrotesk(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                              hintText: 'Select...',
+                              icon: Icon(
+                                Icons.keyboard_arrow_down_rounded,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 24.0,
+                              ),
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              elevation: 2.0,
+                              borderColor:
+                                  FlutterFlowTheme.of(context).secondaryText,
+                              borderWidth: 0.0,
+                              borderRadius: 8.0,
+                              margin: EdgeInsetsDirectional.fromSTEB(
+                                  12.0, 0.0, 12.0, 0.0),
+                              hidesUnderline: true,
+                              isOverButton: false,
+                              isSearchable: false,
+                              isMultiSelect: false,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
@@ -1197,61 +1341,76 @@ class _P1FormnewplanoWidgetState extends State<P1FormnewplanoWidget> {
                               50.0, 0.0, 50.0, 0.0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              if ((_model.pNameTextController.text != '') &&
-                                  (_model.pWitdtjTextController.text !=
-                                          '') &&
-                                  (_model.pHeightTextController.text !=
-                                          '') &&
-                                  (_model.pRowsTextController.text != '') &&
-                                  (_model.pDepthTextController.text != '')) {
-                                context.pushNamed(
-                                  P2ScanproductWidget.routeName,
-                                  queryParameters: {
-                                    'shelfWidthCM': serializeParam(
-                                      int.tryParse(
-                                          _model.pWitdtjTextController.text),
-                                      ParamType.int,
-                                    ),
-                                    'shelfHeightCM': serializeParam(
-                                      int.tryParse(
-                                          _model.pHeightTextController.text),
-                                      ParamType.int,
-                                    ),
-                                    'numRows': serializeParam(
-                                      int.tryParse(
-                                          _model.pRowsTextController.text),
-                                      ParamType.int,
-                                    ),
-                                    'shelfDepthCM': serializeParam(
-                                      int.tryParse(
-                                          _model.pDepthTextController.text),
-                                      ParamType.int,
-                                    ),
-                                    'nameShelf': serializeParam(
-                                      _model.pNameTextController.text,
-                                      ParamType.String,
-                                    ),
-                                  }.withoutNulls,
-                                );
-                              } else {
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text('Error!'),
-                                      content: Text(
-                                          '⚠️ All fields must be completed!'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: Text('Ok'),
+                              await Future.wait([
+                                Future(() async {
+                                  if ((_model.pNameTextController.text != '') &&
+                                      (_model.pWitdtjTextController.text !=
+                                              '') &&
+                                      (_model.pHeightTextController.text !=
+                                              '') &&
+                                      (_model.pRowsTextController.text !=
+                                              '') &&
+                                      (_model.pDepthTextController.text !=
+                                              '')) {
+                                    context.pushNamed(
+                                      P2ScanproductWidget.routeName,
+                                      queryParameters: {
+                                        'shelfWidthCM': serializeParam(
+                                          int.tryParse(_model
+                                              .pWitdtjTextController.text),
+                                          ParamType.int,
                                         ),
-                                      ],
+                                        'shelfHeightCM': serializeParam(
+                                          int.tryParse(_model
+                                              .pHeightTextController.text),
+                                          ParamType.int,
+                                        ),
+                                        'numRows': serializeParam(
+                                          int.tryParse(
+                                              _model.pRowsTextController.text),
+                                          ParamType.int,
+                                        ),
+                                        'shelfDepthCM': serializeParam(
+                                          int.tryParse(
+                                              _model.pDepthTextController.text),
+                                          ParamType.int,
+                                        ),
+                                        'nameShelf': serializeParam(
+                                          _model.pNameTextController.text,
+                                          ParamType.String,
+                                        ),
+                                        'retailerName': serializeParam(
+                                          _model.dropDownValue,
+                                          ParamType.String,
+                                        ),
+                                      }.withoutNulls,
                                     );
-                                  },
-                                );
-                              }
+                                  } else {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          title: Text('Error!'),
+                                          content: Text(
+                                              '⚠️ All fields must be completed!'),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext),
+                                              child: Text('Ok'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  }
+                                }),
+                                Future(() async {
+                                  await actions.inactivitymanager(
+                                    context,
+                                  );
+                                }),
+                              ]);
                             },
                             text: 'Create',
                             options: FFButtonOptions(

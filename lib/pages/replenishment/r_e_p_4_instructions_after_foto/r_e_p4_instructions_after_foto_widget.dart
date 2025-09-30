@@ -1,4 +1,5 @@
 import '/components/menulateral_widget.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -140,7 +141,7 @@ class _REP4InstructionsAfterFotoWidgetState
                                         ),
                                       ),
                                       Text(
-                                        'Replenishment-Top up',
+                                        '4Replenishment-Top up',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -300,142 +301,7 @@ class _REP4InstructionsAfterFotoWidgetState
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: Container(
-                      width: 100.0,
-                      height: 70.0,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFEFEFEF),
-                      ),
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            35.0, 0.0, 25.0, 0.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    width: 100.0,
-                                    height: 35.0,
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFFF03434),
-                                      borderRadius: BorderRadius.circular(24.0),
-                                    ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Container(
-                                          width: 219.0,
-                                          height: 200.0,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xFF81E86A),
-                                            borderRadius:
-                                                BorderRadius.circular(24.0),
-                                          ),
-                                          child: Align(
-                                            alignment:
-                                                AlignmentDirectional(0.0, 0.0),
-                                            child: Text(
-                                              'Complete 70 / 90',
-                                              textAlign: TextAlign.center,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        font: GoogleFonts
-                                                            .hankenGrotesk(
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .fontStyle,
-                                                      ),
-                                            ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment:
-                                              AlignmentDirectional(1.0, 0.0),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 0.0, 0.0, 0.0),
-                                            child: Text(
-                                              'Pending 20',
-                                              textAlign: TextAlign.center,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        font: GoogleFonts
-                                                            .hankenGrotesk(
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .fontStyle,
-                                                      ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                children: [],
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
@@ -462,15 +328,53 @@ class _REP4InstructionsAfterFotoWidgetState
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      child: Image.network(
-                                        functions.imagePathFromUrl(FFAppState()
-                                            .toShelfSelected
-                                            .planogramImg),
-                                        width: 80.0,
-                                        height: 80.0,
-                                        fit: BoxFit.contain,
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        await Navigator.push(
+                                          context,
+                                          PageTransition(
+                                            type: PageTransitionType.fade,
+                                            child: FlutterFlowExpandedImageView(
+                                              image: Image.network(
+                                                functions.imagePathFromUrl(
+                                                    FFAppState()
+                                                        .toShelfSelected
+                                                        .planogramImg),
+                                                fit: BoxFit.contain,
+                                              ),
+                                              allowRotation: false,
+                                              tag: functions.imagePathFromUrl(
+                                                  FFAppState()
+                                                      .toShelfSelected
+                                                      .planogramImg),
+                                              useHeroAnimation: true,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Hero(
+                                        tag: functions.imagePathFromUrl(
+                                            FFAppState()
+                                                .toShelfSelected
+                                                .planogramImg),
+                                        transitionOnUserGestures: true,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.network(
+                                            functions.imagePathFromUrl(
+                                                FFAppState()
+                                                    .toShelfSelected
+                                                    .planogramImg),
+                                            width: 80.0,
+                                            height: 80.0,
+                                            fit: BoxFit.contain,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                     Expanded(
@@ -482,7 +386,7 @@ class _REP4InstructionsAfterFotoWidgetState
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'Category:${FFAppState().toShelfSelected.category1}',
+                                            'Category:${FFAppState().toShelfSelected.type}',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -513,7 +417,7 @@ class _REP4InstructionsAfterFotoWidgetState
                                                 ),
                                           ),
                                           Text(
-                                            'Display Number: ${FFAppState().toShelfSelected.mapCanvaId.toString()}',
+                                            'Display Number: ${FFAppState().toShelfSelected.name}',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -815,7 +719,7 @@ class _REP4InstructionsAfterFotoWidgetState
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: Image.asset(
-                  'assets/images/Group_7345.png',
+                  'assets/images/Group_7735.png',
                   width: 275.0,
                   height: 350.0,
                   fit: BoxFit.cover,

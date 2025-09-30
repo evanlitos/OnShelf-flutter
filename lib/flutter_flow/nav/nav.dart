@@ -235,7 +235,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: REP2InstructionsBeforeFotoWidget.routeName,
           path: REP2InstructionsBeforeFotoWidget.routePath,
-          builder: (context, params) => REP2InstructionsBeforeFotoWidget(),
+          builder: (context, params) => REP2InstructionsBeforeFotoWidget(
+            name: params.getParam(
+              'name',
+              ParamType.String,
+            ),
+          ),
         ),
         FFRoute(
           name: REP3ResumeBeforeFotoWidget.routeName,
@@ -421,6 +426,54 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             nameShelf: params.getParam(
               'nameShelf',
               ParamType.String,
+            ),
+            retailerName: params.getParam(
+              'retailerName',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: Rep6ScanproductsWidget.routeName,
+          path: Rep6ScanproductsWidget.routePath,
+          builder: (context, params) => Rep6ScanproductsWidget(
+            aFoto: params.getParam(
+              'aFoto',
+              ParamType.FFUploadedFile,
+            ),
+            bFoto: params.getParam(
+              'bFoto',
+              ParamType.FFUploadedFile,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: REP34BeforePhotoDiagram4CopyWidget.routeName,
+          path: REP34BeforePhotoDiagram4CopyWidget.routePath,
+          builder: (context, params) => REP34BeforePhotoDiagram4CopyWidget(
+            bFoto: params.getParam(
+              'bFoto',
+              ParamType.FFUploadedFile,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: EditnewplanWidget.routeName,
+          path: EditnewplanWidget.routePath,
+          builder: (context, params) => EditnewplanWidget(
+            product: params.getParam(
+              'product',
+              ParamType.DataStruct,
+              isList: false,
+              structBuilder: ProductListRowStruct.fromSerializableMap,
+            ),
+            pX: params.getParam(
+              'pX',
+              ParamType.int,
+            ),
+            pY: params.getParam(
+              'pY',
+              ParamType.int,
             ),
           ),
         )
