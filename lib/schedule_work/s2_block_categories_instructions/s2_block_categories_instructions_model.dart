@@ -16,7 +16,7 @@ class S2BlockCategoriesInstructionsModel
   late ProgressShelfsModel progressShelfsModel;
   bool isDataUploading_beforePhoto = false;
   FFUploadedFile uploadedLocalFile_beforePhoto =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
+      FFUploadedFile(bytes: Uint8List.fromList([]), originalFilename: '');
 
   @override
   void initState(BuildContext context) {

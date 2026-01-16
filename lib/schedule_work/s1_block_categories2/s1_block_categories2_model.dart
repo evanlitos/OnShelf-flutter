@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/menulateral_widget.dart';
@@ -31,6 +32,8 @@ class S1BlockCategories2Model
   late MenulateralModel menulateralModel;
   // Model for progressShelfs component.
   late ProgressShelfsModel progressShelfsModel;
+  // Stores action output result for [Backend Call - API (Get route)] action in ListView widget.
+  ApiCallResponse? route;
   // State field(s) for sinput_sku widget.
   FocusNode? sinputSkuFocusNode;
   TextEditingController? sinputSkuTextController;

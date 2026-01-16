@@ -26,10 +26,31 @@ class RTB1FindCodeModel extends FlutterFlowModel<RTB1FindCodeWidget> {
   void updateScanListAtIndex(int index, Function(String) updateFn) =>
       scanList[index] = updateFn(scanList[index]);
 
+  int? currentPage;
+
+  List<ProductsStruct> pendingProductsList = [];
+  void addToPendingProductsList(ProductsStruct item) =>
+      pendingProductsList.add(item);
+  void removeFromPendingProductsList(ProductsStruct item) =>
+      pendingProductsList.remove(item);
+  void removeAtIndexFromPendingProductsList(int index) =>
+      pendingProductsList.removeAt(index);
+  void insertAtIndexInPendingProductsList(int index, ProductsStruct item) =>
+      pendingProductsList.insert(index, item);
+  void updatePendingProductsListAtIndex(
+          int index, Function(ProductsStruct) updateFn) =>
+      pendingProductsList[index] = updateFn(pendingProductsList[index]);
+
+  bool showMessage = false;
+
   ///  State fields for stateful widgets in this page.
 
   // Model for menulateral component.
   late MenulateralModel menulateralModel;
+  // Stores action output result for [Custom Action - getTimeZone] action in Button widget.
+  String? userTimezone;
+  // Stores action output result for [Backend Call - API (Backdoor Pending List)] action in Button widget.
+  ApiCallResponse? pendingList;
   // State field(s) for sinput_sku widget.
   FocusNode? sinputSkuFocusNode;
   TextEditingController? sinputSkuTextController;

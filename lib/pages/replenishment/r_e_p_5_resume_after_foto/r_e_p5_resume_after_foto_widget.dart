@@ -436,6 +436,7 @@ class _REP5ResumeAfterFotoWidgetState extends State<REP5ResumeAfterFotoWidget> {
                                         height: m.dimensions?.height,
                                         width: m.dimensions?.width,
                                         blurHash: m.blurHash,
+                                        originalFilename: m.originalFilename,
                                       ))
                                   .toList();
                             } finally {

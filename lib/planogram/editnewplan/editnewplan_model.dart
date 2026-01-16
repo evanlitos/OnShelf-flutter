@@ -19,7 +19,7 @@ class EditnewplanModel extends FlutterFlowModel<EditnewplanWidget> {
   ApiCallResponse? producSearch;
   bool isDataUploading_uploadDataIsc = false;
   FFUploadedFile uploadedLocalFile_uploadDataIsc =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
+      FFUploadedFile(bytes: Uint8List.fromList([]), originalFilename: '');
 
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;

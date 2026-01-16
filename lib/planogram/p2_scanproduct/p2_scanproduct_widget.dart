@@ -245,7 +245,7 @@ class _P2ScanproductWidgetState extends State<P2ScanproductWidget> {
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
                                                   Text(
-                                                    'Rayan',
+                                                    'Name:${FFAppState().user.user.name}',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyMedium
@@ -285,7 +285,7 @@ class _P2ScanproductWidgetState extends State<P2ScanproductWidget> {
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
                                                   Text(
-                                                    'OnShelf ID: 458345OS ',
+                                                    'OnShelf ID:${FFAppState().user.user.id.toString()}',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyMedium

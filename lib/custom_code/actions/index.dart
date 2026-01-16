@@ -4,3 +4,6 @@ export 'check_inactivity_timer.dart' show checkInactivityTimer;
 export 'pick_front_camera_image.dart' show pickFrontCameraImage;
 export 'convert_image_file_to_base64.dart' show convertImageFileToBase64;
 export 'inactivitymanager.dart' show inactivitymanager;
+export 'prevent_screenshots.dart' show preventScreenshots;
+export 'get_time_zone.dart' show getTimeZone;
+export 'show_inactivity_reason_dialog.dart' show showInactivityReasonDialog;

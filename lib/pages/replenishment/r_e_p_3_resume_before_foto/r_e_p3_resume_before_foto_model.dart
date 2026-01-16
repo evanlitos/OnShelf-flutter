@@ -12,7 +12,7 @@ class REP3ResumeBeforeFotoModel
   late MenulateralModel menulateralModel;
   bool isDataUploading_uploadData0xqREF = false;
   FFUploadedFile uploadedLocalFile_uploadData0xqREF =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
+      FFUploadedFile(bytes: Uint8List.fromList([]), originalFilename: '');
 
   @override
   void initState(BuildContext context) {

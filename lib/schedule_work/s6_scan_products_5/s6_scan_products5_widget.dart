@@ -5,6 +5,7 @@ import '/components/alient_product_confirm_widget.dart';
 import '/components/menulateral_widget.dart';
 import '/components/product_in_backdoor_widget.dart';
 import '/components/progress_shelfs_widget.dart';
+import '/components/stock_warning_widget.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -829,6 +830,11 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                                 },
                                                 child: SuccessWidget(
                                                   actionShip: () async {
+                                                    var _shouldSetState = false;
+                                                    FFAppState()
+                                                            .allowedToContinue =
+                                                        true;
+                                                    safeSetState(() {});
                                                     _model.validateProducts =
                                                         await ApiShelfGroup
                                                             .validateProductsCall
@@ -840,6 +846,7 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                                           .token,
                                                     );
 
+                                                    _shouldSetState = true;
                                                     await actions.logAction(
                                                       (_model.validateProducts
                                                               ?.jsonBody ??
@@ -894,6 +901,107 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                                                     .planogramImg,
                                                         );
                                                         safeSetState(() {});
+                                                        _model.checkStock =
+                                                            await ApiShelfGroup
+                                                                .checkSOHCall
+                                                                .call(
+                                                          bodyJson: FFAppState()
+                                                              .startShelf
+                                                              .toMap(),
+                                                          toKen: FFAppState()
+                                                              .user
+                                                              .token,
+                                                        );
+
+                                                        _shouldSetState = true;
+                                                        if (((_model.checkStock?.jsonBody ??
+                                                                            '')
+                                                                        .toList()
+                                                                        .map<ProductsStruct?>(ProductsStruct
+                                                                            .maybeFromMap)
+                                                                        .toList()
+                                                                    as Iterable<
+                                                                        ProductsStruct?>)
+                                                                .withoutNulls
+                                                                .length >
+                                                            0) {
+                                                          await showDialog(
+                                                            barrierDismissible:
+                                                                false,
+                                                            context: context,
+                                                            builder:
+                                                                (dialogContext) {
+                                                              return Dialog(
+                                                                elevation: 0,
+                                                                insetPadding:
+                                                                    EdgeInsets
+                                                                        .zero,
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                alignment: AlignmentDirectional(
+                                                                        0.0,
+                                                                        0.0)
+                                                                    .resolve(
+                                                                        Directionality.of(
+                                                                            context)),
+                                                                child:
+                                                                    GestureDetector(
+                                                                  onTap: () {
+                                                                    FocusScope.of(
+                                                                            dialogContext)
+                                                                        .unfocus();
+                                                                    FocusManager
+                                                                        .instance
+                                                                        .primaryFocus
+                                                                        ?.unfocus();
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    height:
+                                                                        MediaQuery.sizeOf(context).height *
+                                                                            0.6,
+                                                                    width:
+                                                                        500.0,
+                                                                    child:
+                                                                        StockWarningWidget(
+                                                                      products: ((_model.checkStock?.jsonBody ?? '')
+                                                                              .toList()
+                                                                              .map<ProductsStruct?>(ProductsStruct.maybeFromMap)
+                                                                              .toList() as Iterable<ProductsStruct?>)
+                                                                          .withoutNulls,
+                                                                      onCancel:
+                                                                          () async {
+                                                                        FFAppState().allowedToContinue =
+                                                                            false;
+                                                                        safeSetState(
+                                                                            () {});
+                                                                        Navigator.pop(
+                                                                            context);
+                                                                      },
+                                                                      onContinue:
+                                                                          () async {
+                                                                        FFAppState().allowedToContinue =
+                                                                            true;
+                                                                        safeSetState(
+                                                                            () {});
+                                                                        Navigator.pop(
+                                                                            context);
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
+                                                          );
+
+                                                          if (!FFAppState()
+                                                              .allowedToContinue) {
+                                                            Navigator.pop(
+                                                                context);
+                                                            return;
+                                                          }
+                                                        }
                                                         await actions.logAction(
                                                           <String, String?>{
                                                             'lleego':
@@ -928,6 +1036,7 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                                               .toMap(),
                                                         );
 
+                                                        _shouldSetState = true;
                                                         await actions.logAction(
                                                           (_model.resSendShip
                                                                   ?.jsonBody ??
@@ -954,7 +1063,11 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                                                   0,
                                                                 )]
                                                                   ..status =
-                                                                      'progress',
+                                                                      'progress'
+                                                                  ..statusCompleted =
+                                                                      (_model.resSendShip
+                                                                              ?.succeeded ??
+                                                                          true),
                                                               ),
                                                           );
                                                           safeSetState(() {});
@@ -979,6 +1092,8 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                                                 ?.id,
                                                           );
 
+                                                          _shouldSetState =
+                                                              true;
                                                           await actions
                                                               .logAction(
                                                             (_model.sendPhotos
@@ -1781,6 +1896,7 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                                                               height: m.dimensions?.height,
                                                                               width: m.dimensions?.width,
                                                                               blurHash: m.blurHash,
+                                                                              originalFilename: m.originalFilename,
                                                                             ))
                                                                         .toList();
                                                               } finally {
@@ -1892,6 +2008,8 @@ class _S6ScanProducts5WidgetState extends State<S6ScanProducts5Widget> {
                                                                         .secondary,
                                                               ),
                                                             );
+                                                            Navigator.pop(
+                                                                context);
                                                           },
                                                         ),
                                                       ),

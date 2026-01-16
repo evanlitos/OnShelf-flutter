@@ -12,7 +12,7 @@ class S22ResumeTakePhoto3Model
   late MenulateralModel menulateralModel;
   bool isDataUploading_uploadData0xq = false;
   FFUploadedFile uploadedLocalFile_uploadData0xq =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
+      FFUploadedFile(bytes: Uint8List.fromList([]), originalFilename: '');
 
   @override
   void initState(BuildContext context) {

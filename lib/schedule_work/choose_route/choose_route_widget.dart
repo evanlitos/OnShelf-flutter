@@ -4,7 +4,6 @@ import '/components/menulateral_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
-import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -374,11 +373,6 @@ class _ChooseRouteWidgetState extends State<ChooseRouteWidget> {
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
                                     FFAppState().routeOfDay = routesItem;
-                                    FFAppState().updateStartShelfStruct(
-                                      (e) => e
-                                        ..startedAt =
-                                            functions.obtenerFechaHoraActual(),
-                                    );
                                     safeSetState(() {});
 
                                     context.pushNamed(

@@ -282,6 +282,18 @@ class FFAppState extends ChangeNotifier {
   set shelfPositionEditing(int value) {
     _shelfPositionEditing = value;
   }
+
+  bool _allowedToContinue = true;
+  bool get allowedToContinue => _allowedToContinue;
+  set allowedToContinue(bool value) {
+    _allowedToContinue = value;
+  }
+
+  bool _showGhostTime = false;
+  bool get showGhostTime => _showGhostTime;
+  set showGhostTime(bool value) {
+    _showGhostTime = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

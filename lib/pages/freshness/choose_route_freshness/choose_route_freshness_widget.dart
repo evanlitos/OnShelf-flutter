@@ -37,6 +37,10 @@ class _ChooseRouteFreshnessWidgetState
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.inactivitymanager(
+        context,
+      );
+      await actions.preventScreenshots();
       _model.resultRouteForMerch =
           await ApiShelfGroup.getRouteForMerchandiserCall.call(
         userId: FFAppState().user.user.id,

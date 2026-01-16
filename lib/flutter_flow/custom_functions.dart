@@ -267,20 +267,18 @@ String numberOfPendings(dynamic shelfs) {
   print(shelfs);
   if (shelfs is! List) return '0';
 
-  int count = shelfs.where((shelf) => shelf['status'] == 'disponible').length;
+  int count =
+      shelfs.where((shelf) => shelf['status_completed'] == false).length;
   return count.toString();
 }
 
 String completeAndPendigs(dynamic shelfs) {
   if (shelfs is! List) return 'Complete 0';
 
-  int count = shelfs
-      .where((shelf) =>
-          shelf['status'] == 'progreso' || shelf['status'] == 'displayNotFound')
-      .length;
+  int count = shelfs.where((shelf) => shelf['status_completed'] == true).length;
 
   int countComplete =
-      shelfs.where((shelf) => shelf['status'] == 'disponible').length;
+      shelfs.where((shelf) => shelf['status_completed'] == false).length;
 
   return "$count/${shelfs.length}";
 }
@@ -290,10 +288,7 @@ int pintarProgresoShelfs(dynamic shelfs) {
 
   if (shelfs is! List || shelfs.isEmpty) return 0;
 
-  int count = shelfs
-      .where((shelf) =>
-          shelf['status'] == 'progreso' || shelf['status'] == 'displayNotFound')
-      .length;
+  int count = shelfs.where((shelf) => shelf['status_completed'] == true).length;
 
   return ((count / shelfs.length) * 350)
       .toInt(); //((count * 100) / base).toInt();
@@ -418,4 +413,20 @@ List<ShelfsStruct>? filterarUPC(
     final itemUpc = (item.planogramName ?? '').toLowerCase();
     return itemUpc.contains(query);
   }).toList();
+}
+
+String zonaHoraria() {
+  final now = DateTime.now();
+  return now.timeZoneName;
+}
+
+DateTime? stringToDateTime(String dateString) {
+  try {
+    // Intenta parsear el string a DateTime
+    return DateTime.parse(dateString);
+  } catch (e) {
+    // Si falla, retorna null
+    print('Error al convertir string a DateTime: $e');
+    return null;
+  }
 }

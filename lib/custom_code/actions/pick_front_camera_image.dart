@@ -18,7 +18,7 @@ Future<FFUploadedFile> pickFrontCameraImage() async {
   final pickedFile = await picker.pickImage(
     source: ImageSource.camera,
     preferredCameraDevice: CameraDevice.front,
-    imageQuality: 80,
+    imageQuality: 90,
     maxWidth: 1000,
     maxHeight: 1000,
   );

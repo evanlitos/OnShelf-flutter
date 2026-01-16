@@ -16,7 +16,7 @@ class S4AfterBlockCategoriesInstructionsCopyModel
   late ProgressShelfsModel progressShelfsModel;
   bool isDataUploading_afterPhoto = false;
   FFUploadedFile uploadedLocalFile_afterPhoto =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
+      FFUploadedFile(bytes: Uint8List.fromList([]), originalFilename: '');
 
   @override
   void initState(BuildContext context) {

@@ -34,7 +34,9 @@ class _CheckinWidgetState extends State<CheckinWidget> {
     _model = createModel(context, () => CheckinModel());
 
     // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {});
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.preventScreenshots();
+    });
   }
 
   @override
@@ -587,6 +589,11 @@ class _CheckinWidgetState extends State<CheckinWidget> {
                                                                       ?.bytes
                                                                       ?.isNotEmpty ??
                                                                   false)) {
+                                                            _model.userTimezone =
+                                                                await actions
+                                                                    .getTimeZone();
+                                                            _shouldSetState =
+                                                                true;
                                                             _model.uploadPhotoCheckin =
                                                                 await ApiShelfGroup
                                                                     .checkinCall
@@ -600,13 +607,49 @@ class _CheckinWidgetState extends State<CheckinWidget> {
                                                                       .user
                                                                       .user
                                                                       .id,
-                                                              ubicacion: 'mxn',
+                                                              ubicacion: _model
+                                                                  .userTimezone,
                                                               img: _model
                                                                   .photoCamera,
                                                             );
 
                                                             _shouldSetState =
                                                                 true;
+                                                            if (ApiShelfGroup
+                                                                    .checkinCall
+                                                                    .ghostTime(
+                                                                  (_model.uploadPhotoCheckin
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                ) ==
+                                                                true) {
+                                                              FFAppState()
+                                                                      .lastInteraction =
+                                                                  functions.stringToDateTime(
+                                                                      ApiShelfGroup
+                                                                          .checkinCall
+                                                                          .startDate(
+                                                                (_model.uploadPhotoCheckin
+                                                                        ?.jsonBody ??
+                                                                    ''),
+                                                              )!);
+                                                              FFAppState()
+                                                                      .showGhostTime =
+                                                                  true;
+                                                              safeSetState(
+                                                                  () {});
+                                                            } else {
+                                                              FFAppState()
+                                                                      .lastInteraction =
+                                                                  DateTime.fromMillisecondsSinceEpoch(
+                                                                      1738837260000);
+                                                              FFAppState()
+                                                                      .showGhostTime =
+                                                                  false;
+                                                              safeSetState(
+                                                                  () {});
+                                                            }
+
                                                             await actions
                                                                 .logAction(
                                                               (_model.uploadPhotoCheckin

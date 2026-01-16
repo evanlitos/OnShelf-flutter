@@ -25,6 +25,7 @@ class ShelfsStruct extends FFFirebaseStruct {
     String? status,
     String? name,
     String? planogramName,
+    bool? statusCompleted,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _planogramId = planogramId,
         _planogramImg = planogramImg,
@@ -42,6 +43,7 @@ class ShelfsStruct extends FFFirebaseStruct {
         _status = status,
         _name = name,
         _planogramName = planogramName,
+        _statusCompleted = statusCompleted,
         super(firestoreUtilData);
 
   // "planogram_id" field.
@@ -169,6 +171,13 @@ class ShelfsStruct extends FFFirebaseStruct {
 
   bool hasPlanogramName() => _planogramName != null;
 
+  // "status_completed" field.
+  bool? _statusCompleted;
+  bool get statusCompleted => _statusCompleted ?? false;
+  set statusCompleted(bool? val) => _statusCompleted = val;
+
+  bool hasStatusCompleted() => _statusCompleted != null;
+
   static ShelfsStruct fromMap(Map<String, dynamic> data) => ShelfsStruct(
         planogramId: castToType<int>(data['planogram_id']),
         planogramImg: data['planogram_img'] as String?,
@@ -189,6 +198,7 @@ class ShelfsStruct extends FFFirebaseStruct {
         status: data['status'] as String?,
         name: data['name'] as String?,
         planogramName: data['planogram_name'] as String?,
+        statusCompleted: data['status_completed'] as bool?,
       );
 
   static ShelfsStruct? maybeFromMap(dynamic data) =>
@@ -211,6 +221,7 @@ class ShelfsStruct extends FFFirebaseStruct {
         'status': _status,
         'name': _name,
         'planogram_name': _planogramName,
+        'status_completed': _statusCompleted,
       }.withoutNulls;
 
   @override
@@ -279,6 +290,10 @@ class ShelfsStruct extends FFFirebaseStruct {
         'planogram_name': serializeParam(
           _planogramName,
           ParamType.String,
+        ),
+        'status_completed': serializeParam(
+          _statusCompleted,
+          ParamType.bool,
         ),
       }.withoutNulls;
 
@@ -365,6 +380,11 @@ class ShelfsStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        statusCompleted: deserializeParam(
+          data['status_completed'],
+          ParamType.bool,
+          false,
+        ),
       );
 
   @override
@@ -389,7 +409,8 @@ class ShelfsStruct extends FFFirebaseStruct {
         merchandizerId == other.merchandizerId &&
         status == other.status &&
         name == other.name &&
-        planogramName == other.planogramName;
+        planogramName == other.planogramName &&
+        statusCompleted == other.statusCompleted;
   }
 
   @override
@@ -409,7 +430,8 @@ class ShelfsStruct extends FFFirebaseStruct {
         merchandizerId,
         status,
         name,
-        planogramName
+        planogramName,
+        statusCompleted
       ]);
 }
 
@@ -429,6 +451,7 @@ ShelfsStruct createShelfsStruct({
   String? status,
   String? name,
   String? planogramName,
+  bool? statusCompleted,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -450,6 +473,7 @@ ShelfsStruct createShelfsStruct({
       status: status,
       name: name,
       planogramName: planogramName,
+      statusCompleted: statusCompleted,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

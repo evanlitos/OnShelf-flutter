@@ -815,6 +815,8 @@ class _BackDoorDeliveryWidgetState extends State<BackDoorDeliveryWidget> {
                                                                     ?.width,
                                                                 blurHash:
                                                                     m.blurHash,
+                                                                originalFilename:
+                                                                    m.originalFilename,
                                                               ))
                                                       .toList();
                                             } finally {

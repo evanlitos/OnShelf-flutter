@@ -19,7 +19,7 @@ class RTB2FillProductCopyModel
 
   bool isDataUploading_fotoProducto = false;
   FFUploadedFile uploadedLocalFile_fotoProducto =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
+      FFUploadedFile(bytes: Uint8List.fromList([]), originalFilename: '');
 
   // Stores action output result for [Backend Call - API (rtb)] action in Button widget.
   ApiCallResponse? sal;

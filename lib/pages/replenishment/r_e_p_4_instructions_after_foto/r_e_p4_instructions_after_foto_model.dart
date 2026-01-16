@@ -13,7 +13,7 @@ class REP4InstructionsAfterFotoModel
   late MenulateralModel menulateralModel;
   bool isDataUploading_afterPhotoB = false;
   FFUploadedFile uploadedLocalFile_afterPhotoB =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
+      FFUploadedFile(bytes: Uint8List.fromList([]), originalFilename: '');
 
   @override
   void initState(BuildContext context) {

@@ -94,6 +94,9 @@ class _SuccessWidgetState extends State<SuccessWidget> {
                 FFButtonWidget(
                   onPressed: () async {
                     await widget.actionShip?.call();
+                    if (!FFAppState().allowedToContinue) {
+                      return;
+                    }
                     if (FFAppState().topup == true) {
                       context.goNamed(Rep1ScanblockidWidget.routeName);
                     } else {

@@ -64,7 +64,7 @@ export '/schedule_work/choose_route/choose_route_widget.dart'
     show ChooseRouteWidget;
 export '/schedule_work/s6_scan_products_5_copy/s6_scan_products5_copy_widget.dart'
     show S6ScanProducts5CopyWidget;
-export '/schedule_work/choose_route_freshness/choose_route_freshness_widget.dart'
+export '/pages/freshness/choose_route_freshness/choose_route_freshness_widget.dart'
     show ChooseRouteFreshnessWidget;
 export '/pages/delivery/back_door_delivery/back_door_delivery_widget.dart'
     show BackDoorDeliveryWidget;

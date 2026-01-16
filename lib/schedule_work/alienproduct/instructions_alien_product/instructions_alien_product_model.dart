@@ -13,7 +13,7 @@ class InstructionsAlienProductModel
   late MenulateralModel menulateralModel;
   bool isDataUploading_uploadDataMna = false;
   FFUploadedFile uploadedLocalFile_uploadDataMna =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
+      FFUploadedFile(bytes: Uint8List.fromList([]), originalFilename: '');
 
   @override
   void initState(BuildContext context) {

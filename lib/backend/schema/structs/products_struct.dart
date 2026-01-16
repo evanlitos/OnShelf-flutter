@@ -52,6 +52,8 @@ class ProductsStruct extends FFFirebaseStruct {
     double? height,
     double? width,
     double? depth,
+    int? stock,
+    int? stockCapacity,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _id = id,
         _productId = productId,
@@ -97,6 +99,8 @@ class ProductsStruct extends FFFirebaseStruct {
         _height = height,
         _width = width,
         _depth = depth,
+        _stock = stock,
+        _stockCapacity = stockCapacity,
         super(firestoreUtilData);
 
   // "id" field.
@@ -462,6 +466,25 @@ class ProductsStruct extends FFFirebaseStruct {
 
   bool hasDepth() => _depth != null;
 
+  // "stock" field.
+  int? _stock;
+  int get stock => _stock ?? 0;
+  set stock(int? val) => _stock = val;
+
+  void incrementStock(int amount) => stock = stock + amount;
+
+  bool hasStock() => _stock != null;
+
+  // "stock_capacity" field.
+  int? _stockCapacity;
+  int get stockCapacity => _stockCapacity ?? 0;
+  set stockCapacity(int? val) => _stockCapacity = val;
+
+  void incrementStockCapacity(int amount) =>
+      stockCapacity = stockCapacity + amount;
+
+  bool hasStockCapacity() => _stockCapacity != null;
+
   static ProductsStruct fromMap(Map<String, dynamic> data) => ProductsStruct(
         id: castToType<int>(data['id']),
         productId: castToType<int>(data['product_id']),
@@ -507,6 +530,8 @@ class ProductsStruct extends FFFirebaseStruct {
         height: castToType<double>(data['height']),
         width: castToType<double>(data['width']),
         depth: castToType<double>(data['depth']),
+        stock: castToType<int>(data['stock']),
+        stockCapacity: castToType<int>(data['stock_capacity']),
       );
 
   static ProductsStruct? maybeFromMap(dynamic data) =>
@@ -557,6 +582,8 @@ class ProductsStruct extends FFFirebaseStruct {
         'height': _height,
         'width': _width,
         'depth': _depth,
+        'stock': _stock,
+        'stock_capacity': _stockCapacity,
       }.withoutNulls;
 
   @override
@@ -736,6 +763,14 @@ class ProductsStruct extends FFFirebaseStruct {
         'depth': serializeParam(
           _depth,
           ParamType.double,
+        ),
+        'stock': serializeParam(
+          _stock,
+          ParamType.int,
+        ),
+        'stock_capacity': serializeParam(
+          _stockCapacity,
+          ParamType.int,
         ),
       }.withoutNulls;
 
@@ -961,6 +996,16 @@ class ProductsStruct extends FFFirebaseStruct {
           ParamType.double,
           false,
         ),
+        stock: deserializeParam(
+          data['stock'],
+          ParamType.int,
+          false,
+        ),
+        stockCapacity: deserializeParam(
+          data['stock_capacity'],
+          ParamType.int,
+          false,
+        ),
       );
 
   @override
@@ -1012,7 +1057,9 @@ class ProductsStruct extends FFFirebaseStruct {
         outOfPlanogram == other.outOfPlanogram &&
         height == other.height &&
         width == other.width &&
-        depth == other.depth;
+        depth == other.depth &&
+        stock == other.stock &&
+        stockCapacity == other.stockCapacity;
   }
 
   @override
@@ -1060,7 +1107,9 @@ class ProductsStruct extends FFFirebaseStruct {
         outOfPlanogram,
         height,
         width,
-        depth
+        depth,
+        stock,
+        stockCapacity
       ]);
 }
 
@@ -1109,6 +1158,8 @@ ProductsStruct createProductsStruct({
   double? height,
   double? width,
   double? depth,
+  int? stock,
+  int? stockCapacity,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -1159,6 +1210,8 @@ ProductsStruct createProductsStruct({
       height: height,
       width: width,
       depth: depth,
+      stock: stock,
+      stockCapacity: stockCapacity,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

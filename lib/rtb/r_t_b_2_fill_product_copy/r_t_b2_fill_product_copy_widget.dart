@@ -68,6 +68,7 @@ class _RTB2FillProductCopyWidgetState extends State<RTB2FillProductCopyWidget> {
                     height: m.dimensions?.height,
                     width: m.dimensions?.width,
                     blurHash: m.blurHash,
+                    originalFilename: m.originalFilename,
                   ))
               .toList();
         } finally {

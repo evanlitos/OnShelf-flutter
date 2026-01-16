@@ -12,7 +12,7 @@ class InstructionsAlienProductPhotoModel
   late MenulateralModel menulateralModel;
   bool isDataUploading_uploadData6cx = false;
   FFUploadedFile uploadedLocalFile_uploadData6cx =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
+      FFUploadedFile(bytes: Uint8List.fromList([]), originalFilename: '');
 
   @override
   void initState(BuildContext context) {

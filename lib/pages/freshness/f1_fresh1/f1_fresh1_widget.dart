@@ -4,9 +4,11 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/alerts/success_register_products/success_register_products_widget.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -33,6 +35,13 @@ class _F1Fresh1WidgetState extends State<F1Fresh1Widget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => F1Fresh1Model());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.inactivitymanager(
+        context,
+      );
+    });
 
     _model.sinputSkuTextController ??= TextEditingController();
     _model.sinputSkuFocusNode ??= FocusNode();
@@ -294,148 +303,155 @@ class _F1Fresh1WidgetState extends State<F1Fresh1Widget> {
               Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Expanded(
-                    child: Container(
-                      width: 100.0,
-                      height: 70.0,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFEFEFEF),
-                      ),
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            35.0, 0.0, 25.0, 0.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Container(
-                                  width: 330.0,
-                                  height: 35.0,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFF03434),
-                                    borderRadius: BorderRadius.circular(24.0),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Container(
-                                        width: functions
-                                            .pintarProgresoShelfs(getJsonField(
-                                              FFAppState().routeOfDay.toMap(),
-                                              r'''$.shelfs''',
-                                            ))
-                                            .toDouble(),
-                                        height: 200.0,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFF81E86A),
-                                          borderRadius:
-                                              BorderRadius.circular(24.0),
+                  if (responsiveVisibility(
+                    context: context,
+                    phone: false,
+                  ))
+                    Expanded(
+                      child: Container(
+                        width: 100.0,
+                        height: 70.0,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFEFEFEF),
+                        ),
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              35.0, 0.0, 25.0, 0.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Container(
+                                    width: 330.0,
+                                    height: 35.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFF03434),
+                                      borderRadius: BorderRadius.circular(24.0),
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Container(
+                                          width: functions
+                                              .pintarProgresoShelfs(
+                                                  getJsonField(
+                                                FFAppState().routeOfDay.toMap(),
+                                                r'''$.shelfs''',
+                                              ))
+                                              .toDouble(),
+                                          height: 200.0,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xFF81E86A),
+                                            borderRadius:
+                                                BorderRadius.circular(24.0),
+                                          ),
+                                          child: Align(
+                                            alignment:
+                                                AlignmentDirectional(0.0, 0.0),
+                                            child: Text(
+                                              functions.completeAndPendigs(
+                                                  getJsonField(
+                                                FFAppState().routeOfDay.toMap(),
+                                                r'''$.shelfs''',
+                                              )),
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        font: GoogleFonts
+                                                            .hankenGrotesk(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryBackground,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                            ),
+                                          ),
                                         ),
-                                        child: Align(
+                                        Align(
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          child: Text(
-                                            functions.completeAndPendigs(
-                                                getJsonField(
-                                              FFAppState().routeOfDay.toMap(),
-                                              r'''$.shelfs''',
-                                            )),
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  font:
-                                                      GoogleFonts.hankenGrotesk(
-                                                    fontWeight:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontWeight,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontStyle,
-                                                  ),
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryBackground,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontWeight,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontStyle,
-                                                ),
+                                              AlignmentDirectional(1.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    10.0, 0.0, 0.0, 0.0),
+                                            child: Text(
+                                              'Pending ${functions.numberOfPendings(getJsonField(
+                                                FFAppState().routeOfDay.toMap(),
+                                                r'''$.shelfs''',
+                                              ))}',
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        font: GoogleFonts
+                                                            .hankenGrotesk(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryBackground,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Align(
-                                        alignment:
-                                            AlignmentDirectional(1.0, 0.0),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  10.0, 0.0, 0.0, 0.0),
-                                          child: Text(
-                                            'Pending ${functions.numberOfPendings(getJsonField(
-                                              FFAppState().routeOfDay.toMap(),
-                                              r'''$.shelfs''',
-                                            ))}',
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  font:
-                                                      GoogleFonts.hankenGrotesk(
-                                                    fontWeight:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontWeight,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontStyle,
-                                                  ),
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryBackground,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontWeight,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontStyle,
-                                                ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
                 ],
               ),
               Expanded(
@@ -538,7 +554,7 @@ class _F1Fresh1WidgetState extends State<F1Fresh1Widget> {
                                                                 ),
                                                       ),
                                                       Text(
-                                                        'Display Number:${listPlanogramItem.mapCanvaId.toString()}',
+                                                        'Name: ${listPlanogramItem.planogramName}',
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)

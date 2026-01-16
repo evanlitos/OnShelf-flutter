@@ -31,6 +31,8 @@ class S6ScanProducts5Model extends FlutterFlowModel<S6ScanProducts5Widget> {
   ApiCallResponse? sendPhotos;
   // Stores action output result for [Backend Call - API (ShipShelf)] action in Button widget.
   ApiCallResponse? resSendShip;
+  // Stores action output result for [Backend Call - API (Check SOH)] action in Button widget.
+  ApiCallResponse? checkStock;
   // Stores action output result for [Backend Call - API (ValidateProducts)] action in Button widget.
   ApiCallResponse? validateProducts;
   // State field(s) for sinput_sku widget.
@@ -50,7 +52,7 @@ class S6ScanProducts5Model extends FlutterFlowModel<S6ScanProducts5Widget> {
   String? salidaB64;
   bool isDataUploading_uploadDataS6e = false;
   FFUploadedFile uploadedLocalFile_uploadDataS6e =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
+      FFUploadedFile(bytes: Uint8List.fromList([]), originalFilename: '');
 
   @override
   void initState(BuildContext context) {

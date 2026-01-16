@@ -17,7 +17,7 @@ class BackDoorDeliveryModel extends FlutterFlowModel<BackDoorDeliveryWidget> {
   ApiCallResponse? resultadoSKUBusqueda;
   bool isDataUploading_uploadDataX5foto = false;
   FFUploadedFile uploadedLocalFile_uploadDataX5foto =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
+      FFUploadedFile(bytes: Uint8List.fromList([]), originalFilename: '');
 
   // Stores action output result for [Backend Call - API (rtb)] action in Container widget.
   ApiCallResponse? apiResult6ul;

@@ -468,6 +468,7 @@ class _S5AferResumeTakePhoto3CopyWidgetState
                                         height: m.dimensions?.height,
                                         width: m.dimensions?.width,
                                         blurHash: m.blurHash,
+                                        originalFilename: m.originalFilename,
                                       ))
                                   .toList();
                             } finally {

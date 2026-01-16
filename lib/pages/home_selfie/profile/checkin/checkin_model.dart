@@ -13,6 +13,8 @@ class CheckinModel extends FlutterFlowModel<CheckinWidget> {
 
   // Stores action output result for [Custom Action - pickFrontCameraImage] action in Column widget.
   FFUploadedFile? photoCamera;
+  // Stores action output result for [Custom Action - getTimeZone] action in Button widget.
+  String? userTimezone;
   // Stores action output result for [Backend Call - API (Checkin)] action in Button widget.
   ApiCallResponse? uploadPhotoCheckin;
 

@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/menulateral_widget.dart';
@@ -339,7 +340,30 @@ class _S1BlockCategories2WidgetState extends State<S1BlockCategories2Widget> {
                             final shelfsOfDay = _model.shelfsOfDayList.toList();
 
                             return RefreshIndicator(
-                              onRefresh: () async {},
+                              onRefresh: () async {
+                                await actions.inactivitymanager(
+                                  context,
+                                );
+                                _model.route =
+                                    await ApiShelfGroup.getRouteCall.call(
+                                  routeId: FFAppState().routeOfDay.routeId,
+                                  toKen: FFAppState().user.token,
+                                );
+
+                                if ((_model.route?.succeeded ?? true)) {
+                                  FFAppState().routeOfDay =
+                                      RouteForMerchandiseStruct.maybeFromMap(
+                                          (_model.route?.jsonBody ?? ''))!;
+                                  safeSetState(() {});
+                                  _model.shelfsOfDayList =
+                                      RouteForMerchandiseStruct.maybeFromMap(
+                                              (_model.route?.jsonBody ?? ''))!
+                                          .shelfs
+                                          .toList()
+                                          .cast<ShelfsStruct>();
+                                  safeSetState(() {});
+                                }
+                              },
                               child: ListView.separated(
                                 padding: EdgeInsets.zero,
                                 shrinkWrap: true,
@@ -645,6 +669,18 @@ class _S1BlockCategories2WidgetState extends State<S1BlockCategories2Widget> {
                                                           context,
                                                         );
                                                         FFAppState()
+                                                            .updateStartShelfStruct(
+                                                          (e) => e
+                                                            ..startedAt = functions
+                                                                .obtenerFechaHoraActual(),
+                                                        );
+                                                        safeSetState(() {});
+
+                                                        context.pushNamed(
+                                                            S1BlockCategories2Widget
+                                                                .routeName);
+
+                                                        FFAppState()
                                                                 .ShelfSelected =
                                                             shelfsOfDayItem;
                                                         FFAppState()
@@ -755,8 +791,8 @@ class _S1BlockCategories2WidgetState extends State<S1BlockCategories2Widget> {
                                             ],
                                           ),
                                         ),
-                                        if ((shelfsOfDayItem.status ==
-                                                'progreso') ||
+                                        if ((shelfsOfDayItem.statusCompleted ==
+                                                true) ||
                                             (shelfsOfDayItem.status ==
                                                 'displayNotFound'))
                                           Align(

@@ -659,6 +659,7 @@ class _S6ScanProducts5CopyWidgetState extends State<S6ScanProducts5CopyWidget> {
                                     child: FFButtonWidget(
                                       onPressed: () async {
                                         await showDialog(
+                                          barrierDismissible: false,
                                           context: context,
                                           builder: (dialogContext) {
                                             return Dialog(

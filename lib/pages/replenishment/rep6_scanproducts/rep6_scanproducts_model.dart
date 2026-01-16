@@ -38,6 +38,8 @@ class Rep6ScanproductsModel extends FlutterFlowModel<Rep6ScanproductsWidget> {
   ApiCallResponse? sendPhotos;
   // Stores action output result for [Backend Call - API (ShipShelf)] action in Button widget.
   ApiCallResponse? resSendShip;
+  // Stores action output result for [Backend Call - API (Check SOH)] action in Button widget.
+  ApiCallResponse? checkStock;
   // Stores action output result for [Backend Call - API (ValidateProducts)] action in Button widget.
   ApiCallResponse? validateProducts;
   // State field(s) for sinput_sku widget.
@@ -48,7 +50,7 @@ class Rep6ScanproductsModel extends FlutterFlowModel<Rep6ScanproductsWidget> {
   ApiCallResponse? resultadoSKU;
   bool isDataUploading_uploadDataWw5 = false;
   FFUploadedFile uploadedLocalFile_uploadDataWw5 =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
+      FFUploadedFile(bytes: Uint8List.fromList([]), originalFilename: '');
 
   // Stores action output result for [Custom Action - convertImageFileToBase64] action in Button widget.
   String? fileOutputAlien;

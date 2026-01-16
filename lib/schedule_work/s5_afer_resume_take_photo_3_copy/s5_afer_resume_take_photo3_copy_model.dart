@@ -13,7 +13,7 @@ class S5AferResumeTakePhoto3CopyModel
   late MenulateralModel menulateralModel;
   bool isDataUploading_uploadDataR1jB = false;
   FFUploadedFile uploadedLocalFile_uploadDataR1jB =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
+      FFUploadedFile(bytes: Uint8List.fromList([]), originalFilename: '');
 
   @override
   void initState(BuildContext context) {

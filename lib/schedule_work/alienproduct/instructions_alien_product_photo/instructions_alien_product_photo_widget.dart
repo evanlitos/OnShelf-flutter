@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'instructions_alien_product_photo_model.dart';
 export 'instructions_alien_product_photo_model.dart';
 
@@ -45,6 +46,8 @@ class _InstructionsAlienProductPhotoWidgetState
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -181,7 +184,7 @@ class _InstructionsAlienProductPhotoWidgetState
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'Name: Rayan',
+                                          'Name:${FFAppState().user.user.name}',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -216,7 +219,7 @@ class _InstructionsAlienProductPhotoWidgetState
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 5.0, 0.0, 0.0),
                                           child: Text(
-                                            'OnShelf ID: 458345OS ',
+                                            'OnShelf ID:${FFAppState().user.user.id.toString()}',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -357,6 +360,7 @@ class _InstructionsAlienProductPhotoWidgetState
                                         height: m.dimensions?.height,
                                         width: m.dimensions?.width,
                                         blurHash: m.blurHash,
+                                        originalFilename: m.originalFilename,
                                       ))
                                   .toList();
                             } finally {

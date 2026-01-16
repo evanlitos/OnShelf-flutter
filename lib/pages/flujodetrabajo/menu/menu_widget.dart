@@ -49,6 +49,20 @@ class _MenuWidgetState extends State<MenuWidget> {
           await actions.inactivitymanager(
             context,
           );
+          await actions.preventScreenshots();
+        }),
+        Future(() async {
+          if (FFAppState().showGhostTime == true) {
+            FFAppState().showGhostTime = false;
+            safeSetState(() {});
+            await actions.showInactivityReasonDialog(
+              context,
+              FFAppState().lastInteraction!,
+            );
+            FFAppState().lastInteraction =
+                DateTime.fromMillisecondsSinceEpoch(1738837260000);
+            safeSetState(() {});
+          }
         }),
       ]);
     });
@@ -223,7 +237,10 @@ class _MenuWidgetState extends State<MenuWidget> {
                                                       MainAxisSize.max,
                                                   children: [
                                                     Text(
-                                                      'Rayan',
+                                                      FFAppState()
+                                                          .user
+                                                          .user
+                                                          .name,
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -1565,7 +1582,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                                     .fromSTEB(
                                                         10.0, 0.0, 0.0, 0.0),
                                                 child: Text(
-                                                  'Backdoor stock',
+                                                  'RTB- Backdoor stock',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium

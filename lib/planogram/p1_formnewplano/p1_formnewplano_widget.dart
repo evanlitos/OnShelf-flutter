@@ -238,7 +238,7 @@ class _P1FormnewplanoWidgetState extends State<P1FormnewplanoWidget> {
                                                       MainAxisSize.max,
                                                   children: [
                                                     Text(
-                                                      'Rayan',
+                                                      'Name:${FFAppState().user.user.name}',
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -277,7 +277,7 @@ class _P1FormnewplanoWidgetState extends State<P1FormnewplanoWidget> {
                                                       MainAxisSize.max,
                                                   children: [
                                                     Text(
-                                                      'OnShelf ID: 458345OS ',
+                                                      'OnShelf ID:${FFAppState().user.user.id.toString()}',
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)

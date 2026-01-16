@@ -36,6 +36,7 @@ class ApiShelfGroup {
   static SearchProductCall searchProductCall = SearchProductCall();
   static SearchProductUPCCall searchProductUPCCall = SearchProductUPCCall();
   static ValidateProductsCall validateProductsCall = ValidateProductsCall();
+  static CheckSOHCall checkSOHCall = CheckSOHCall();
   static NewPlanogramCall newPlanogramCall = NewPlanogramCall();
   static ActualizarProductoCall actualizarProductoCall =
       ActualizarProductoCall();
@@ -44,6 +45,9 @@ class ApiShelfGroup {
   static UpdateProductCall updateProductCall = UpdateProductCall();
   static CreateProductCall createProductCall = CreateProductCall();
   static RoutestatusCall routestatusCall = RoutestatusCall();
+  static BackdoorPendingListCall backdoorPendingListCall =
+      BackdoorPendingListCall();
+  static GetRouteCall getRouteCall = GetRouteCall();
 }
 
 class LoginCall {
@@ -197,6 +201,15 @@ class CheckinCall {
       alwaysAllowBody: false,
     );
   }
+
+  bool? ghostTime(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.ghost_time''',
+      ));
+  String? startDate(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.start_ghost_time''',
+      ));
 }
 
 class ShipShelfCall {
@@ -542,6 +555,38 @@ ${body}''';
   }
 }
 
+class CheckSOHCall {
+  Future<ApiCallResponse> call({
+    dynamic bodyJson,
+    String? toKen = '',
+  }) async {
+    final baseUrl = ApiShelfGroup.getBaseUrl(
+      toKen: toKen,
+    );
+
+    final body = _serializeJson(bodyJson);
+    final ffApiRequestBody = '''
+${body}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Check SOH',
+      apiUrl: '${baseUrl}/api/v1/app/route-register-history/check-soh',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${toKen}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class NewPlanogramCall {
   Future<ApiCallResponse> call({
     dynamic bodyJson,
@@ -723,6 +768,63 @@ class RoutestatusCall {
     return ApiManager.instance.makeApiCall(
       callName: 'routestatus',
       apiUrl: '${baseUrl}/api/v1/app/route-status/${idRoute}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${toKen}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class BackdoorPendingListCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+    String? timezone = '',
+    String? toKen = '',
+  }) async {
+    final baseUrl = ApiShelfGroup.getBaseUrl(
+      toKen: toKen,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Backdoor Pending List',
+      apiUrl:
+          '${baseUrl}/api/v1/app/route-register-history/backdoor-pending?timezone=${timezone}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${toKen}',
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GetRouteCall {
+  Future<ApiCallResponse> call({
+    int? routeId,
+    String? toKen = '',
+  }) async {
+    final baseUrl = ApiShelfGroup.getBaseUrl(
+      toKen: toKen,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get route',
+      apiUrl: '${baseUrl}/api/v1/app/route/${routeId}/details',
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${toKen}',

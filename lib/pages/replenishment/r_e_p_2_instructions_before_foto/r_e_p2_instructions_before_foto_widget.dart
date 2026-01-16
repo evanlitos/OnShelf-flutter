@@ -582,9 +582,9 @@ class _REP2InstructionsBeforeFotoWidgetState
                                     child: FFButtonWidget(
                                       onPressed: () async {
                                         final selectedMedia = await selectMedia(
-                                          maxWidth: 400.00,
-                                          maxHeight: 600.00,
-                                          imageQuality: 63,
+                                          maxWidth: 1000.00,
+                                          maxHeight: 1000.00,
+                                          imageQuality: 80,
                                           multiImage: false,
                                         );
                                         if (selectedMedia != null &&
@@ -610,6 +610,8 @@ class _REP2InstructionsBeforeFotoWidgetState
                                                           width: m.dimensions
                                                               ?.width,
                                                           blurHash: m.blurHash,
+                                                          originalFilename: m
+                                                              .originalFilename,
                                                         ))
                                                     .toList();
                                           } finally {

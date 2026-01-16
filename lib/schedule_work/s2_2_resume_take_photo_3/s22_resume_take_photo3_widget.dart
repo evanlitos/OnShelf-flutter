@@ -441,6 +441,7 @@ class _S22ResumeTakePhoto3WidgetState extends State<S22ResumeTakePhoto3Widget> {
                                         height: m.dimensions?.height,
                                         width: m.dimensions?.width,
                                         blurHash: m.blurHash,
+                                        originalFilename: m.originalFilename,
                                       ))
                                   .toList();
                             } finally {

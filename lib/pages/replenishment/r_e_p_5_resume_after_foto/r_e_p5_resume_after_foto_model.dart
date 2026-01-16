@@ -12,7 +12,7 @@ class REP5ResumeAfterFotoModel
   late MenulateralModel menulateralModel;
   bool isDataUploading_uploadDataR1jL = false;
   FFUploadedFile uploadedLocalFile_uploadDataR1jL =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
+      FFUploadedFile(bytes: Uint8List.fromList([]), originalFilename: '');
 
   @override
   void initState(BuildContext context) {
